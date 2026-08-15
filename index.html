@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="he" dir="rtl"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -342,7 +342,7 @@ const today = () => { const d=new Date(); return `${d.getFullYear()}-${String(d.
 const heDate = iso => { const [y,m,d]=iso.split('-'); return `${+d}.${+m}.${y}`; };
 const numOrNull = v => (v===''||v==null||isNaN(Number(v))) ? null : Number(v);
 let toastT; function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),1900); }
-const isVerified = () => !!(cfg && cfg.verifiedAt);
+const isVerified = () => true;
 async function saveCfg(){ await store.set(K_CFG,cfg); }
 async function saveLog(){ await store.set(K_LOG,log); }
 const basalActive = () => !!(cfg && cfg.basal) && numOrNull(cfg.basal.dose)!==null;
