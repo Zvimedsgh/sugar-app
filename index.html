@@ -835,14 +835,7 @@ function allProblems(){
   return out;
 }
 function renderWarns(){
-  if(!cfg) return;
-  if (!cfg) return;
-  const host=$('#warns'); host.innerHTML='';
-  allProblems().forEach(([name,p])=>{
-    const c=el('div','card alert'); c.append(el('h2',null,'לבדוק: '+name));
-    const ul=el('ul'); ul.style.cssText='margin:6px 0 0;padding-inline-start:18px;font-size:14px';
-    p.forEach(x=>ul.append(el('li',null,x))); c.append(ul); host.append(c);
-  });
+  const host=$('#warns'); if(host) host.innerHTML='';
 }
 function unverify(reason){
   if (!cfg.verifiedAt) return;
