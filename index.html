@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="סוכר">
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAlo0lEQVR4nO2deZhVxZn/662qs9393qYXaKCbZmtAFAVFxQVRiRrjxCQuM2qi5jEmZpsQY9TMTMwyMWYym/OLv2d+zsRkohPHTJbHmcREo3FFUVABkb1pdppe7n622n5/nAY70TsDzT23G3I+j2A/3fQ9de/5nvrW+9ZbVdAy/VwUEfFe4LFuQMT4JRJHRE0icUTUJBJHRE0icUTUJBJHRE0icUTUJBJHRE0icUTUJBJHRE0icUTUJBJHRE0icUTUJBJHRE0icUTUJBJHRE0icUTUJBJHRE0icUTUJBJHRE0icUTUJBJHRE0icUTUJBJHRE0icUTUJBJHRE0icUTUJBJHRE0icUTUJBJHRE0icUTUJBJHRE0icUTUhI51A8YKQIAg+OJdKKSC/wV//mj54xAHACBAAAghpJRSUimhhERKKqSQUsN6AIQQDP9jjAGG/3vnF4f/8R8LJ6o4AAAQAFJKSSG5LyVXUgAAEI1Qg+oxqseIZmLNJEQDTBEAUlJJIbgvucd9R/i2YC5ntpJcKQWYYEIx1gCT4VcOVHXicoKJAwADUkhKLpgvBQNMNDMZz0yKZdrjuSlWeqKZajViWWomqGZhogOhABgBhqD3CPoVwYXwhO8wt+zbBbfUZxf320O77MI+t9zPvLKSAhMNUx1jigCUkidkj3KCiAMAI4SkYNxzEUJ6LJNu685Mmptq6040dRqJCVSPY0wUUkoKJbmUAkmpkFLcRwiN6ACCcQgQYtC4ZSZbABPABBBIKbhf9cr9lcHe4oFNxQObKgM7fDuPFCKagYmOAJSUJ1JfAsf3VpMAAFgJzpmDkDKTrbkppzR1np6ZOM9KtxFqKCUE96VgSkoAAEwxocH9HjEUHTGSAAj+KBSMToSSQgqmpFBKAcaYaIQagLFgnlM6UNy/cbB3dX7vOruwHylJdAsTLeh+xuYDqSvHqziCcaJgrmCuHsvkpp7WNuu87OQFZqoFKSS4K7mHEMJEx9TAmCglOXOYU/KrQ151yLeHfLvA3DL3bSl8KRhSCAEE957oMc1M6rGMHssa8ZwRz2lmimgWAlCSC+4pwRBCmOqEWgiQVxnM7113cOuLgztXu5V+THSqWQih410ix584AgfhzFGCxZs6J825qHX20kRTJ0IQ3GmMafAEC+a6lf7KQG+5f1tloNfO7/Eqg8wrS+4HY0wUxDGHQ9rh7kMd+hEGTIhmUCNpJibEsu2JCV3J5umJpg4j2UyoIQUTviMlx0SjegwhsIv7+re9tG/jU6UDm5RS1IgDguNXIseVOAAAMPdtJXhm0tzJp1zROvNcPZYVvsOZA5hQPQaY+nahdHBLfveb+b3rq4M7fbsgBQPAmFDAFDB5Jzo9zO/Zyu99XymppJCSK8GVkphoejybyHVk2k/KTj4l1TpLj2WVEsKzpeSEGlSPc1Yd7F2ze93jg72vScGPX4kcN+IATCT3OHPTbXM6F13VOvM8ose4V5HCJ5pF9Rhzy4V9bx3c+uLQrtftwj7BvZEBRZDMUKPMawWBMUIIkFJScsl9KRihupWZlJuyoHn6kmz7fD2WEczlvg2ANTOplMrveXPnmv/s3/6yUoIacaWOszTJcSAOAKyQ4k7JyrRPO+NPJ510CdXjzC0pKTQjAYRWB3cd2Py7vi3PlQd6lGCYGoTqCHBoqYjhJIpSUnJfcg8wjeemtsw4p617abJlJkKIuxWllGYmAPDgztU9qx4Z7F2NqU40U0lR7/aExXgXB2ASPItTTrmia/F1ZqqVOSUpuWYkAJPCvg171v3XwW0vedUhQg2imY3OOgAAYKSU4J5grmYmmzoWTj758qaORZjozC0pJTUzpZQ4sOmZ7S//sDLQq5kpgOPDZcaxOAAAId8ppSfO6b7g000di7hXFcylRhxTvbB3fe/qn/RvXymYQ/U4EIqUVGPYaQdBtRSBlLOT50897cMt08/GRPedEgBoVtq3h3peeXjXGz9XSlI9Nv67kHEqjmCEIQXvXHT19LNvJLrFnBImVDNTlYEdO1Y9sm/T05J51EgAxuMq9TQcTPm2UjI35ZRpZ1zX3HWmFJx7FaIZ1EgM9q7e+Mw/lvq26lZ6nE/WjEdxAKbcLRuJ3NyLv9g6aylzS1L4mpkW3N255j93rv4P3y5QIwkYj9uH77BEEEKtM8+dfvaNqdZZzC1JwTQrzb3q1hce3PXGz4lmYkzHrcWMO3EAJr5dzE1dMP/Su2PZyb6dx5hqVmpw55rNzz5Q2LeBGglM6LiVxUgCiTC3rJmJjtOvmbboWkx15pSwZmhGYu+G32x6+h+YW6XGOLWYcSUOAADfKU6e//65F68AQrlboUYCIbn95R/tePXflZTUiI0rEzkSABMlOPPKmfb53Rd8Jjdlge8UlRRGPFfq27Lul98sH9ymWalxqI9xIw4AhBB3y11nfWzWubdw5kju6VbWLuzd8OR3Bna8qpnpsAf5GANCSMowlAeAMfeqmGjTl9w47fQ/lYIL39asFHMr65/464NbX9RjmfGmj/EhDgCkEPers5fe1rX4et8pICX1WLa/55W3nrjXrQxoZjLsDw5jcF1fIWWZppShSBAAKyWZW2qbtXTu8tv1WJY5RaJbGJO3f/v3u974hW6lx9X4YzzUkAJCiPvVORd+vmvx9b6dR0rpseyuN37++s/u9J1SA5RBCMkXSpctP+/Kyy/KF4qUkDCuopRECPRYtm/r868++tlS32YjnhPMFdyf9747us683neKwTBlnDD2PQcAZm65e9lnpy3+M686hAFTM7ntpYe2vfgv1EgET1vIDQAhhK7rK3/776ZhLF52TblS1SgNL2sCmAjfJpp50iV3tnUv8+08ANas1JbnH9y+8iHNTI2T/mOMdQqY+E5xxpKbp53xZ341D4Cpmdz87ANbX3hQM1OoIZlEQnCpXL3nrk93TG5rbc5+8y8/X63aGIf4ySgpiG5JId58/Ku7Xv+ZHssqpXynNOu8T0w/62O+U4Qwr37kjGUjABPfLkw99YMzzrnZtwsIQDOTm3/3vZ5XfqTHMo2ZpgoM5fJLzr/5hivLVadUda676v1XfiBEcwlQUmJCiGZuePK7Pase1mMZpJTvFGeed2vnoqt9uwg4xKsfIWMmDsCEueUJ0xbPufDPuVdFSGpWatuL/9qz6mE9llVSNCBeBQDGWFMuc+89K4IgBRAwzr/1V19obZng+T7AeyxcqBdKKQSgmYlNv/ve9pf/TY9lkJLcLXcv+9ykuRf7ztjrY2zEAYAFc2PpifMvvQshJAXTY9lda/5z20vf163GRXQE41K5+pdf/tSs6VNtx8MYYwyO50/rmPS1uz9Tqdok7O5dKaWQbqa2PPd/e197VI9lpeSSe/MuuSM3+WTuVsZWH2MjjmAmfd7yL5nJFu5V9Vimb+sLG5/5J2okVKMSXISQfLF06cXn3nz9hyq2Q+nwbaCElKvOR6+94srLLxoK2VwQQoFAqJnc+Mw/7X3rV0Y8J7iHsT7/sr8wks2CeWMYv4zBhQET5pamLb5uQteZvlOgZqI62Lvh1/dhTIPp70a0AYAxlsukv/21FQq9R1zCuPjWV7/QFr65IIQCA6WateE33x3ofU23MtyrxLKT5y3/ElJiDKeaGy0OAMy9am7KKV2Lr2duERNNCf7Wr+/znQKmesNCOIJxqVz5yh2f7J7ZGRjKyJ9ijB3Pm9Yx6Z67GmIuCCGlABOl1PpfftMu7KFGwrfzLTOWdJ31UeaWxspcGi2OoAxz1tLbMNGl4JqZ2PbS94d2v0mN0DNdhzlkKOfd8rGPVGz3PY0jMJcb/vQDV1y2bKhQCt9ckFKSaIZbGVj/xL1KCUw05hS7Fl/f1LmIe5UxMZeGXjKIUKac+sHc5FOYW9Ss9MCOV3vX/ES3MkryBrXhDw3lf+q0hZDf+uoXWppzns/CNxekpNDM1NCu17e+8KBmJqXkALh72WfJcGVQ6A34AxooDgDBvVh28rTTr+VeFRNdeNXNzz7QuAYghIZTXjUNZSQYY9v1Zkyb/NU7P12uVBthLggpyXUrs3PNT/q2PK9bGeaW062zu864jnmVxmfGGnc9ACx8t3PR1WayJSi33Pn6T4oHNlM91rihBiH5wrChlGsYykgCc7nxuj/5k8uWhZ0WGwlguvnZ7/n2ENFM5pamLvxwum0296oNNpcGXQwABHNSrTPa513C3BI14pWBHTvX/FQzEg0baow0FHQ09XlCyHvv+UJzc1ODzEVJolmVwZ3bVv6QGnHBfUrN7mWfxURr8JxLo5QIWHJ/6qlXalZSCkao0bv6Ma+aB9K4ldwjDaX6PxrKSDDGtuNNnzb5r758W7lSJaRB5qJZqT3r/mtw5xor1aaUYF6FGvFgXrcBDQhoyL0BEMxNNHW2zrqAuRVqJIp9W/Zv/K1mNq7bIITkC+UjN5SRUErKVffG6/7kV08+98RTL2TTKS5CbzYgkIL1vPIjQvVtK38w0LMKawYAaWQVXCOegyBZPnHuciOelcLHRN/95i+Y17jcMAAwxnOZVBChjCrPpqRU996zoimX8VmDzIXqscLet1b9+HP9Pa9QI95gZaDGiEMJbsSzbbOXct8hWqw6tLNvy3OaHm9gt4FLpfLdX7q1e2anbR+poYwkiFxmTZ/6V1++rVRuUOSC0PDCf81IKDUGlbOhv0nAhDO7qWNRPDdVMIfq1oFNT3vVoYaNNgghhUJ5+YVLhlNedJTdFSWkXHVvvuHKyy85P18okUZFLgiN2W4fjUgMIwSts85HQRLMKR3Y/ByhRmPeMAAwztPpxH1f/yIAHPM8xbC5TGjKsIaYy9gStjhACt9Kt2XbT+a+TfV4fu/6ysAOopmNmWAbNpTbb507u6tqu8dY3xVELrOmT/3KHZ8qlSuNiVzGkHDfXrA9Urb9ZCMxQQqGMenf/pKU/A+3wQiHYUNZtuTWm64uH4OhjIRSUrbdj99w5aUXn5dvyJzLGNII7TdNPQ0BAkx9pzC0+83GeEoQoaTTycBQ6tlRKaUUfPtrK3KZdGMil7EiXHEowTUrlZ44RzCXama5f7td2Iep3pDi0Hoaykgwxrbjds/s/ModnzyxzSXENwYAUvixbLuVnii5D0TL710vmNuACYLDEcqtN11VL0MZSWAut3zsI4G5NDByaShh3ifAUrBk8wyiW0opJUVx/0bAJOxu41CEEoKhjEQppVRgLidq5BKyrSCUbO5CCDAmzClWB3diooddJUoILhXLd9/+ibobykiCyKV7Zuddt3+iVDoxzSXMt6QkIVo816Ekx0R3yn1edQgTGmrPQQgpFANDufpYUl5HAqWkYrufuPGq5RcuKRTLJ565hLquSxIjbqZapPCBak5hX7AlUnhXHI5QUvVKef3vKKUA4L6vfzGdSjDGTzBzCe1WAUjJdTOtW2klBAB2ivuVFKFmOAjBxVL5zhW3zJ3dVXXCMpSRYIyrjjt3dtfdt99aKpVPMHMJ680E27JqVopoVpDVcEoHQ1YGKRTLFy0965M3X1OrbDgMKCEV2731pquXX7ikUAjfXADee5/dEAhT6VLqVgoTLZg6YnY+vNgBADjnyUT8vm98EWPc4LUe75hLOsF5mOYCIJnn23nmliXzwp6nDdFWlJLUSAIQhJCSnIVZX08ILhTLd33xE/PnzGiMoYzksLncueKWQjE0cwGQ3E9N7J699Lb5l9192ofuNeJNUoQ4FxHqh6iIbgaHVCgpuO+gcMRx2FA+9fGGGspIAnP55M3XXHTBWSFFLkHNVGbinNlLPzFp3vuau87S4zklOYRWOBhmtIIQJvrw11IqwWDE0QT1IjCU1BgZykiUUhjj+77+xVQiHoq5KAWYOMUDXrXEnKIQTDOT4W6SFt5Lo0N7LQan24T0NgjGxVJ5xeduGhNDGUlgLvPnzFjxuZuKpXIY1WIAEOxtCphgTDUjgZQ6Tm3l0FEVwd8heArGuFK1F5560qc+fm3V8RpXvVcDgnHV8T718WsXnnpSJYztgQAL5iohglMsiWaFOiYNMyWFkBRs+GsgmNDD53PW7RKAGOe3f+6mRMzkQox5DgoAuBCJmHn7525inNe7OQoQSMGVGq69xUQL1URDfdRAMCc46AQIIZqJ6uosGONyxT77jAXvX37eWI1D300wMn3/8vPOPmNBuRJC5xF8hgDv/B0aoYlDKQTAvGogc8Bk+DSa+gEAnPGbbviQoWsinJ1DR4eQ0tC1m274EA8hoQ6AgzOBUPhnyIU604GZU1SCIwQARI9lkZL1EjsAuK43o2vqJRed63pszEcbIyEYux675KJzZ3RNdV2vfvoAhRQQ7fCKain8ULuOsD5ThVRQay64EwjCTDTXsecgGFdt5+JlZzdlU944K6cAAI+xpmzq4mVnV22nnsJVkuoWYBKs9RW+G+rqyPBsBQEmvlv0nTLGFClppdsA43qNrqVSukaXX7hEIRReFmjUAAKF0PILl+galfV7JJSSmpEATBEKTocqh7pRVni9sQIg3Kt65X4gmhQ8lmknmqnqMTgAAN/32ye1njK/22c82NB+XIEx+IyfMr+7fVKrX69dxQCUUlosGww7pGC+U0Jh+mmYYw6MJfeq+d2YUCl8M9U6vI3kMX9SGMD1/O5ZXa0Tcn5DtkU4WgDA91nrhFz3rC7X83G9WqiUlWpBw6l0hzml4HTE+rz4uwi9TLAysAMhUJLrsUwsO1kK/9hdIEiZz5szA2OoY6ddX6RSGMO8OTPqlkpXCjCx0hOVkkCI7xR9t4hxiJV1oZYJKoxpuX9bcHI4IXqqdXZdZhEVQgAwo2sqavw+WUdM0LAZXVMBoC53L1h3b2UmKc4w0d3SQeFVQ90LKsyJN6Uw1atDu91yPya6lCLbflJdakiVUpqmtU9qRQiNc3m0T2rVNK0OYRqAFNyI56xkqxQ+YFod2ikEC2miOyDcKXuMqV/Nlw9uJZopmJtqnWUkmqVgx3hHlVKGrmUzKRl6knD0ACCJUDaTMvQ6iAMQSOHHmzo0Ky2lQEiV+3vCfush544ApBJDu98AwFL4ZrIlM2mu4O6xeDAAklJqmhazLCnrPFlTV0BKFbMsTdOklMcqYgAlRXriHMAEAITvlPu3YaLVd0biDwh7VlYSqg/tXusH2/ACNHedGQwZjvGFMUCoyw7qBaWkLqGKUpJoZrZ9vhIMU90p7rfzezHRQ61fCTlaUQpTozq4s3RgM9Vj3LdzHYvMVIvk/jE+8VIpzsfXcXnvCeeiDvEUgOR+LDMp2TydM5doZnH/RuaUwt4AJ/ydfQAL4fVvX4mJJrlvpdomdJ4hmDPqYbZSCGPMGLMdB+P6l5bVD4Ux2I7DGMMYH4tCALDgXm7KguGtnhUa3PV6/dpZk9DFoZQk1OrvedmrDmKiKcknzr0YE/1YzBIAPJ8VCuW6ZeNDQCGEESoUynXYvVQpjGnz9CVSCkw0rzKQ37uOaEZd0s3/A43Y9olQozq0e2DHq9SIc6+SbT85M3k+951RF6MHK9v27u8LXr+era0jSiGE9u7vO9aVcMFGnROmZdvnc79K9Vh+7zqneAAT/bhdmvB7KMB471u/VoIrhDDVppxyhTqG6fugJHVbzy40vnsOhNC2nl1KqWPpNwJPaZt9/uFTq/u2PIdQiKWjh2nIVpNKUj2W3/Nmfs9azUgwt9wy45zMxLmjXjqrkKKUvL1xm1SqbtMW9QYDSKXe3riNUnIs0x9KcCOea+u+kPsO0azq0K7BnaupFmvARp0Nq5EBKdiuN34OgJUURDM7Fl2tpBhdyCKlMgx945aegwN5vR4pprqjlNJ17eBAfuOWHsPQR30EOmDC/GrrrPPjuQ7BbKpbBzY/27BtwRskDqUkNRIHt7+c37NOM5PMKbXNOq+pYyF3R3MSgFLK0PU9+/rWrt+kazSc0+ePCSmVrtG16zft2ddn6KPPRigpNCMxZcEHg52fvWp+/9tPEs1szEadDTxSA4EU/o7XfhwsY0GAp599IwyXpB81GMD32VPPrASEGnZm4JGjkAKEnnpmpe+zURsfYMLcysQ5F6VbZ3GvopmJvi2/qwz2NmyjzsaJI6hi6t++sn/bSs1KMbfcNOW0ySd/gDmloLTpqBBSxmPmU8+sHCqU9brMbNUPpZSuaUOF8lPPrIzHzFEXPwfbgncuulpwDxONOeVdb/wc02PKAhwVY3AA4PaVP+C+gwnlfnXG2R9LNHUIdtRhrVLKNM0t23t/8/SLljHuqs8tQ/vN0y9u2d5rmubohAuYMK/SsfDDiQnTuFfVzNTeDb8u9W0jmtWwJ6Gh4lBKEj1W2P/2rjU/1cyUYK4ey81e+unRHfCmlKKEPPSjn/mMj7fqc5/xh370M0rIKJUBmPt2um12x2lXMbdMNNMtH+xd/RjRGzTaCGj46ZBSakai59VHin2bNTPpO4XWWed1LLzKdwpHay5SymQi/tIrbzzx1IvBireQ2nxUBCvennjqxZdeeSOZiMtj6NJmL72NGHEpfGrEd7z2qJ3fQ6jRyKRf4x84BZgI3970zD8pJTGmzC3PPPeW3NTTRnGAqkKIUPLd+79vO974WfFmO9537/8+oWR0tzHY6rlz4VUTpp3BnKJmpof2rN39xi80s3GnqwaMQW8chLWDvat7Vj2sWWkpGACZf+ldZmLC0Z7OLaVMxmOvrln3zw89FreMMZ+n5VzELeOfH3rs1TXrkvHYKLoNwIR75dyUBTOW3MzcSlCbveXZB6RgjT9adozOspdCM1M9L//bwW0v6bEs9yqxzOT57/8LADja8nQhZTqVvO/v/2Xthi3JuCXGzlyEEMm4tXbDlvv+/l/SqeQoxsgAWHJftzInXfJlIFQKppnpnlUPD+1ee+iAt4YyZuM4AEBANjz5N3Z+DzUSvlOY0Hn6vPfdzpkT/PwIX0cpRSmp2s5nbv+m7bgaHZucmJRKo9R23M/c/s2q7VB69ENRAKWklHzeJV+ON3Vyt6JbmYGeV3asekQzUw02lIAxE0dwOrdX7l//q29K6RNqeNWh9pMum7Pss9wtA8CR60MImUrGX1u9/vN33muZOkKo8RvGIYQsU//8nfe+tnp9KhkX4ui7DQTcq8xZ9tnWmef6doEacbd8cMOTf4MQjNXCnLGMAJUU1EwM7Vm34dffwdTAmPp2vvP0a2ed/ynfLQEcRTUh56Ipl3n40ce/8o37k3FTqf/lHPI6ElwrGTe/8o37H3708aZcZhRDH8DEdwozltw8deFHfDuPiYYQWv/EvXZxf8OS5e9mjNMDSgrdSu97+6lNz9xPzSQC7NuF6Wd9tPuCTzO3gpQ68oeGC9GUy/zt/Q/dc+8DybiFAB1LGHmESCkRoGTcuufeB/72/oeacpmjj6gBMPHtfNfi62ec83HmlBDC1IhvfPofBnasanyEMpKxzx0pKfRYunf1Y1uf/2fdSiMA3y50Lb5+3vLbBXOlEEdeUCilymXT3/67B1fc/R1T1w1dDzV+4VwYum7q+oq7v/Ptv3swl00f9XAHAIL3e+YNsy/4NHPLSCk9ltn24vd3vfELPZYZQ2Wg8SAOhJCSUrfS21/+4Zbn/59upQDAt/NTT/vQgiu+hgkRvnOE+Q+llJAyl8t878EfX3PjisGhfDoZ40LUfYgqpeJCpJOxwaH8NTeu+N6DP87lMkLKo/KyYIE8c0szz71l9tLbuFtWSurx7I5X/33bS9/XrfTYKgMhBC3Tzx3bFhwGAPtOsevM62cvvY17VSmYEcsW9r+97pffqA7u1Ky0kkd6tiqlZChf6uqc/DffuP2y5ecyLm3HJQQf+8hOKSWEjFmmRvGvnnzhS3/53Z7ePbls6mi7KMBEMA8hNefCz0899UrfLiCE9Fi2d/V/bHz6H6kRRwqNeZnbOBIHOqSPqad+cO5FX5BSCN/RrLRv599+8rsHtjyrmSkAfISjM0qI7bhciOuuvvyOP/94V0e7z4XreghgdBMxQkqklGkaOiU9O/d+5x/+9ZHH/psSErOOOnMPmDC3bCYmnHTpXc1dZ/p2HgHWrUzPqoc3P/sA1eNBIeQoGllfxpc4UDButwstM8+Zf+lXNDPBnBLRY5jQHa/9ePtLP5CCUSN+hF1IsFlbvlBqa2m66YYPffTaK6Z1tCOEbNdnnANCABgA1epOgohHKakQ0iiNmTpCaMfOvf/26OMP/ehnBw4OZjMphI5u2AuAlVLMLU6Ydsa85XfEMu2+k8fUoJq15YUHe17+ITWTwbWP/DXDY9yJAx06mzjZMuPk9/9FqnWWVx0CTHQrPbT7zU2/+z+Fves1IwmEHqElU0J8xkrl6sTW5ssvPf/DVyxfeOq8VCKGEOJSMcbF8KBk+IYE2/RhDIQQTaMUA0KoVLHXvLHhp48/+d9PPLe/rz+VjOuadpQdBgDG3LMB42ln/Nn0s25ACHOvQs2EEvztp/5uz/pf6lZaKTXmbnKY8SgONDzFYGtmvPvCP2+f9z7mVSTzNCslub9j9aM7X/sP5lY0M4mObEc9ACAEez6rVKqGrs+eNe2cM087a/GCObOnT2prSSbj2ru2smdClsvVfQcObty8/eVVb774yuubt+zwfD+RiBu6JsRRjj0xkYJzr5KZNG/20tuaOhYypyQl12NZO79n/RPfGtr1ph4b+xHoHzBOxYGCiQbJBXOnnnrlzHNvoUacOUVMNM1Mlfq2bF/5g76tLyCEqB5DRywRjLFS0nE81/UwwelUorVlwsS25taWCelUwjJNhJDjusVSpe/gwP4D/X0HB4qlihTSNA3LMgCwPNqQBBMlJffKeizTseiajoUfIdRkbhETXTNTfVueffupv/UqQ9RMjq6oJVTGrzgQGp6A8Z1iqnXmnGWfb+pcxL2KYB41EpjQ/p5Xdrz6yNDutQD4yCWCEMIYADBCinPBGGecCyEO51SDUQghRKNU0yilBKFg1uOoensAjJWU3KtgzZjUfeG0xdclJkxjbkkKrlkp4TvbV/6gd/VjmFBMjfHWZwSMb3EghAKL8W0APPXUK7vOvF6P5ZhTVErpVkoK/+D2lbte/2l+z/pgdQxgopQ88gEdHAIdmssJflMd4qhbC4AAK8G5XyWa1Tz97M5FV2Xa50vuc69KNJMa8cGdqzf97nvF/Rt1KxVsNnu0V2kMx4E40DuD/FJiQuf0sz7W1r0MgDC3BIA1MyWFP7hz9Z51/z24c01QVEeoEUxyNu5zBwiSWoK5gntGPNcyY8nkkz+QmTRPScG8CsZUs1Juqa9n1SO71z4eSHl8dhiHOT7EEQCYCOZK7jd1LupafF1TxyKlJHMrAEDNBEKofHDrgU3PHtz2YnVol5IcUwNTPbhn4UQBAAAIACkpuC+5B0RLTuhqnXV+2+wL4k1TleDMqwAmmpnifnXfW7/e8eqPncJeaqWCM/Dq3Z46czyJA6FhG+BeFYA0Tz+rY+FHspMXAABzy8GzSDTTtwv5vev7t780tPtNp7BPcB8TDVMdYzq8ZEah0WrlkP8AIKWk5JL7UjBCjVhmUm7qaS0zz8lMOkkzk9y3BXMw0amREL7dt/X53tU/KR7YSDVz3I4w3s3xJg6EUOAySHGviglt6jx9yslXNHUupFqc+1XBPYwpMWIAxLfzpb4t+T1rC3vfqgzt9Kv5oNgOCMWYvvcZi4dt6F3fV0oqKZTkUnClJCaaHsvEmzqy7fOzUxakWmbpsYySnPu2koJqFtEt3873bX1hz9rHC/veBkKpHmuo0x0zx6U4Ag5LBABSbd2T5lzcPGNJLD0JIcV9WwqGMSW6hYkmuOeV+yuDO8v92ysDPXZ+r1sZ4F5ZME9JEXTv75QXvbMfzPCAFAAAU0x1zUgaiaZYdnJiQmeyeUZiQqeZaCaaKQUTviMlx0SnegwhVRns7dv87L6Nv60O9gLRqGah8A85qDvHsTgCgrJbzhwpfDPR3NSxqGXmOdn2k41EE1JIcEdyHyEERCPUAEyRUoI5zC151SGvOuTbed8uMLcsfFtwTwqGlEKAMNGCO62ZST2W0WM5I57T4znNSlHNAsBSCsk9KXyEEKYGoSYC5JYO5ve8eWDL80O7XvftAtHMYOnicSeLgONeHAGBQQRPMAIcy0zMtp/c1LkoPXGOlWoLNsEJ7r2SEgAAE0w0wASABJ1GcN7Y79vKYWdRSgolhRRcSa6UAowx0QjVAYjgnlM8UNi/YbD3taHda91yH0JANQsIPb5M5N2cIOI4BADGSCkpfME8BEiPZRMTpqXbutNt3YmmTiPZTPU4xkQdut9KciWlekcWh+/l8FFIgABhjDGBYJiCQErB/apXGagM9pYObCrse7sysCOYcyeaGVT4HaddxR9wgonjEIeyDocDCsBEM5JmsjmWmRTLTY2lJ5qpVj2W0cwk0S1CDCA06H6C0zCQkkpJJbgUPmcOdyuenXdLfU5xf3Vot13Y65YPMrespBgRCiElx9G02bFzgorjHQ6nIpSSQkomBVdSBGNMQg2imUSPUd3C1CBUB0xQkBeRXAgmmSuYy307SG0pwZRSwbGdgSsNv/J4mkqtI43YIGZMCYoyEEIIARwaOcKhn0jOHOZX0TvOcvgESxj2FMCAMQCmmoX02PAvBqkSJU9ESbzDCS+O32f4vr7zDQACmCBS67gndaha78SXwrv5IxPHe6AOBypj3ZJxx7ioPo8Yn0TiiKhJJI6ImkTiiKhJJI6ImkTiiKhJJI6ImkTiiKhJJI6ImkTiiKhJJI6ImkTiiKhJJI6ImkTiiKhJJI6ImkTiiKhJJI6ImkTiiKhJJI6ImkTiiKhJJI6ImkTiiKhJJI6ImkTiiKhJJI6ImkTiiKhJJI6ImkTiiKhJJI6ImkTiiKhJJI6ImkTiiKhJJI6Imvx/dPDyNlut8s4AAAAASUVORK5CYII=">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="theme-color" content="#16233D">
+<title>סוכר ואינסולין</title>
+<style>
+:root{
+  --paper:#EDF0F2; --card:#FFFFFF; --ink:#16233D; --ink-soft:#5B6B87; --rule:#C7D0DA;
+  --pen:#1E4FA8; --pen-soft:#E7EEF9; --warn:#A63D1B; --warn-soft:#FBEDE7;
+  --ok:#1F6B4A; --ok-soft:#EEF6F1; --long:#6B3FA0; --long-soft:#F0EAF8;
+  --num: ui-monospace, "SF Mono", Menlo, monospace;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{background:var(--paper); color:var(--ink);
+  font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  font-size:17px; line-height:1.45; padding-bottom:calc(76px + env(safe-area-inset-bottom));}
+.num{font-family:var(--num); font-variant-numeric:tabular-nums}
+header{padding:calc(14px + env(safe-area-inset-top)) 18px 12px; background:var(--card); border-bottom:1px solid var(--rule)}
+header h1{margin:0; font-size:17px; font-weight:600; letter-spacing:-.01em}
+header .sub{font-size:13px; color:var(--ink-soft); margin-top:2px}
+main{padding:16px 14px 24px; max-width:640px; margin:0 auto}
+.screen{display:none} .screen.on{display:block}
+nav{position:fixed; bottom:0; right:0; left:0; z-index:20; display:flex; background:var(--card);
+  border-top:1px solid var(--rule); padding-bottom:env(safe-area-inset-bottom)}
+nav button{flex:1; background:none; border:0; padding:11px 4px 9px; font:inherit; font-size:12px; color:var(--ink-soft); cursor:pointer}
+nav button .ic{display:block; font-size:19px; line-height:1.3}
+nav button[aria-selected="true"]{color:var(--pen); font-weight:600}
+.card{background:var(--card); border:1px solid var(--rule); border-radius:12px; padding:16px; margin-bottom:14px}
+.card h2{margin:0 0 4px; font-size:15px; font-weight:600}
+.card p.hint{margin:0 0 12px; font-size:13.5px; color:var(--ink-soft)}
+.card p.hint:last-child{margin-bottom:0}
+.card.alert{background:var(--warn-soft); border-color:#E3C4B6}
+.card.alert h2{color:var(--warn)}
+label.fld{display:block; margin-bottom:12px}
+label.fld > span{display:block; font-size:13px; color:var(--ink-soft); margin-bottom:5px}
+input, select, textarea{width:100%; font:inherit; color:var(--ink); background:#fff; border:1px solid var(--rule); border-radius:9px; padding:11px 12px}
+input:focus, select:focus, textarea:focus, button:focus-visible{outline:2px solid var(--pen); outline-offset:1px}
+textarea{min-height:70px; resize:vertical}
+.btn{display:block; width:100%; font:inherit; font-weight:600; font-size:17px; padding:14px; border-radius:11px;
+  border:1px solid var(--pen); background:var(--pen); color:#fff; cursor:pointer}
+.btn.ghost{background:#fff; color:var(--pen)}
+.btn.small{font-size:14px; padding:9px; border-radius:8px}
+.btn.danger{background:#fff; color:var(--warn); border-color:#DCC0B4}
+.row2{display:flex; gap:10px} .row2 > *{flex:1}
+.seg{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px}
+.seg button{flex:1 1 40%; font:inherit; font-size:14px; padding:10px 6px; cursor:pointer; background:#fff;
+  color:var(--ink-soft); border:1px solid var(--rule); border-radius:9px}
+.seg button[aria-pressed="true"]{background:var(--pen-soft); border-color:var(--pen); color:var(--pen); font-weight:600}
+.now{display:flex; align-items:baseline; justify-content:space-between; gap:8px; margin-bottom:12px;
+  padding:11px 14px; background:var(--card); border:1px solid var(--rule); border-radius:11px}
+.now b{font-size:16px} .now .t{font-family:var(--num); font-size:14px; color:var(--ink-soft)}
+.now .auto{font-size:12px; color:var(--ink-soft)}
+#gluc{font-family:var(--num); font-size:44px; text-align:center; letter-spacing:.02em; padding:10px 12px; border-width:2px}
+#result{margin-top:14px; display:flex; flex-direction:column; gap:12px}
+.dose{background:var(--card); border:1px solid var(--rule); border-radius:12px; padding:16px; text-align:center}
+.dose .who{font-size:13px; font-weight:600; letter-spacing:.02em; color:var(--pen)}
+.dose.long{border-color:#CDBBE6; background:linear-gradient(#FCFAFF,#fff)}
+.dose.long .who{color:var(--long)} .dose.long .units{color:var(--long)}
+.dose .units{font-family:var(--num); font-size:62px; font-weight:600; line-height:1.05; color:var(--pen); margin-top:2px}
+.dose .unitlbl{font-size:15px; color:var(--ink-soft)}
+.dose .math{font-family:var(--num); font-size:15px; color:var(--ink-soft); margin-top:6px}
+.dose .src{font-size:12.5px; color:var(--ink-soft); margin-top:13px; padding-top:11px; border-top:1px dashed var(--rule)}
+.rowecho{position:relative; display:inline-block; padding:7px 16px; margin-top:8px}
+.rowecho .txt{font-family:var(--num); font-size:18px; position:relative; z-index:1}
+.rowecho svg{position:absolute; inset:-4px -6px; width:calc(100% + 12px); height:calc(100% + 8px); overflow:visible}
+.rowecho path{fill:none; stroke:var(--pen); stroke-width:1.7; opacity:.85; stroke-linecap:round;
+  stroke-dasharray:340; stroke-dashoffset:340; animation:draw .55s ease-out forwards}
+.dose.long .rowecho path{stroke:var(--long)}
+@keyframes draw{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.rowecho path{animation:none; stroke-dashoffset:0}}
+.dose.zero{border-color:#BCD8C8; background:var(--ok-soft)}
+.dose.zero .who{color:var(--ok)}
+.dose.zero .big{font-size:34px; font-weight:600; color:var(--ok); line-height:1.15; margin:6px 0 2px}
+.msg{border-radius:12px; padding:15px; font-size:14.5px}
+.msg.bad{background:var(--warn-soft); border:1px solid #E3C4B6; color:var(--warn)}
+.msg.bad strong{display:block; font-size:16px; margin-bottom:3px}
+table.grid{width:100%; border-collapse:collapse; font-size:14px}
+table.grid th, table.grid td{border:1px solid var(--rule); padding:5px 6px; text-align:center}
+table.grid th{background:var(--pen-soft); font-weight:600; font-size:12.5px}
+table.grid.long th{background:var(--long-soft)}
+table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(--num); font-size:15px; border-radius:0}
+.tbl-wrap{overflow-x:auto; -webkit-overflow-scrolling:touch}
+.iconbtn{background:none; border:0; font:inherit; color:var(--warn); cursor:pointer; padding:4px 8px; font-size:18px}
+.slots{display:flex; gap:6px; flex-wrap:wrap; margin:2px 0 12px}
+.slots label{flex:1 1 40%; display:flex; gap:7px; align-items:center; font-size:14px; border:1px solid var(--rule);
+  border-radius:8px; padding:8px 10px; cursor:pointer}
+.slots input{width:19px; height:19px; margin:0; flex:0 0 auto}
+.slots label.on{background:var(--pen-soft); border-color:var(--pen)}
+.sublbl{font-size:13px; color:var(--ink-soft); margin-bottom:5px}
+.verify{border:1px solid var(--rule); border-radius:11px; padding:14px; background:#fff; margin-top:6px}
+.verify.pending{background:var(--warn-soft); border-color:#E3C4B6}
+.verify.done{background:var(--ok-soft); border-color:#BCD8C8}
+.chk{display:flex; gap:10px; align-items:flex-start; font-size:14.5px}
+.chk input{width:22px; height:22px; flex:0 0 auto; margin:1px 0 0}
+.stamp{font-size:13px; color:var(--ok); margin-top:8px}
+.logrow{border:1px solid var(--rule); border-radius:11px; background:#fff; margin-bottom:10px; overflow:hidden}
+.logrow > summary{padding:9px 8px; cursor:pointer; list-style:none}
+.logrow > summary::-webkit-details-marker{display:none}
+.lgrid{display:grid; grid-template-columns:1.3fr repeat(8, 1fr); gap:1px; align-items:center}
+.lgrid > div{text-align:center; font-family:var(--num); font-size:12px; font-variant-numeric:tabular-nums; overflow:hidden}
+.lgrid > div:first-child{text-align:right; font-weight:600; font-size:12.5px; padding-inline-start:4px}
+.lgrid .u{color:var(--pen); font-weight:600}
+.lgrid .b{border-radius:5px; padding:2px 0}
+.b-low{background:#FBE3DC; color:#8E2F10; font-weight:700}
+.b-ok {background:#E4F3EA; color:#1F6B4A}
+.b-mid{background:#FBF3D8; color:#7A5B12}
+.b-hi {background:#FBE6D2; color:#8A4A12}
+.b-vhi{background:#F6D5CB; color:#8E2F10; font-weight:700}
+.wknd > summary, .subrow.wknd{background:#F4F6FA}
+.loghead{background:var(--pen-soft); border:1px solid var(--rule); border-radius:9px; padding:7px 8px; margin-bottom:8px}
+.loghead .lgrid{gap:1px 1px}
+.loghead .lgrid > div{font-family:inherit; font-size:10.5px; font-weight:600; color:var(--pen); line-height:1.15}
+.loghead .span2{grid-column:span 2; white-space:nowrap; border-bottom:1px solid #C4D5EC; padding-bottom:2px; margin-bottom:2px}
+.loghead .sub{font-size:10px; font-weight:500; color:var(--ink-soft)}
+.loghead .corner{border-bottom:1px solid #C4D5EC; padding-bottom:2px; margin-bottom:2px}
+.logrow[open] > summary{border-bottom:1px dashed var(--rule)}
+.lempty{color:var(--rule)}
+.subrow{border:1px solid var(--rule); border-top:0; border-radius:0 0 11px 11px; background:#F7FAFD;
+  margin:-11px 0 10px; padding:8px; cursor:pointer}
+.subrow .lgrid > div:first-child{font-weight:500; font-size:12px; color:var(--ink-soft)}
+.logrow .body{padding:0 14px 14px; border-top:1px dashed var(--rule)}
+.grp{margin-top:12px}
+.grp.fold{border:1px solid var(--rule); border-radius:9px; padding:0 10px 2px; background:#FCFDFE}
+.grp.fold > summary{list-style:none; cursor:pointer; padding:9px 2px; display:flex; justify-content:space-between; align-items:baseline; gap:8px}
+.grp.fold > summary::-webkit-details-marker{display:none}
+.grp.fold .gname{font-size:13px; font-weight:600; color:var(--pen)}
+.grp.fold .gval{font-family:var(--num); font-size:13px; text-align:left}
+.grp.fold[open] > summary{border-bottom:1px dashed var(--rule); margin-bottom:8px}
+.grp.fold .btn.small{margin-bottom:10px}
+.pair{display:flex; gap:8px; flex-wrap:wrap} .pair label.fld{flex:1 1 30%}
+.empty{text-align:center; color:var(--ink-soft); font-size:14.5px; padding:26px 10px}
+.savednote{font-size:12.5px; color:var(--ok); text-align:center; margin:2px 0 0; min-height:17px}
+.foodseg button[aria-pressed="true"]{background:var(--ok-soft); border-color:#BCD8C8; color:var(--ok)}
+.lgrid .dn{color:var(--ok); font-weight:700}
+.toast{position:fixed; bottom:calc(84px + env(safe-area-inset-bottom)); right:50%; transform:translateX(50%);
+  background:var(--ink); color:#fff; padding:10px 18px; border-radius:20px; font-size:14px; opacity:0;
+  pointer-events:none; transition:opacity .2s; z-index:30; white-space:nowrap}
+.toast.show{opacity:.95}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>סוכר ואינסולין</h1>
+  <div class="sub" id="hdrsub">ההוראות שקיבלת מהצוות</div>
+</header>
+
+<main>
+<div id="persistwarn"></div>
+<section class="screen" id="s-dose">
+  <div id="lockcard"></div>
+  <div id="calc">
+    <div class="now" id="nowbar"></div>
+    <div class="seg" id="slotsel"></div>
+    <div class="seg foodseg" id="foodsel"></div>
+    <div id="slotnote"></div>
+    <label class="fld">
+      <span id="gluclbl">סוכר לפני ארוחת הערב (mg/dL)</span>
+      <input id="gluc" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="—" autocomplete="off">
+    </label>
+    <div id="savednote" class="savednote"></div>
+    <div id="result"></div>
+  </div>
+</section>
+
+<section class="screen" id="s-log">
+  <div class="card">
+    <h2>הוספת יום</h2>
+    <p class="hint">בחר תאריך ולחץ הוספה. אפשר להזין גם ימים שעברו.</p>
+    <div class="row2">
+      <input type="date" id="newdate">
+      <button class="btn small" id="addtoday">הוספה</button>
+    </div>
+  </div>
+  <div id="loglist"></div>
+  <div class="row2" style="margin-top:6px">
+    <button class="btn ghost small" id="exportcsv">ייצוא CSV</button>
+    <button class="btn ghost small" id="importcsv">ייבוא CSV</button>
+  </div>
+  <button class="btn ghost small" id="exporthtml" style="margin-top:8px">טבלה צבעונית להדפסה</button>
+  <button class="btn danger small" id="clearlog" style="margin-top:8px">ניקוי היומן</button>
+</section>
+
+<section class="screen on" id="s-tbl">
+  <div class="card alert">
+    <h2>לבדוק מול הדף</h2>
+    <p class="hint">הקלדתי מהצילום רק את מה שקראתי בוודאות. את ההוראות של הטרזיבה לא הצלחתי לפענח, ולכן השארתי אותן ריקות — תמלא אותן מהדף. גם שמות שתי עמודות הנוברפיד לא ברורים בצילום. עבור שורה־שורה, ואשר למטה. עד שתאשר, מסך המינון נעול.</p>
+  </div>
+
+  <div class="card" id="basalcard"></div>
+
+  <div id="tables"></div>
+  <button class="btn ghost small" id="addtable" style="margin-bottom:14px">הוספת טבלה</button>
+
+  <div id="warns"></div>
+  <div class="verify done" id="verify"></div>
+
+  <div class="card" id="hypocard"><h2>סוכר נמוך</h2><p class="hint">מתחת לערך הזה האפליקציה לא מציגה מינון בכלל, אלא הוראה לשתות מי סוכר ולבדוק שוב.</p><div class="row2"><label class="fld"><span>מתחת ל־ (mg/dL)</span><input type="text" inputmode="decimal" placeholder="80"></label><label class="fld"><span>לבדוק שוב אחרי (דקות)</span><input type="text" inputmode="decimal" placeholder="15"></label></div></div>
+
+  <div id="buildinfo" class="card"><h2>הגרסה שפתוחה כרגע</h2><p class="hint" style="margin-bottom: 4px;">קובץ מ־2026-08-11 10:58</p><p class="hint" style="margin-bottom: 4px;">טבלאות מהירות: 1</p><p class="hint" style="margin-bottom: 4px;">• נוברפיד — קצר, עם הארוחה: 140–200→2, 201–240→3, 241–280→4, 281–320→5</p><p class="hint">אם זה לא מה שאתה מצפה לראות, אתה פתחת קובץ ישן.</p></div>
+
+  <div class="card">
+    <h2>עותק אישי</h2>
+    <p class="hint">יוצר קובץ אפליקציה חדש שהטבלאות והאישור שלך צרובים בתוכו. הקובץ הזה זוכר אותם גם אם הדפדפן לא שומר כלום. אחרי כל תיקון בטבלה — צור עותק חדש, והוסף אותו למסך הבית במקום הישן.</p>
+    <button class="btn" id="makecopy">יצירת עותק אישי</button>
+    <div id="copyout" style="margin-top:12px"></div>
+  </div>
+
+  <div class="card">
+    <h2>גיבוי היומן</h2>
+    <p class="hint">הרשומות נשמרות במכשיר הזה בלבד. שמור עותק מדי פעם.</p>
+    <div class="row2">
+      <button class="btn ghost small" id="expjson">שמירת גיבוי</button>
+      <button class="btn ghost small" id="impjson">שחזור מגיבוי</button>
+    </div>
+  </div>
+</section>
+</main>
+
+<nav>
+  <button data-s="s-dose" aria-selected="false"><span class="ic">＃</span>מינון</button>
+  <button data-s="s-log" aria-selected="false"><span class="ic">▤</span>יומן</button>
+  <button data-s="s-tbl" aria-selected="true"><span class="ic">✎</span>הטבלה שלי</button>
+</nav>
+<div class="toast" id="toast"></div>
+
+<script id="appcode">
+/* ---------- storage ---------- */
+const mem = {};
+const store = {
+  async get(k){
+    if (window.storage && window.storage.get){
+      try{ const r = await window.storage.get(k); return r ? JSON.parse(r.value) : null; }catch(e){ return null; }
+    }
+    try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : null; }catch(e){ return mem[k] ?? null; }
+  },
+  async set(k,v){
+    if (window.storage && window.storage.set){ try{ await window.storage.set(k, JSON.stringify(v)); return true; }catch(e){} }
+    try{ localStorage.setItem(k, JSON.stringify(v)); return true; }catch(e){ mem[k]=v; return false; }
+  }
+};
+const K_CFG='sugar:config2', K_LOG='sugar:log', K_STAMP='sugar:stamp';
+const EMBEDDED = {"stamp":"2026-08-15T04:52:30.000Z","cfg":{"verifiedAt":"2026-08-15T07:00:00.000Z","hypo":{"limit":"80","minutes":"15"},"basal":{"name":"אינסולין ארוך טווח","slot":"fast","dose":"6","threshold":"200","step":"1","everyDays":"2","max":"","lastChange":"2026-08-06","history":[{"date":"2026-08-04","from":4,"to":5},{"date":"2026-08-06","from":5,"to":6}],"note":"6 יחידות כל בוקר בצום. אם סוכר הצום מעל 200 — מעלים יחידה, לא יותר מפעם ביומיים. גבול עליון לא ידוע."},"tables":[{"name":"נוברפיד — קצר, עם הארוחה","slots":["m_meal","noon","eve"],"rows":[{"from":140,"to":200,"units":2},{"from":201,"to":240,"units":3},{"from":241,"to":280,"units":4},{"from":281,"to":320,"units":5}],"food":"meal"},{"name":"ללא אוכל","slots":["m_meal","noon","eve"],"rows":[{"from":200,"to":240,"units":2},{"from":241,"to":280,"units":3},{"from":281,"to":320,"units":4}],"food":"nofood"}]},"log":[{"date":"2026-08-07","notes":"","t_fast":"","g_fast":"123","g_fast_r":"","i_long":"6","t_m":"","g_m":"151","g_m_r":"","i_m":"2","t_n":"","g_n":"","g_n_r":"","i_n":"","t_e":"","g_e":"","g_e_r":"","i_e":""},{"date":"2026-08-06","notes":"","t_fast":"","g_fast":"213","g_fast_r":"","i_long":"6","t_m":"","g_m":"178","g_m_r":"","i_m":"3","t_n":"","g_n":"172","g_n_r":"","i_n":"","t_e":"","g_e":"74","g_e_r":"88","i_e":""},{"date":"2026-08-05","notes":"","t_fast":"","g_fast":"191","g_fast_r":"","i_long":"","t_m":"","g_m":"204","g_m_r":"","i_m":"2","t_n":"","g_n":"201","g_n_r":"","i_n":"3","t_e":"","g_e":"73","g_e_r":"138","i_e":""},{"date":"2026-08-04","notes":"","t_fast":"","g_fast":"265","g_fast_r":"","i_long":"5","t_m":"","g_m":"","g_m_r":"","i_m":"","t_n":"","g_n":"316","g_n_r":"","i_n":"4","t_e":"","g_e":"190","g_e_r":"","i_e":"2"},{"date":"2026-08-03","notes":"","t_fast":"","g_fast":"172","g_fast_r":"","i_long":"4","t_m":"","g_m":"","g_m_r":"","i_m":"","t_n":"","g_n":"187","g_n_r":"","i_n":"3","t_e":"","g_e":"80","g_e_r":"","i_e":""},{"date":"2026-08-02","notes":"","t_fast":"","g_fast":"","g_fast_r":"","i_long":"","t_m":"","g_m":"","g_m_r":"","i_m":"","t_n":"","g_n":"","g_n_r":"","i_n":"","t_e":"","g_e":"117","g_e_r":"","i_e":""}]}; /*EMBED*/
+store.mode='unknown';
+async function detectStorage(){
+  if (window.storage && window.storage.set){
+    try{ await window.storage.set('sugar:ping','1'); const r=await window.storage.get('sugar:ping'); if(r) return (store.mode='cloud'); }catch(e){}
+  }
+  try{ localStorage.setItem('sugar:ping','1'); if(localStorage.getItem('sugar:ping')==='1') return (store.mode='local'); }catch(e){}
+  return (store.mode='memory');
+}
+function renderHypo(){
+  if(!cfg) return;
+  if (!cfg) return;
+  const c=$('#hypocard'); c.innerHTML='';
+  cfg.hypo = cfg.hypo || {limit:'', minutes:''};
+  c.append(el('h2',null,'סוכר נמוך'));
+  c.append(el('p','hint','מתחת לערך הזה האפליקציה לא מציגה מינון בכלל, אלא הוראה לשתות מי סוכר ולבדוק שוב.'));
+  const two=el('div','row2');
+  const l1=el('label','fld'); l1.append(el('span',null,'מתחת ל־ (mg/dL)'));
+  const i1=el('input'); i1.type='text'; i1.inputMode='decimal'; i1.value=cfg.hypo.limit||''; i1.placeholder='80';
+  i1.oninput=()=>{ const nv=i1.value.replace(/[^0-9.]/g,''); if(nv!==cfg.hypo.limit) unverify('שינית את סף הסוכר הנמוך'); cfg.hypo.limit=nv; saveCfg(); }; l1.append(i1);
+  const l2=el('label','fld'); l2.append(el('span',null,'לבדוק שוב אחרי (דקות)'));
+  const i2=el('input'); i2.type='text'; i2.inputMode='decimal'; i2.value=cfg.hypo.minutes||''; i2.placeholder='15';
+  i2.oninput=()=>{ cfg.hypo.minutes=i2.value.replace(/[^0-9.]/g,''); saveCfg(); }; l2.append(i2);
+  two.append(l1,l2); c.append(two);
+}
+function renderBuild(){
+  if(!cfg) return;
+  if (!cfg) return;
+  const h=$('#buildinfo'); h.innerHTML='';
+  h.append(el('h2',null,'הגרסה שפתוחה כרגע'));
+  const st = (EMBEDDED && EMBEDDED.stamp) ? EMBEDDED.stamp.replace('T',' ').slice(0,16) : 'ללא חותמת';
+  const lines = [
+    'קובץ מ־'+st,
+    'טבלאות מהירות: '+cfg.tables.length,
+    ...cfg.tables.map(t=>'• '+t.name+' ['+((t.food==='nofood')?'ללא אוכל':'עם אוכל')+']: '+t.rows.map(r=>r.from+'–'+r.to+'→'+r.units).join(', '))
+  ];
+  lines.forEach(x=>{ const p=el('p','hint',x); p.style.marginBottom='4px'; h.append(p); });
+  h.append(el('p','hint','אם זה לא מה שאתה מצפה לראות, אתה פתחת קובץ ישן.'));
+}
+function renderPersist(){
+  const h=$('#persistwarn'); h.innerHTML='';
+  if (store.mode!=='memory') return;
+  const c=el('div','card alert');
+  c.append(el('h2',null,'הנתונים לא נשמרים במכשיר'));
+  c.append(el('p','hint','הדפדפן חוסם שמירה בדרך שבה הקובץ נפתח כרגע, ולכן כל פתיחה מתחילה מאפס. שני פתרונות: למלא ולאשר את הטבלה, ואז ללחוץ "יצירת עותק אישי" למטה — בקובץ שייווצר הטבלה והאישור צרובים ולא נמחקים; ובנוסף לפתוח את הקובץ ב־Safari ולהוסיף אותו למסך הבית, כדי שגם היומן יישמר.'));
+  h.append(c);
+}
+
+/* ---------- time slots ---------- */
+const SLOTS = [
+  {id:'fast',   label:'בוקר ארוך',   kind:'long',  from:4,  to:10, glucLabel:'סוכר בצום, לפני כל אכילה'},
+  {id:'m_meal', label:'בוקר קצר',    kind:'short', from:10, to:12, glucLabel:'סוכר לפני ארוחת הבוקר'},
+  {id:'noon',   label:'צהריים קצר',  kind:'short', from:12, to:17, glucLabel:'סוכר לפני ארוחת הצהריים'},
+  {id:'eve',    label:'ערב קצר',     kind:'short', from:17, to:4,  glucLabel:'סוכר לפני ארוחת הערב'}
+];
+function slotNow(){
+  const d=new Date(), h=d.getHours()+d.getMinutes()/60;
+  for (const s of SLOTS){
+    if (s.from < s.to){ if (h>=s.from && h<s.to) return s.id; }
+    else { if (h>=s.from || h<s.to) return s.id; }
+  }
+  return 'noon';
+}
+const slotBy = id => SLOTS.find(s=>s.id===id);
+const clock = () => { const d=new Date(); return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`; };
+
+/* ---------- defaults ---------- */
+const DEFAULT_CFG = {
+  verifiedAt:null,
+  basal:{ name:'אינסולין ארוך טווח', slot:'morning', dose:'', threshold:'', step:'', everyDays:'', max:'', lastChange:'', history:[], note:'' },
+  hypo:{limit:'80', minutes:'15'},
+  tables:[
+    { name:'עמודה ימנית בדף (לשנות לשם הנכון)', slots:[], food:'meal',
+      rows:[{from:140,to:180,units:2},{from:181,to:220,units:3},{from:221,to:260,units:4},{from:261,to:300,units:5}] },
+    { name:'עמודה שמאלית בדף (לשנות לשם הנכון)', slots:[], food:'meal',
+      rows:[{from:200,to:240,units:2},{from:241,to:280,units:3},{from:281,to:320,units:4}] }
+  ]
+};
+
+let cfg=null, log=[], curSlot=slotNow(), manualSlot=false;
+let foodMode='meal';        // 'meal' | 'nofood' — which kind of table the dose comes from
+let session=null;           // the reading currently being typed, and where it is being written
+const SLOT_IDS=['fast','m_meal','noon','eve'];
+
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s);
+const el = (t,c,txt) => { const n=document.createElement(t); if(c)n.className=c; if(txt!=null)n.textContent=txt; return n; };
+const esc = s => String(s??'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+const today = () => { const d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; };
+const heDate = iso => { const [y,m,d]=iso.split('-'); return `${+d}.${+m}.${y}`; };
+const numOrNull = v => (v===''||v==null||isNaN(Number(v))) ? null : Number(v);
+let toastT; function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),1900); }
+const isVerified = () => !!(cfg && cfg.verifiedAt);
+async function saveCfg(){ await store.set(K_CFG,cfg); }
+async function saveLog(){ await store.set(K_LOG,log); }
+const basalActive = () => !!(cfg && cfg.basal) && numOrNull(cfg.basal.dose)!==null;
+const daysBetween = (a,b) => Math.floor((new Date(b+'T00:00:00') - new Date(a+'T00:00:00'))/86400000);
+function titrationState(v){
+  const b=cfg.basal;
+  const dose=numOrNull(b.dose), th=numOrNull(b.threshold), step=numOrNull(b.step),
+        every=numOrNull(b.everyDays), max=numOrNull(b.max);
+  if (dose===null || th===null || step===null || every===null) return {kind:'off'};
+  if (v <= th) return {kind:'below', th};
+  if (max!==null && dose+step > max) return {kind:'capped', max};
+  const since = b.lastChange ? daysBetween(b.lastChange, today()) : null;
+  if (since!==null && since < every) return {kind:'wait', wait: every-since, since};
+  return {kind:'raise', to: dose+step, step};
+}
+
+document.querySelectorAll('nav button').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    document.querySelectorAll('nav button').forEach(x=>x.setAttribute('aria-selected', x===b));
+    document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on', s.id===b.dataset.s));
+    $('#hdrsub').textContent = {'s-dose':'מינון לפי הטבלה שלך','s-log':'מעקב ערכי סוכר','s-tbl':'ההוראות שקיבלת מהצוות'}[b.dataset.s];
+    if (b.dataset.s==='s-dose' && cfg){ if(!manualSlot) setSlot(slotNow(), false); else { renderDoseScreen(); calc(); } }
+    window.scrollTo(0,0);
+  });
+});
+const goTo = id => document.querySelector(`nav button[data-s="${id}"]`).click();
+function setSlot(id, manual){
+  const changed = (id !== curSlot);
+  curSlot = id;
+  manualSlot = manual;
+  if (changed){                       // a reading belongs to one measurement point only
+    const g=$('#gluc'); if(g) g.value='';
+    const r=$('#result'); if(r) r.innerHTML='';
+    session=null; foodMode='meal'; renderSaved('');
+  }
+  renderDoseScreen();
+  if (!changed) calc();
+}
+document.addEventListener('visibilitychange', ()=>{ if(!document.hidden && !manualSlot && cfg){ setSlot(slotNow(), false); }});
+
+/* ---------- dose screen ---------- */
+function renderDoseScreen(){
+  if(!cfg) return;
+  if (!cfg) return;
+  const lock=$('#lockcard'); lock.innerHTML='';
+  if (!isVerified()){
+    const c=el('div','card alert');
+    c.append(el('h2',null,'ההוראות עוד לא אושרו'));
+    c.append(el('p','hint','אסור להסתמך על מה שהקלדתי לפני שעברת עליו מול הדף המקורי. פתח את "הטבלה שלי", השלם ואשר.'));
+    const b=el('button','btn','לפתיחת הטבלה'); b.onclick=()=>goTo('s-tbl'); c.append(b);
+    lock.append(c); $('#calc').hidden=true; return;
+  }
+  $('#calc').hidden=false;
+
+  const s=slotBy(curSlot);
+  const nb=$('#nowbar'); nb.innerHTML='';
+  const L=el('div'); L.append(el('b',null,s.label)); nb.append(L);
+  const R=el('div'); R.style.textAlign='left';
+  R.append(el('div','t',clock()));
+  R.append(el('div','auto', manualSlot?'נבחר ידנית':'לפי השעה'));
+  nb.append(R);
+
+  const sel=$('#slotsel'); sel.innerHTML='';
+  SLOTS.forEach(x=>{
+    const b=el('button',null,x.label);
+    b.setAttribute('aria-pressed', x.id===curSlot);
+    b.onclick=()=>{ setSlot(x.id, x.id!==slotNow()); };
+    sel.append(b);
+  });
+  const fs=$('#foodsel'); fs.innerHTML='';
+  if (s.kind==='short'){
+    fs.hidden=false;
+    [['meal','עם אוכל'],['nofood','ללא אוכל']].forEach(([id,lbl])=>{
+      const fb=el('button',null,lbl);
+      fb.setAttribute('aria-pressed', id===foodMode);
+      fb.onclick=()=>{ foodMode=id; renderDoseScreen(); calc(); };
+      fs.append(fb);
+    });
+  } else { fs.hidden=true; foodMode='meal'; }
+
+  $('#gluclbl').textContent = s.glucLabel+' (mg/dL)';
+
+  const nb2=$('#slotnote'); nb2.innerHTML='';
+  if (cfg.basal.slot===curSlot && !basalActive()){
+    const n=el('div','msg bad'); n.style.marginBottom='12px';
+    n.innerHTML = '<strong>'+esc(cfg.basal.name)+' לא מוגדר</strong>המנה עוד לא הוזנה, ולכן האפליקציה לא מציגה אותה. קבע לפי הדף.';
+    nb2.append(n);
+  }
+}
+
+function lookup(rows,v,key){
+  const hits = rows.filter(r=>numOrNull(r.from)!==null && numOrNull(r.to)!==null && v>=r.from && v<=r.to);
+  if (hits.length>1) return {err:'overlap'};
+  if (!hits.length) return {err:'none'};
+  return {row:hits[0], val:Number(hits[0][key])};
+}
+function echo(text){
+  return `<div class="rowecho"><span class="txt">${esc(text)}</span>
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M4,52 C4,22 26,7 51,7 C78,7 97,21 97,49 C97,78 74,94 49,94 C24,94 5,80 4,54 C4,34 15,16 40,9" vector-effect="non-scaling-stroke"/></svg></div>`;
+}
+function tablesForSlot(){
+  const kind = cfg.tables.filter(t=>((t.food==='nofood')?'nofood':'meal')===foodMode);
+  if (!kind.length) return [];                       // no table of this kind — never fall back
+  const named = kind.filter(t=>(t.slots||[]).includes(curSlot));
+  return named.length ? named : kind;
+}
+function noTableCard(){
+  const c=el('div','card alert');
+  c.append(el('h2',null, foodMode==='nofood' ? 'אין טבלה ללא אוכל' : 'אין טבלה עם אוכל'));
+  c.append(el('p','hint','לא הוגדרה טבלה מהסוג הזה, ולכן אין מאיפה לקחת מינון. האפליקציה לא משתמשת בטבלה של הסוג השני.'));
+  const b=el('button','btn','הוספת טבלה '+(foodMode==='nofood'?'ללא אוכל':'עם אוכל'));
+  b.onclick=()=>{
+    cfg.tables.push({name: foodMode==='nofood'?'ללא אוכל — למלא מהדף':'עם אוכל — למלא מהדף',
+                     slots:[], food:foodMode, rows:[{from:'',to:'',units:''}]});
+    unverify('הוספת טבלה'); saveCfg(); renderTables(); goTo('s-tbl');
+    toast('מלא את הטבלה מהדף ואשר למטה');
+  };
+  c.append(b);
+  return c;
+}
+function band(v){
+  const n=Number(v); if(!Number.isFinite(n)) return '';
+  const lim=hypoLimit()!==null?hypoLimit():80;
+  if (n<lim) return 'b b-low';
+  if (n<140) return 'b b-ok';
+  if (n<=200) return 'b b-mid';
+  if (n<=280) return 'b b-hi';
+  return 'b b-vhi';
+}
+function hypoLimit(){ return numOrNull(cfg.hypo && cfg.hypo.limit); }
+let hypoTimer=null;
+function hypoCard(v){
+  const lim=hypoLimit(), mins=numOrNull(cfg.hypo && cfg.hypo.minutes) || 15;
+  const c=el('div','card alert');
+  c.append(el('h2',null,'סוכר נמוך — לא להזריק'));
+  c.append(el('p','hint', v+' מתחת ל־'+lim+'. שתה מי סוכר, ובדוק שוב בעוד '+mins+' דקות. אל תזריק כלום עד לבדיקה החוזרת.'));
+  c.append(el('p','hint','הערך הנמוך כבר נשמר ביומן. אחרי הבדיקה החוזרת הזן כאן את הערך החדש — הוא ייכנס לעמודת "בדיקה חוזרת" של אותה שעה, והערך הנמוך יישאר.'));
+  const disp=el('div'); disp.style.cssText='font-family:var(--num);font-size:34px;text-align:center;margin:6px 0;color:var(--warn)';
+  const btn=el('button','btn','התחל '+mins+' דקות');
+  btn.onclick=()=>{
+    clearInterval(hypoTimer);
+    let left=mins*60;
+    const tick=()=>{
+      const m=Math.floor(left/60), sec=left%60;
+      disp.textContent = m+':'+String(sec).padStart(2,'0');
+      if (left<=0){ clearInterval(hypoTimer); disp.textContent='בדוק שוב'; toast('עברו '+mins+' דקות — בדוק שוב'); }
+      left--;
+    };
+    tick(); hypoTimer=setInterval(tick,1000); btn.remove();
+  };
+  c.append(disp, btn);
+  return c;
+}
+function calc(){
+  if(!cfg) return;
+  if (!cfg) return;
+  const out=$('#result'); out.innerHTML='';
+  const raw=$('#gluc').value.trim(); if(raw==='') return;
+  const v=Number(raw); if(!Number.isFinite(v)||v<=0) return;
+  const slot=slotBy(curSlot);
+  let lastRapid=null, lastBasal=null;
+
+  // low sugar overrides everything
+  const lim=hypoLimit();
+  if (lim!==null && v < lim){
+    out.append(hypoCard(v));
+    out.append(doneBtn(null,null));
+    return;
+  }
+
+  if (slot.kind==='long'){
+    if (!basalActive()){
+      out.innerHTML = '<div class="msg bad"><strong>המנה לא הוגדרה</strong>הזן את המנה במסך "הטבלה שלי".</div>';
+      return;
+    }
+    const b=cfg.basal, dose=Number(b.dose);
+    lastBasal = dose;
+    const d=el('div','dose long');
+    d.innerHTML = `<div class="who">${esc(b.name)}</div>
+      <div class="units num">${dose}</div><div class="unitlbl">יחידות עכשיו</div>
+      <div class="math">מנה יומית קבועה</div>
+      <div class="src">אינסולין ארוך טווח, פעם ביום בצום. לא תלוי בגובה המדידה — המדידה קובעת רק אם מעלים את המנה.</div>`;
+    out.append(d);
+
+    const t = titrationState(v);
+    if (t.kind!=='off'){
+      const n=el('div','card');
+      if (t.kind==='below'){
+        n.innerHTML = `<h2>אין שינוי במנה</h2><p class="hint">${v} אינו מעל ${t.th}. ממשיכים עם ${dose} יחידות.</p>`;
+      } else if (t.kind==='wait'){
+        n.innerHTML = `<h2>עוד לא מעלים</h2><p class="hint">${v} מעל ${b.threshold}, אבל עברו רק ${t.since} ימים מאז ההעלאה האחרונה. אפשר לשקול בעוד ${t.wait} ימים. היום ${dose} יחידות.</p>`;
+      } else if (t.kind==='capped'){
+        n.className='card alert';
+        n.innerHTML = `<h2>הגעת לגבול העליון</h2><p class="hint">${v} מעל ${b.threshold}, אבל המנה כבר ${dose} והגבול שהגדרת ${t.max}. אל תעלה עוד — פנה לצוות.</p>`;
+      } else if (t.kind==='raise'){
+        n.innerHTML = `<h2>אפשר להעלות את המנה</h2><p class="hint">${v} מעל ${b.threshold}, ועברו לפחות ${b.everyDays} ימים מאז השינוי האחרון. ${dose} ← ${t.to} יחידות מהיום.</p>`;
+        const ok=el('button','btn','העליתי ל־'+t.to+' יחידות');
+        ok.onclick=()=>{
+          b.history=(b.history||[]); b.history.push({date:today(), from:dose, to:t.to});
+          b.dose=String(t.to); b.lastChange=today(); saveCfg(); renderBasal(); calc(); toast('המנה עודכנה ל־'+t.to);
+        };
+        n.append(ok);
+        if (numOrNull(b.max)===null){
+          const w=el('p','hint'); w.style.cssText='margin-top:10px;color:var(--warn)';
+          w.textContent='לא הגדרת גבול עליון למנה. שווה לברר עם הצוות עד כמה מותר להעלות.';
+          n.append(w);
+        }
+      }
+      out.append(n);
+    }
+
+    const nxt=el('div','card');
+    nxt.append(el('h2',null,'הבדיקה הבאה'));
+    nxt.append(el('p','hint','לפני שאתה אוכל — בדוק שוב, והבדיקה הזאת תקבע אם צריך אינסולין קצר.'));
+    const go=el('button','btn ghost','מעבר לבדיקה שלפני האוכל');
+    go.onclick=()=>{ setSlot('m_meal', true); $('#gluc').focus(); };
+    nxt.append(go); out.append(nxt);
+
+  } else {
+    const list=tablesForSlot();
+    if (!list.length){ out.append(noTableCard()); return; }
+    list.forEach(t=>{
+      const r=lookup(t.rows,v,'units');
+      const d=el('div','dose');
+      if (r.err==='overlap'){
+        d.innerHTML=`<div class="who">${esc(t.name)}</div>
+          <div class="msg bad" style="margin-top:10px;text-align:right"><strong>חפיפה בטבלה</strong>הערך ${v} מתאים ליותר משורה אחת.</div>`;
+      } else if (r.err==='none'){
+        const froms=t.rows.filter(x=>numOrNull(x.from)!==null).map(x=>Number(x.from));
+        const min=froms.length?Math.min(...froms):null;
+        if (min!==null && v<min){
+          lastRapid=0; d.className='dose zero';
+          d.innerHTML=`<div class="who">${esc(t.name)}</div>
+            <div class="big">לא להזריק</div><div class="unitlbl">0 יחידות</div>
+            ${echo((lim!==null? lim+'–'+(min-1) : 'מתחת ל־'+min) + ' → 0')}
+            <div class="src">${foodMode==='meal'?'טווח תקין לפני ארוחה. אפשר לאכול בלי אינסולין קצר.':'טווח תקין. אין צורך בתיקון ללא אוכל.'}</div>`;
+        } else {
+          const tos=t.rows.filter(x=>numOrNull(x.to)!==null).map(x=>Number(x.to));
+          const max=tos.length?Math.max(...tos):null;
+          const why=(max!==null&&v>max)?`${v} גבוה מהשורה האחרונה בטבלה.`:`${v} נופל בפער בין שתי שורות בטבלה.`;
+          d.innerHTML=`<div class="who">${esc(t.name)}</div>
+            <div class="msg bad" style="margin-top:10px;text-align:right"><strong>אין התאמה בטבלה</strong>${why} פעל לפי ההנחיות שקיבלת מהצוות המטפל.</div>`;
+        }
+      } else {
+        lastRapid=r.val;
+        d.innerHTML=`<div class="who">${esc(t.name)}</div>
+          <div class="units num">${r.val}</div><div class="unitlbl">יחידות</div>
+          ${echo(`${r.row.from}–${r.row.to} → ${r.row.units}`)}
+          <div class="src">${foodMode==='meal'?'אינסולין קצר, עם הארוחה.':'אינסולין קצר, תיקון ללא אוכל.'} השווה לדף לפני ההזרקה.</div>`;
+      }
+      out.append(d);
+    });
+  }
+
+  out.append(doneBtn(lastRapid,lastBasal));
+}
+$('#gluc').addEventListener('input', ()=>{
+  $('#gluc').value=$('#gluc').value.replace(/[^0-9]/g,'').slice(0,3);
+  calc(); scheduleSave();
+});
+$('#gluc').addEventListener('blur', ()=>{ clearTimeout(saveT); saveReading(); });
+
+/* ---------- the reading is written to the log as it is typed ---------- */
+function renderSaved(txt){ const n=$('#savednote'); if(n) n.textContent = txt||''; }
+function entryToday(){
+  let e=log.find(x=>x.date===today());
+  if(!e){ e=blank(today()); log.push(e); }
+  return e;
+}
+function startSession(){
+  const e=entryToday();
+  const [gf,inf,rf]=SLOT_FIELDS[curSlot];
+  const lim=hypoLimit();
+  const prev=e[gf];
+  const wasLow = prev!=='' && lim!==null && Number(prev)<lim;   // a repeat check after a low reading
+  session={date:today(), slot:curSlot, field:(wasLow && rf && e[rf]==='') ? rf : gf, gf, inf};
+  const tk=SLOT_TIME[curSlot];
+  if (tk && !e[tk]){ e[tk]=clock(); session.setTime=tk; }
+  return e;
+}
+let saveT;
+function scheduleSave(){ clearTimeout(saveT); saveT=setTimeout(saveReading, 450); }
+function saveReading(){
+  if (!cfg || !isVerified()) return;
+  const raw=$('#gluc').value.trim();
+  if (!session || session.slot!==curSlot || session.date!==today()){
+    if (raw==='') { renderSaved(''); return; }
+    startSession();
+  }
+  const e=entryToday();
+  if (raw===''){                                   // erased — take it out of the log too
+    e[session.field]='';
+    if (session.setTime) e[session.setTime]='';
+    session=null; renderSaved('');
+  } else {
+    const dup = session.field!==session.gf && Number(raw)===Number(e[session.gf]);
+    e[session.field] = dup ? '' : raw;              // don't duplicate the same reading twice
+    renderSaved('נשמר ביומן · '+slotBy(curSlot).label+(session.field.endsWith('_r')?' · בדיקה חוזרת':'')+' · '+clock());
+  }
+  saveLog(); renderLog();
+}
+function doneBtn(rapid, basal){
+  const b=el('button','btn','בוצע');
+  b.onclick=()=>{ $('#gluc').blur(); clearTimeout(saveT); saveReading(); markDone(rapid,basal); };
+  return b;
+}
+function markDone(rapid, basal){
+  const e=entryToday();
+  if (!session || session.slot!==curSlot || session.date!==today()) startSession();
+  const [gf,inf,rf]=SLOT_FIELDS[curSlot];
+  if (rapid!=null) e[inf]=String(rapid);
+  if (basal!=null) e.i_long=String(basal);
+  e.marks = e.marks || {};
+  const mk = {done: clock()};
+  if (slotBy(curSlot).kind==='short') mk.food = foodMode;
+  if (rapid==null && basal==null) mk.none = true;
+  e.marks[curSlot] = mk;
+  if (rapid==null && basal==null){
+    const line = slotBy(curSlot).label+': סוכר נמוך, מי סוכר, בלי הזרקה';
+    if ((e.notes||'').indexOf(line)<0) e.notes = (e.notes? e.notes+' | ':'') + line;
+  }
+  e._open=true; session=null; saveLog(); renderLog();
+  $('#gluc').value=''; $('#result').innerHTML=''; renderSaved('');
+  toast((rapid==null&&basal==null) ? 'נרשם — בלי הזרקה' : 'נרשם כבוצע — '+slotBy(curSlot).label);
+  goTo('s-log');
+}
+
+/* ---------- long-acting editor ---------- */
+function renderBasal(){
+  if(!cfg) return;
+  if (!cfg) return;
+  const c=$('#basalcard'); c.innerHTML=''; const b=cfg.basal;
+  c.append(el('h2',null,'אינסולין ארוך טווח'));
+  c.append(el('p','hint','מנה יומית קבועה, שעולה בהדרגה לפי סוכר הבוקר. המנה הזאת לא משתנה מיום ליום לפי המדידה — היא נשארת עד שמעלים אותה.'));
+
+  const nl=el('label','fld'); nl.append(el('span',null,'שם התכשיר'));
+  const ni=el('input'); ni.type='text'; ni.value=b.name;
+  ni.oninput=()=>{ b.name=ni.value; saveCfg(); }; nl.append(ni); c.append(nl);
+
+  const two=el('div','row2');
+  const dl=el('label','fld'); dl.append(el('span',null,'המנה הנוכחית (יחידות)'));
+  const di=el('input'); di.type='text'; di.inputMode='decimal'; di.value=b.dose||''; di.placeholder='4';
+  di.oninput=()=>{ const nv=di.value.replace(/[^0-9.]/g,''); if(nv!==b.dose) unverify('שינית את המנה'); b.dose=nv; saveCfg(); renderWarns(); }; dl.append(di);
+  const sl=el('label','fld'); sl.append(el('span',null,'מתי מזריקים'));
+  const ss=el('select');
+  SLOTS.forEach(s=>{ const o=el('option',null,s.label); o.value=s.id; if(s.id===b.slot)o.selected=true; ss.append(o); });
+  ss.onchange=()=>{ b.slot=ss.value; saveCfg(); }; sl.append(ss);
+  two.append(dl,sl); c.append(two);
+
+  c.append(el('div','sublbl','כלל ההעלאה'));
+  const g1=el('div','row2');
+  const tl=el('label','fld'); tl.append(el('span',null,'אם סוכר הבוקר מעל'));
+  const ti=el('input'); ti.type='text'; ti.inputMode='decimal'; ti.value=b.threshold||''; ti.placeholder='200';
+  ti.oninput=()=>{ const nv=ti.value.replace(/[^0-9.]/g,''); if(nv!==b.threshold) unverify('שינית את הסף'); b.threshold=nv; saveCfg(); renderWarns(); }; tl.append(ti);
+  const stl=el('label','fld'); stl.append(el('span',null,'מוסיפים (יחידות)'));
+  const sti=el('input'); sti.type='text'; sti.inputMode='decimal'; sti.value=b.step||''; sti.placeholder='1';
+  sti.oninput=()=>{ const nv=sti.value.replace(/[^0-9.]/g,''); if(nv!==b.step) unverify('שינית את גודל ההעלאה'); b.step=nv; saveCfg(); renderWarns(); }; stl.append(sti);
+  g1.append(tl,stl); c.append(g1);
+
+  const g2=el('div','row2');
+  const el2=el('label','fld'); el2.append(el('span',null,'לא יותר מפעם ב־ (ימים)'));
+  const ei=el('input'); ei.type='text'; ei.inputMode='decimal'; ei.value=b.everyDays||''; ei.placeholder='2';
+  ei.oninput=()=>{ const nv=ei.value.replace(/[^0-9.]/g,''); if(nv!==b.everyDays) unverify('שינית את התדירות'); b.everyDays=nv; saveCfg(); renderWarns(); }; el2.append(ei);
+  const ml=el('label','fld'); ml.append(el('span',null,'גבול עליון (יחידות)'));
+  const mi=el('input'); mi.type='text'; mi.inputMode='decimal'; mi.value=b.max||''; mi.placeholder='לא הוגדר';
+  mi.oninput=()=>{ const nv=mi.value.replace(/[^0-9.]/g,''); if(nv!==b.max) unverify('שינית את הגבול העליון'); b.max=nv; saveCfg(); renderWarns(); }; ml.append(mi);
+  g2.append(el2,ml); c.append(g2);
+
+  if (numOrNull(b.max)===null){
+    const w=el('p','hint'); w.style.color='var(--warn)';
+    w.textContent='בלי גבול עליון האפליקציה תמשיך להציע העלאות ללא סוף. שאל את הצוות עד כמה מותר להעלות, והזן כאן.';
+    c.append(w);
+  }
+
+  const ll=el('label','fld'); ll.append(el('span',null,'תאריך ההעלאה האחרונה'));
+  const li=el('input'); li.type='date'; li.value=b.lastChange||'';
+  li.onchange=()=>{ b.lastChange=li.value; saveCfg(); }; ll.append(li); c.append(ll);
+
+  if ((b.history||[]).length){
+    c.append(el('div','sublbl','היסטוריית שינויים'));
+    const ul=el('ul'); ul.style.cssText='margin:0 0 12px;padding-inline-start:18px;font-size:14px;color:var(--ink-soft)';
+    [...b.history].reverse().slice(0,8).forEach(h=>ul.append(el('li',null,heDate(h.date)+': '+h.from+' ← '+h.to+' יחידות')));
+    c.append(ul);
+  }
+
+  const nt=el('label','fld'); nt.style.marginTop='6px';
+  nt.append(el('span',null,'ההוראות מהדף, כלשונן (לתזכורת)'));
+  const ta=el('textarea'); ta.value=b.note||'';
+  ta.placeholder='למשל: מתי מורידים, ומה הגבול העליון';
+  ta.oninput=()=>{ b.note=ta.value; saveCfg(); }; nt.append(ta); c.append(nt);
+}
+
+/* ---------- rapid tables editor ---------- */
+function renderTables(){
+  if(!cfg) return;
+  if (!cfg) return;
+  const host=$('#tables'); host.innerHTML='';
+  cfg.tables.forEach((t,ti)=>{
+    const c=el('div','card');
+    const nameL=el('label','fld'); nameL.append(el('span',null,'שם הטבלה'));
+    const nin=el('input'); nin.type='text'; nin.value=t.name;
+    nin.oninput=()=>{ t.name=nin.value; saveCfg(); }; nameL.append(nin); c.append(nameL);
+
+    t.food = (t.food==='nofood') ? 'nofood' : 'meal';
+    c.append(el('div','sublbl','הטבלה הזאת היא ל־'));
+    const fseg=el('div','seg foodseg'); fseg.style.marginBottom='12px';
+    [['meal','עם אוכל'],['nofood','ללא אוכל']].forEach(([id,lbl])=>{
+      const fb=el('button',null,lbl);
+      fb.setAttribute('aria-pressed', t.food===id);
+      fb.onclick=()=>{ if(t.food===id) return; t.food=id; unverify('שינית את סוג הטבלה'); saveCfg(); renderTables(); };
+      fseg.append(fb);
+    });
+    c.append(fseg);
+
+    c.append(el('div','sublbl','מתי משתמשים בטבלה הזאת'));
+    const slots=el('div','slots');
+    t.slots = t.slots||[];
+    SLOTS.forEach(s=>{
+      const L=el('label'); const cb=el('input'); cb.type='checkbox';
+      cb.checked=t.slots.includes(s.id); if(cb.checked) L.classList.add('on');
+      cb.onchange=()=>{ t.slots = cb.checked ? [...t.slots,s.id] : t.slots.filter(x=>x!==s.id);
+        L.classList.toggle('on',cb.checked); saveCfg(); };
+      L.append(cb, el('span',null,s.label)); slots.append(L);
+    });
+    c.append(slots);
+
+    const wrap=el('div','tbl-wrap'); const tbl=el('table','grid');
+    tbl.innerHTML='<thead><tr><th>סוכר מ־</th><th>עד</th><th>יחידות</th><th></th></tr></thead>';
+    const tb=el('tbody');
+    t.rows.forEach((r,ri)=>{
+      const tr=el('tr');
+      ['from','to','units'].forEach(f=>{
+        const td=el('td'); const inp=el('input'); inp.type='text'; inp.inputMode='decimal'; inp.value=r[f];
+        inp.oninput=()=>{ const nv= inp.value===''?'':Number(inp.value.replace(/[^0-9.]/g,'')); if(nv!==r[f]) unverify('שינית מספר בטבלה'); r[f]=nv; saveCfg(); renderWarns(); };
+        td.append(inp); tr.append(td);
+      });
+      const td=el('td'); const del=el('button','iconbtn','✕');
+      del.onclick=()=>{ t.rows.splice(ri,1); unverify('מחקת שורה'); saveCfg(); renderTables(); };
+      td.append(del); tr.append(td); tb.append(tr);
+    });
+    tbl.append(tb); wrap.append(tbl); c.append(wrap);
+
+    const bar=el('div','row2'); bar.style.marginTop='10px';
+    const add=el('button','btn ghost small','הוספת שורה');
+    add.onclick=()=>{ t.rows.push({from:'',to:'',units:''}); unverify('הוספת שורה'); saveCfg(); renderTables(); };
+    bar.append(add);
+    if (cfg.tables.length>1){
+      const rm=el('button','btn danger small','מחיקת הטבלה');
+      rm.onclick=()=>{ if(confirm('למחוק את הטבלה "'+t.name+'"?')){ cfg.tables.splice(ti,1); unverify('מחקת טבלה'); saveCfg(); renderTables(); } };
+      bar.append(rm);
+    }
+    c.append(bar); host.append(c);
+  });
+  renderWarns(); renderVerify();
+}
+$('#addtable').onclick=()=>{ cfg.tables.push({name:'טבלה חדשה', slots:[], food:'meal', rows:[{from:'',to:'',units:''}]}); unverify('הוספת טבלה'); saveCfg(); renderTables(); };
+
+/* ---------- validation ---------- */
+function problems(rows,key){
+  const p=[];
+  rows.forEach(r=>{
+    if (r.from===''||r.to===''||r[key]==='') p.push('יש שורה עם שדה ריק');
+    else if (Number(r.from)>Number(r.to)) p.push(`בשורה ${r.from}–${r.to}: "מ־" גדול מ־"עד"`);
+  });
+  const s=rows.filter(r=>r.from!==''&&r.to!=='').slice().sort((a,b)=>a.from-b.from);
+  for (let i=1;i<s.length;i++){
+    if (Number(s[i].from)<=Number(s[i-1].to)) p.push(`חפיפה בין ${s[i-1].from}–${s[i-1].to} לבין ${s[i].from}–${s[i].to}`);
+    else if (Number(s[i].from)>Number(s[i-1].to)+1) p.push(`פער בין ${s[i-1].to} לבין ${s[i].from} — ערכים בתחום הזה לא יקבלו תשובה`);
+  }
+  return [...new Set(p)];
+}
+function allProblems(){
+  if(!cfg) return [];
+  const out=[]; const b=cfg.basal;
+  {
+    const p=[];
+    const any = [b.threshold,b.step,b.everyDays].some(x=>numOrNull(x)!==null);
+    if (numOrNull(b.dose)===null && any) p.push('לא הוזנה המנה הנוכחית');
+    if (any){
+      if (numOrNull(b.threshold)===null) p.push('לא הוזן הסף להעלאה');
+      if (numOrNull(b.step)===null) p.push('לא הוזן גודל ההעלאה');
+      if (numOrNull(b.everyDays)===null) p.push('לא הוזן כל כמה ימים מותר להעלות');
+    }
+    if (numOrNull(b.max)!==null && numOrNull(b.dose)!==null && Number(b.dose)>Number(b.max))
+      p.push('המנה הנוכחית גבוהה מהגבול העליון');
+    if (p.length) out.push([b.name,p]);
+  }
+  cfg.tables.forEach(t=>{ const p=problems(t.rows,'units'); if(p.length) out.push([t.name,p]); });
+  return out;
+}
+function renderWarns(){
+  if(!cfg) return;
+  if (!cfg) return;
+  const host=$('#warns'); host.innerHTML='';
+  allProblems().forEach(([name,p])=>{
+    const c=el('div','card alert'); c.append(el('h2',null,'לבדוק: '+name));
+    const ul=el('ul'); ul.style.cssText='margin:6px 0 0;padding-inline-start:18px;font-size:14px';
+    p.forEach(x=>ul.append(el('li',null,x))); c.append(ul); host.append(c);
+  });
+}
+function unverify(reason){
+  if (!cfg.verifiedAt) return;
+  cfg.verifiedAt=null; saveCfg(); renderVerify(); renderDoseScreen();
+  toast(reason ? 'האישור בוטל — '+reason : 'האישור בוטל');
+}
+function renderVerify(){
+  if(!cfg) return;
+  if (!cfg) return;
+  const v=$('#verify'); v.className='verify '+(isVerified()?'done':'pending'); v.innerHTML='';
+  const lab=el('label','chk'); const cb=el('input'); cb.type='checkbox'; cb.checked=isVerified();
+  lab.append(cb, el('span',null,'עברתי על כל המספרים כאן מול הדף שקיבלתי מהצוות המטפל, והם זהים לו.'));
+  v.append(lab);
+  if (isVerified()) v.append(el('div','stamp','אושר ב־'+heDate(cfg.verifiedAt.slice(0,10))+'. כל שינוי יבטל את האישור.'));
+  cb.onchange=()=>{
+    if (cb.checked && allProblems().length){ cb.checked=false; toast('צריך לתקן קודם את מה שמסומן למעלה'); return; }
+    cfg.verifiedAt = cb.checked ? new Date().toISOString() : null;
+    saveCfg(); renderVerify(); renderDoseScreen();
+    if (cb.checked) toast('מסך המינון נפתח');
+  };
+}
+
+/* ---------- log ---------- */
+const FIELDS=[
+  {grp:'בוקר ארוך',   f:[['t_fast','שעה'],['g_fast','סוכר'],['i_long','יחידות'],['g_fast_r','בדיקה חוזרת']]},
+  {grp:'בוקר קצר',    f:[['t_m','שעה'],['g_m','סוכר'],['i_m','יחידות'],['g_m_r','בדיקה חוזרת']]},
+  {grp:'צהריים קצר',  f:[['t_n','שעה'],['g_n','סוכר'],['i_n','יחידות'],['g_n_r','בדיקה חוזרת']]},
+  {grp:'ערב קצר',     f:[['t_e','שעה'],['g_e','סוכר'],['i_e','יחידות'],['g_e_r','בדיקה חוזרת']]}
+];
+const TIME_KEYS = ['t_fast','t_m','t_n','t_e'];
+const SLOT_TIME = {fast:'t_fast', m_meal:'t_m', noon:'t_n', eve:'t_e'};
+const SLOT_FIELDS={fast:['g_fast','i_long','g_fast_r'], m_meal:['g_m','i_m','g_m_r'],
+                   noon:['g_n','i_n','g_n_r'], eve:['g_e','i_e','g_e_r']};
+function blank(d){ const o={date:d, notes:'', marks:{}}; FIELDS.forEach(g=>g.f.forEach(([k])=>o[k]='')); return o; }
+
+function renderLog(){
+  if(!cfg) return;
+  if (!cfg) return;
+  const host=$('#loglist'); host.innerHTML='';
+  if(!log.length){ host.append(el('div','empty','אין עדיין רשומות. כל יום נשמר בשורה אחת, כמו בדף המעקב.')); return; }
+  const head=el('div','loghead'); const hg=el('div','lgrid');
+  hg.append(el('div','corner',''));
+  ['בוקר ארוך','בוקר קצר','צהרים קצר','ערב קצר'].forEach(t=>hg.append(el('div','span2',t)));
+  hg.append(el('div','sub','תאריך'));
+  for(let k=0;k<4;k++){ hg.append(el('div','sub','סוכר')); hg.append(el('div','sub','יח׳')); }
+  head.append(hg); host.append(head);
+  log.sort((a,b)=>b.date.localeCompare(a.date));
+  log.forEach((e,idx)=>{
+    const d=el('details','logrow'); if(e._open)d.open=true;
+    const sm=el('summary');
+    const gr=el('div','lgrid');
+    const shortDate = (()=>{ const [y,m,dd]=e.date.split('-'); return (+dd)+'.'+(+m); })();
+    const SL=[['g_fast','g_fast_r','i_long'],['g_m','g_m_r','i_m'],['g_n','g_n_r','i_n'],['g_e','g_e_r','i_e']];
+    const put=(row, txt, unit)=>{
+      const cls = txt==='' ? 'lempty' : (unit ? 'u' : null);
+      row.append(el('div', cls, txt===''?'·':txt));
+    };
+    if (isWeekend(e.date)) d.classList.add('wknd');
+    put(gr, shortDate);
+    SL.forEach(([g,r,ins],si)=>{
+      put(gr, e[g]||'');
+      const mk=(e.marks||{})[SLOT_IDS[si]];
+      const iv = e[r] ? '' : (e[ins]??'');
+      const cell = (iv==='' ? '' : iv) + (mk && mk.done ? '✓' : '');
+      const div = el('div', cell==='' ? 'lempty' : (mk && mk.done ? 'u dn' : 'u'), cell===''?'·':cell);
+      gr.append(div);
+    });
+    sm.append(gr); d.append(sm);
+    const body=el('div','body');
+    const groups=[];
+    let firstEmptyDone=false;
+    const dayEmpty = FIELDS.every(g=>g.f.every(([k])=>!e[k]));
+    e._gopen = e._gopen || {};
+    FIELDS.forEach((g,gi)=>{
+      const filled = g.f.some(([k])=>e[k]);
+      const box=el('details','grp fold');
+      if (gi in e._gopen){ box.open = !!e._gopen[gi]; }
+      else if (dayEmpty && !firstEmptyDone){ box.open=true; firstEmptyDone=true; }
+      box.addEventListener('toggle',()=>{ e._gopen[gi]=box.open; saveLog(); });
+      const sum=el('summary');
+      const ttl=el('span','gname',g.grp);
+      const val=el('span','gval');
+      const paint=()=>{
+        const parts=g.f.filter(([k])=>e[k]).map(([k,l])=>l.replace('סוכר','')+' '+e[k]).map(x=>x.trim());
+        const mk=(e.marks||{})[SLOT_IDS[gi]];
+        if (mk && mk.food==='nofood') parts.push('ללא אוכל');
+        if (mk && mk.done) parts.push(mk.none ? 'טופל '+mk.done : 'הוזרק '+mk.done);
+        val.textContent = parts.length? parts.join(' · ') : 'ריק';
+        val.style.color = parts.length? 'var(--ok)' : 'var(--ink-soft)';
+      };
+      paint();
+      sum.append(ttl,val); box.append(sum);
+      const pair=el('div','pair');
+      g.f.forEach(([k,lbl])=>{
+        const L=el('label','fld'); L.append(el('span',null,lbl));
+        const i=el('input'); i.value=e[k]||'';
+        if (TIME_KEYS.includes(k)){
+          i.type='time';
+          i.oninput=()=>{ e[k]=i.value; saveLog(); paint(); };
+        } else {
+          i.type='text'; i.inputMode='numeric';
+          i.oninput=()=>{ e[k]=i.value.replace(/[^0-9.]/g,''); saveLog(); paint(); };
+        }
+        L.append(i); pair.append(L);
+      });
+      box.append(pair);
+      if ((e.marks||{})[SLOT_IDS[gi]]){
+        const ub=el('button','btn ghost small','ביטול הסימון "בוצע"');
+        ub.onclick=()=>{ delete e.marks[SLOT_IDS[gi]]; saveLog(); renderLog(); };
+        box.append(ub);
+      }
+      groups.push(box); body.append(box);
+    });
+    const nl=el('label','fld'); nl.style.marginTop='6px'; nl.append(el('span',null,'הערות'));
+    const ta=el('textarea'); ta.value=e.notes||''; ta.oninput=()=>{ e.notes=ta.value; saveLog(); };
+    nl.append(ta); body.append(nl);
+    const bar=el('div','row2'); bar.style.marginTop='4px';
+    const cl=el('button','btn ghost small','צמצם בדיקה זו');
+    cl.onclick=()=>{ d.open=false; e._open=false; saveLog(); d.scrollIntoView({block:'center'}); };
+    const dl=el('button','btn danger small','מחיקת הרשומה');
+    dl.onclick=()=>{ if(confirm('למחוק את הרשומה של '+heDate(e.date)+'?')){ log.splice(idx,1); saveLog(); renderLog(); } };
+    bar.append(cl,dl); body.append(bar); d.append(body);
+    d.addEventListener('toggle',()=>{ e._open=d.open; saveLog(); });
+    host.append(d);
+
+    if (SL.some(([g,r])=>e[r])){
+      const sub=el('div','subrow'+(isWeekend(e.date)?' wknd':'')); const sg=el('div','lgrid');
+      sg.append(el('div',null, shortDate+' חוזרת'));
+      SL.forEach(([g,r,ins])=>{
+        sg.append(el('div', e[r]? null : 'lempty', e[r]||'·'));
+        const iv = e[r] ? (e[ins]??'') : '';
+        sg.append(el('div', iv===''?'lempty':'u', iv===''?'·':iv));
+      });
+      sub.append(sg);
+      sub.onclick=()=>{ d.open=true; e._open=true; d.scrollIntoView({block:'center'}); };
+      host.append(sub);
+    }
+  });
+}
+$('#addtoday').onclick=()=>{
+  const d=$('#newdate').value;
+  if(!d){ toast('בחר תאריך'); return; }
+  if(log.some(x=>x.date===d)){
+    const ex=log.find(x=>x.date===d); ex._open=true; renderLog(); toast('כבר יש רשומה ליום הזה — נפתחה לעריכה'); return;
+  }
+  const e=blank(d); e._open=true; log.push(e); saveLog(); renderLog();
+  const prev=new Date(d+'T00:00:00'); prev.setDate(prev.getDate()-1);
+  $('#newdate').value = prev.toISOString().slice(0,10);
+};
+function parseCSV(text, delim){
+  const rows=[]; let row=[], cur='', q=false;
+  for (let i=0;i<text.length;i++){
+    const ch=text[i];
+    if (q){
+      if (ch==='"'){ if (text[i+1]==='"'){ cur+='"'; i++; } else q=false; }
+      else cur+=ch;
+    } else {
+      if (ch==='"') q=true;
+      else if (ch===delim){ row.push(cur); cur=''; }
+      else if (ch==='\n'){ row.push(cur); cur=''; rows.push(row); row=[]; }
+      else if (ch!=='\r') cur+=ch;
+    }
+  }
+  if (cur!=='' || row.length){ row.push(cur); rows.push(row); }
+  return rows.filter(r=>r.some(x=>String(x).trim()!==''));
+}
+function normDate(x){
+  x=String(x).trim();
+  let m=x.match(/^(\d{4})-(\d{2})-(\d{2})$/); if (m) return x;
+  m=x.match(/^(\d{1,2})[.\/](\d{1,2})[.\/](\d{4})$/);
+  if (m) return m[3]+'-'+String(m[2]).padStart(2,'0')+'-'+String(m[1]).padStart(2,'0');
+  return null;
+}
+$('#importcsv').onclick=()=>{
+  const inp=document.createElement('input'); inp.type='file'; inp.accept='.csv,text/csv';
+  inp.onchange=()=>{
+    const f=inp.files[0]; if(!f) return;
+    const r=new FileReader();
+    r.onload=()=>{
+      try{
+        let text=String(r.result).replace(/^\uFEFF/,'');
+        const first=text.split(/\r?\n/)[0];
+        let delim=',';
+        if (first.split('\t').length>first.split(',').length) delim='\t';
+        else if (first.split(';').length>first.split(',').length) delim=';';
+        const rows=parseCSV(text, delim);
+        if (!rows.length){ toast('הקובץ ריק'); return; }
+        const start = normDate(String(rows[0][0]||'').trim()) ? 0 : 1;  // skip a header row if present
+        let added=0, merged=0, skipped=0;
+        rows.slice(start).forEach(rw=>{
+          const d=normDate(String(rw[0]||'').trim());
+          if (!d){ skipped++; return; }
+          let e=log.find(x=>x.date===d);
+          if (!e){ e=blank(d); log.push(e); added++; } else merged++;
+          CSV_KEYS.forEach((k,ix)=>{
+            if (k==='date' || k==='dow') return;
+            const val=String(rw[ix]??'').trim();
+            if (val!=='' && val!=='—') e[k]=val;
+          });
+        });
+        saveLog(); renderLog();
+        toast('נוספו '+added+', עודכנו '+merged+(skipped?', דולגו '+skipped:''));
+      }catch(e){ toast('לא הצלחתי לקרוא את הקובץ'); }
+    };
+    r.readAsText(f,'utf-8');
+  };
+  inp.click();
+};
+$('#clearlog').onclick=()=>{
+  if(!log.length){ toast('היומן כבר ריק'); return; }
+  if(!confirm('למחוק את כל '+log.length+' הרשומות ביומן?')) return;
+  if(!confirm('בטוח? הפעולה לא ניתנת לביטול. כדאי לייצא CSV קודם.')) return;
+  log=[]; saveLog(); renderLog(); toast('היומן נוקה');
+};
+const DOW=['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
+function dowOf(iso){ return DOW[new Date(iso+'T00:00:00').getDay()]; }
+function isWeekend(iso){ const d=new Date(iso+'T00:00:00').getDay(); return d===5 || d===6; }
+function monthDates(){
+  // every date from the earliest record to the end of the current month
+  const dates = log.map(e=>e.date).sort();
+  const startISO = dates.length ? dates[0] : today();
+  const last = dates.length ? dates[dates.length-1] : today();
+  const endBase = (last > today()) ? last : today();
+  const eb = new Date(endBase+'T00:00:00');
+  const endISO = new Date(eb.getFullYear(), eb.getMonth()+1, 0);
+  const out=[]; const cur=new Date(startISO+'T00:00:00');
+  while (cur <= endISO){
+    out.push(cur.getFullYear()+'-'+String(cur.getMonth()+1).padStart(2,'0')+'-'+String(cur.getDate()).padStart(2,'0'));
+    cur.setDate(cur.getDate()+1);
+  }
+  return out;
+}
+const CSV_GROUPS=[['בוקר','ארוך','g_fast','i_long','g_fast_r','t_fast'],
+                 ['בוקר','קצר','g_m','i_m','g_m_r','t_m'],
+                 ['צהרים','קצר','g_n','i_n','g_n_r','t_n'],
+                 ['ערב','קצר','g_e','i_e','g_e_r','t_e']];
+const CSV_KEYS = ['date','dow'].concat(...CSV_GROUPS.map(g=>[g[5],g[2],g[3],g[4]])).concat('notes');
+function csvDate(iso){ const [y,m,d]=iso.split('-'); return d+'/'+m+'/'+y; }
+$('#exportcsv').onclick=()=>{
+  if(!log.length){ toast('אין מה לייצא'); return; }
+  const header=['תאריך','יום'].concat(...CSV_GROUPS.map(g=>['שעה',g[0]+' '+g[1],'יחידות','בדיקה חוזרת'])).concat('הערות');
+  const rows=[header];
+  const byDate={}; log.forEach(e=>byDate[e.date]=e);
+  monthDates().forEach(d=>{
+    const e=byDate[d]||{};
+    rows.push(CSV_KEYS.map(k=> k==='date' ? csvDate(d) : k==='dow' ? dowOf(d) : (e[k] ?? '')));
+  });
+  download('sugar-log-'+today()+'.csv','\uFEFF'+rows.map(r=>r.map(x=>`"${String(x).replace(/"/g,'""')}"`).join(',')).join('\r\n'),'text/csv;charset=utf-8');
+};
+function fullMonthDates(){
+  const dates = log.map(e=>e.date).sort();
+  const base = dates.length ? (dates[dates.length-1] > today() ? dates[dates.length-1] : today()) : today();
+  const b = new Date(base+'T00:00:00');
+  const y=b.getFullYear(), m=b.getMonth();
+  const last = new Date(y, m+1, 0).getDate();
+  const out=[];
+  for(let d=1; d<=last; d++) out.push(y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0'));
+  return out;
+}
+$('#exporthtml').onclick=()=>{
+  const dates=fullMonthDates();
+  const byDate={}; log.forEach(e=>byDate[e.date]=e);
+  const head1 = '<tr><th rowspan="2" class="dt">תאריך</th><th rowspan="2" class="dw">יום</th>'+
+    CSV_GROUPS.map(g=>'<th colspan="4" class="sep grp">'+g[0]+' '+g[1]+'</th>').join('')+
+    '<th rowspan="2" class="sep">הערות</th></tr>';
+  const head2 = '<tr>'+CSV_GROUPS.map(()=>'<th class="sep">שעה</th><th>סוכר</th><th>יח׳</th><th>חוזרת</th>').join('')+'</tr>';
+  const buildRows = (list)=> list.map(d=>{
+    const e=byDate[d]||{};
+    const wk = isWeekend(d) ? ' class="wk"' : '';
+    let tds = '<td class="dt">'+csvDate(d)+'</td><td class="dw">'+dowOf(d)+'</td>';
+    const extra=[];
+    CSV_GROUPS.forEach(([n1,n2,g,ins,rf,tk],gi)=>{
+      const mk=(e.marks||{})[SLOT_IDS[gi]];
+      const u=(e[ins]??'')+((mk&&mk.done)?'✓':'');
+      if (mk && mk.food==='nofood') extra.push(n1+': ללא אוכל');
+      tds += '<td class="sep tm">'+(e[tk]||'')+'</td><td>'+(e[g]||'')+'</td><td>'+u+'</td><td>'+(e[rf]||'')+'</td>';
+    });
+    const noteTxt = [(e.notes||'')].concat(extra).filter(Boolean).join(' | ');
+    tds += '<td class="sep nt">'+noteTxt.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</td>';
+    return '<tr'+wk+'>'+tds+'</tr>';
+  }).join('');
+  const half1 = dates.slice(0,15), half2 = dates.slice(15);
+  const sub = (list)=> csvDate(list[0])+' – '+csvDate(list[list.length-1]);
+  const page = (list, n)=>
+    '<section class="page"><h1>מעקב ערכי סוכר ואינסולין</h1>'+
+    '<p class="sub">'+sub(list)+' · חלק '+n+' מתוך 2</p>'+
+    '<table>'+head1+head2+buildRows(list)+'</table></section>';
+  const html = '<!DOCTYPE html><html lang="he" dir="rtl"><head><meta charset="utf-8">'+
+    '<meta name="viewport" content="width=device-width,initial-scale=1">'+
+    '<title>מעקב סוכר</title><style>'+
+    'body{font-family:-apple-system,system-ui,sans-serif;margin:10px;color:#16233D}'+
+    'h1{font-size:16px;margin:0}p.sub{margin:2px 0 7px;color:#5B6B87;font-size:12px}'+
+    'table{border-collapse:collapse;width:100%;font-size:16px}'+
+    'th,td{border:1px solid #C7D0DA;text-align:center}'+
+    'th{background:#E7EEF9;color:#1E4FA8;font-size:12px;padding:4px 3px;line-height:1.15}'+
+    'th.grp{background:#D6E4F7}'+
+    'td{height:34px;padding:2px 4px}'+
+    'tr{page-break-inside:avoid}'+
+    '.sep{border-inline-start:2.5px solid #16233D}'+
+    '.dt{width:1%;white-space:nowrap;font-weight:600;text-align:right;padding-inline:6px}'+
+    '.dw{width:1%;white-space:nowrap;color:#5B6B87;padding-inline:6px}'+
+    'th.dt,th.dw{color:#1E4FA8}'+
+    'td.nt{text-align:right;font-size:11px;color:#5B6B87;width:12%}'+
+    'td.tm{color:#8894AB}'+
+    'tr.wk td{background:#F6F8FB}'+
+    '.page{page-break-after:always}.page:last-child{page-break-after:auto}'+
+    '@page{margin:8mm}'+
+    '@media print{body{margin:0}h1{font-size:15px}p.sub{font-size:11px;margin-bottom:5px}table{font-size:15px}td{height:34px}.page{page-break-after:always}}'+
+    '</style></head><body>'+ page(half1,1) + page(half2,2) + '</body></html>';
+  download('sugar-table-'+today()+'.html', html, 'text/html;charset=utf-8');
+  toast('נוצרה טבלה להדפסה, שני דפים');
+};
+function download(name,text,mime){
+  const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([text],{type:mime})); a.download=name;
+  document.body.append(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+}
+function buildCopyHTML(){
+  const clone = document.documentElement.cloneNode(true);
+  [...clone.querySelectorAll('script')].forEach(s=>{ if (s.id!=='appcode') s.remove(); });
+  ['tables','basalcard','loglist','result','slotsel','foodsel','savednote','nowbar','warns','verify','persistwarn','lockcard','copyout']
+    .forEach(id=>{ const n=clone.querySelector('#'+id); if(n) n.innerHTML=''; });
+  const sc = clone.querySelector('#appcode') ||
+    [...clone.querySelectorAll('script')].find(s=>s.textContent.indexOf('/*EMBED*/')>-1);
+  if (!sc) return null;
+  const payload = JSON.stringify({stamp:new Date().toISOString(), cfg, log:log.map(e=>{ const o={...e}; delete o._open; delete o._gopen; return o; })}).replace(/</g,'\\u003c');
+  const src = sc.textContent.replace(/const EMBEDDED =[\s\S]*?; \/\*EMBED\*\//, () => 'const EMBEDDED = '+payload+'; /*EMBED*/');
+  if (src === sc.textContent) return null;
+  sc.textContent = src;
+  return '<!DOCTYPE html>\n' + clone.outerHTML;
+}
+$('#makecopy').onclick=()=>{
+  let html=null;
+  try{ html = buildCopyHTML(); }catch(e){ html=null; }
+  const out=$('#copyout'); out.innerHTML='';
+  if (!html){
+    out.innerHTML = '<div class="msg bad"><strong>לא הצלחתי ליצור עותק כאן</strong>הסביבה שבה הקובץ פתוח לא מאפשרת את זה. שלח לי בצ׳אט את המספרים שבטבלאות ואכין לך את הקובץ המוכן.</div>';
+    return;
+  }
+  try{ download('sugar-app.html', html, 'text/html;charset=utf-8'); toast('נוצר עותק'); }catch(e){}
+  const box=el('div','card');
+  box.append(el('h2',null,'אם הקובץ לא ירד'));
+  box.append(el('p','hint','העתק את כל הטקסט הזה, שמור אותו בקובץ בשם sugar-app.html ופתח אותו ב־Safari.'));
+  const ta=el('textarea'); ta.value=html; ta.readOnly=true; ta.style.minHeight='90px'; ta.style.fontSize='11px';
+  box.append(ta);
+  const cp=el('button','btn ghost small','העתקת הקוד'); cp.style.marginTop='8px';
+  cp.onclick=async()=>{
+    try{ await navigator.clipboard.writeText(html); toast('הועתק'); }
+    catch(e){ ta.select(); ta.setSelectionRange(0, html.length); toast('סמן והעתק ידנית'); }
+  };
+  box.append(cp); out.append(box);
+};
+$('#expjson').onclick=()=> download('sugar-backup-'+today()+'.json', JSON.stringify({cfg,log},null,2),'application/json');
+$('#impjson').onclick=()=>{
+  const i=document.createElement('input'); i.type='file'; i.accept='.json,application/json';
+  i.onchange=()=>{ const f=i.files[0]; if(!f) return; const r=new FileReader();
+    r.onload=async()=>{ try{
+      const d=JSON.parse(r.result); if(!d.cfg||!Array.isArray(d.cfg.tables)) throw 0;
+      cfg=d.cfg; cfg.basal=cfg.basal||JSON.parse(JSON.stringify(DEFAULT_CFG.basal)); cfg.verifiedAt=null;
+      cfg.tables.forEach(t=>{ t.slots=t.slots||[]; t.food=(t.food==='nofood')?'nofood':'meal'; });
+      log=Array.isArray(d.log)?d.log:[]; await saveCfg(); await saveLog();
+      renderBasal(); renderTables(); renderLog(); renderDoseScreen();
+      toast('שוחזר. צריך לאשר מחדש.');
+    }catch(e){ toast('הקובץ לא מתאים'); } };
+    r.readAsText(f); };
+  i.click();
+};
+
+/* ---------- boot ---------- */
+(async function(){
+  try{ await detectStorage(); }catch(e){ store.mode='memory'; }
+  renderPersist();
+  const savedStamp = await store.get(K_STAMP);
+  const freshBuild = !!(EMBEDDED && EMBEDDED.stamp && EMBEDDED.stamp !== savedStamp);
+  let c = freshBuild ? null : await store.get(K_CFG);
+  if (!c && EMBEDDED && EMBEDDED.cfg) c = EMBEDDED.cfg;
+  if (freshBuild) await store.set(K_STAMP, EMBEDDED.stamp);
+  if (!c){
+    const oldCfg = await store.get('sugar:config');
+    if (oldCfg && Array.isArray(oldCfg.tables)){
+      c = { verifiedAt:null,
+        basal:{...JSON.parse(JSON.stringify(DEFAULT_CFG.basal)), note: typeof oldCfg.basal==='string'?oldCfg.basal:''},
+        tables: oldCfg.tables.map(t=>({name:t.name, slots:[], rows:t.rows})) };
+    }
+  }
+  if (!c || !Array.isArray(c.tables) || !c.tables.length) c = JSON.parse(JSON.stringify(DEFAULT_CFG));
+  c.basal = Object.assign(JSON.parse(JSON.stringify(DEFAULT_CFG.basal)), c.basal||{});
+  if (c.basal.dose==='' && c.basal.base) c.basal.dose = c.basal.base;
+  delete c.basal.base; delete c.basal.rows; delete c.basal.belowMin;
+  c.tables.forEach(t=>{ t.slots = t.slots||[]; t.food = (t.food==='nofood')?'nofood':'meal'; });
+  c.hypo = Object.assign({limit:'80',minutes:'15'}, c.hypo||{});
+  const savedLog = await store.get(K_LOG);
+  cfg = c;
+  const embLog = (EMBEDDED && Array.isArray(EMBEDDED.log)) ? EMBEDDED.log : [];
+  if (freshBuild){
+    // a new build may carry records the device has not seen; keep whatever is
+    // already on the device and add only the dates it is missing
+    log = Array.isArray(savedLog) ? savedLog.slice() : [];
+    embLog.forEach(e=>{ if(!log.some(x=>x.date===e.date)) log.push(e); });
+  } else {
+    log = Array.isArray(savedLog) ? savedLog : embLog;
+  }
+  saveCfg(); saveLog();
+  renderBasal(); renderTables(); renderLog(); renderDoseScreen(); renderHypo(); renderBuild();
+  $('#newdate').value = today();
+})();
+</script>
+
+
+</body></html>
