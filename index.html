@@ -901,15 +901,19 @@ function renderLog(){
       row.append(el('div', cls, txt===''?'·':txt));
     };
     if (isWeekend(e.date)) d.classList.add('wknd');
-    put(gr, shortDate);
-    SL.forEach(([g,r,ins],si)=>{
-      put(gr, e[g]||'');
-      const mk=(e.marks||{})[SLOT_IDS[si]];
-      const iv = e[r] ? '' : (e[ins]??'');
-      const cell = (iv==='' ? '' : iv) + (mk && mk.done ? '✓' : '');
-      const div = el('div', cell==='' ? 'lempty' : (mk && mk.done ? 'u dn' : 'u'), cell===''?'·':cell);
-      gr.append(div);
-    });
+    const refreshSummary=()=>{
+      gr.innerHTML='';
+      put(gr, shortDate);
+      SL.forEach(([g,r,ins],si)=>{
+        put(gr, e[g]||'');
+        const mk=(e.marks||{})[SLOT_IDS[si]];
+        const iv = e[r] ? '' : (e[ins]??'');
+        const cell = (iv==='' ? '' : iv) + (mk && mk.done ? '✓' : '');
+        const div = el('div', cell==='' ? 'lempty' : (mk && mk.done ? 'u dn' : 'u'), cell===''?'·':cell);
+        gr.append(div);
+      });
+    };
+    refreshSummary();
     sm.append(gr); d.append(sm);
     const body=el('div','body');
     const groups=[];
@@ -932,6 +936,7 @@ function renderLog(){
         if (mk && mk.done) parts.push(mk.none ? 'טופל '+mk.done : 'הוזרק '+mk.done);
         val.textContent = parts.length? parts.join(' · ') : 'ריק';
         val.style.color = parts.length? 'var(--ok)' : 'var(--ink-soft)';
+        refreshSummary();
       };
       paint();
       sum.append(ttl,val); box.append(sum);
