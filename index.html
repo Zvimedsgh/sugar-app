@@ -850,19 +850,7 @@ function unverify(reason){
   toast(reason ? 'האישור בוטל — '+reason : 'האישור בוטל');
 }
 function renderVerify(){
-  if(!cfg) return;
-  if (!cfg) return;
-  const v=$('#verify'); v.className='verify '+(isVerified()?'done':'pending'); v.innerHTML='';
-  const lab=el('label','chk'); const cb=el('input'); cb.type='checkbox'; cb.checked=isVerified();
-  lab.append(cb, el('span',null,'עברתי על כל המספרים כאן מול הדף שקיבלתי מהצוות המטפל, והם זהים לו.'));
-  v.append(lab);
-  if (isVerified()) v.append(el('div','stamp','אושר ב־'+heDate(cfg.verifiedAt.slice(0,10))+'. כל שינוי יבטל את האישור.'));
-  cb.onchange=()=>{
-    if (cb.checked && allProblems().length){ cb.checked=false; toast('צריך לתקן קודם את מה שמסומן למעלה'); return; }
-    cfg.verifiedAt = cb.checked ? new Date().toISOString() : null;
-    saveCfg(); renderVerify(); renderDoseScreen();
-    if (cb.checked) toast('מסך המינון נפתח');
-  };
+  const v=$('#verify'); if(v){ v.innerHTML=''; v.className=''; v.style.display='none'; }
 }
 
 /* ---------- log ---------- */
