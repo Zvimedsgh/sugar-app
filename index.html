@@ -1257,12 +1257,9 @@ $('#impjson').onclick=()=>{
   const K_LIC = 'sugar:license';
   const TRIAL_DAYS = 7;
   const LIC_DAYS = 365;
-  const PW_HASH = 'fffb0e0b';
+  const PW_KEY = 'WWcwMTA2MTk0OQ=='; // base64
 
-  function simpleHash(s){
-    let h=0; for(let i=0;i<s.length;i++){h=((h<<5)-h)+s.charCodeAt(i);h|=0;}
-    return (h>>>0).toString(16).slice(0,8);
-  }
+  function checkPw(s){ return s === atob(PW_KEY); }
 
   function daysSince(ts){ return (Date.now() - Number(ts)) / (1000*60*60*24); }
 
@@ -1292,7 +1289,7 @@ $('#impjson').onclick=()=>{
 
   function activateLicense(){
     const pw = $('#lockpw').value;
-    if (simpleHash(pw) === PW_HASH){
+    if (checkPw(pw)){
       localStorage.setItem(K_LIC, String(Date.now()));
       $('#lockoverlay').style.display = 'none';
       document.querySelector('header').style.display = '';
