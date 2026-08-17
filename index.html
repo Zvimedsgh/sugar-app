@@ -61,6 +61,7 @@ textarea{min-height:70px; resize:vertical}
 .now b{font-size:16px} .now .t{font-family:var(--num); font-size:14px; color:var(--ink-soft)}
 .now .auto{font-size:12px; color:var(--ink-soft)}
 #gluc{font-family:var(--num); font-size:54px; text-align:center; letter-spacing:.02em; padding:16px 12px; border:3px solid var(--pen); border-radius:14px; background:#F0F4FF; box-shadow:0 0 0 4px rgba(30,79,168,0.15)}
+#gluc::placeholder{font-size:20px; font-family:Arial,sans-serif; letter-spacing:0}
 #result{margin-top:14px; display:flex; flex-direction:column; gap:12px}
 .dose{background:var(--card); border:1px solid var(--rule); border-radius:12px; padding:16px; text-align:center}
 .dose .who{font-size:13px; font-weight:600; letter-spacing:.02em; color:var(--pen)}
@@ -174,8 +175,8 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
     <div class="seg foodseg" id="foodsel"></div>
     <div id="slotnote"></div>
     <label class="fld">
-      <span id="gluclbl" style="font-size:18px;font-weight:bold;color:#1E4FA8;margin-bottom:8px">סוכר לפני ארוחת הערב (mg/dL)</span>
-      <input id="gluc" type="tel" placeholder="הקש/י כאן את רמת הסוכר" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+      <span id="gluclbl" style="font-size:18px;font-weight:bold;color:#1E4FA8;margin-bottom:8px;text-align:center">סוכר לפני ארוחת הערב (mg/dL)</span>
+      <input id="gluc" type="tel" placeholder="הקלד/י רמת הסוכר" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
     </label>
     <div id="savednote" class="savednote"></div>
     <div id="result"></div>
