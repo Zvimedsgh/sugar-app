@@ -153,8 +153,8 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
 <div id="lockoverlay" style="display:none;position:fixed;inset:0;background:#fff;z-index:9999;flex-direction:column;align-items:center;justify-content:center;padding:30px;text-align:center">
   <div style="font-size:48px;margin-bottom:16px">🔒</div>
   <h2 style="font-size:22px;margin-bottom:8px">היישום נעול</h2>
-  <p style="font-size:16px;color:#666;margin-bottom:20px">הקלד/י סיסמה להפעלה</p>
-  <input id="lockpw" type="password" placeholder="סיסמה" style="font-size:22px;text-align:center;padding:14px;border:2px solid #1E4FA8;border-radius:10px;width:80%;max-width:300px;margin-bottom:12px">
+  <p style="font-size:16px;color:#666;margin-bottom:20px">הקלד/י מפתח רישיון להפעלה לשנה</p>
+  <input id="lockpw" type="password" placeholder="מפתח רישיון" style="font-size:22px;text-align:center;padding:14px;border:2px solid #1E4FA8;border-radius:10px;width:80%;max-width:300px;margin-bottom:12px">
   <div id="lockerr" style="color:#C62828;font-size:15px;margin-bottom:12px;min-height:20px"></div>
   <button id="lockbtn" style="font-size:18px;font-weight:bold;padding:14px 40px;background:#1E4FA8;color:#fff;border:none;border-radius:10px;cursor:pointer;width:80%;max-width:300px">הפעלה</button>
 </div>
@@ -1252,47 +1252,76 @@ $('#impjson').onclick=()=>{
   $('#newdate').value = today();
   goTo('s-dose');
 
-  // --- Activation lock ---
-  const K_ACT = 'sugar:activated';
-  const GRACE_DAYS = 7;
-  const PW_HASH = 'fffb0e0b'; // hash of activation password
+  // --- Trial & License ---
+  const K_TRIAL = 'sugar:trialStart';
+  const K_LIC = 'sugar:license';
+  const TRIAL_DAYS = 7;
+  const LIC_DAYS = 365;
+  const PW_HASH = 'fffb0e0b';
 
   function simpleHash(s){
     let h=0; for(let i=0;i<s.length;i++){h=((h<<5)-h)+s.charCodeAt(i);h|=0;}
     return (h>>>0).toString(16).slice(0,8);
   }
 
-  function checkActivation(){
-    const saved = localStorage.getItem(K_ACT);
-    if (saved){
-      const days = (Date.now() - Number(saved)) / (1000*60*60*24);
-      if (days <= GRACE_DAYS) return true;
-    }
-    return false;
+  function daysSince(ts){ return (Date.now() - Number(ts)) / (1000*60*60*24); }
+
+  // Initialize trial
+  if (!localStorage.getItem(K_TRIAL)){
+    localStorage.setItem(K_TRIAL, String(Date.now()));
   }
 
-  if (!checkActivation()){
-    const ov = $('#lockoverlay');
-    ov.style.display = 'flex';
-    document.querySelector('header').style.display = 'none';
-    document.querySelector('main').style.display = 'none';
-    document.querySelector('nav').style.display = 'none';
+  const lic = localStorage.getItem(K_LIC);
+  const trialStart = Number(localStorage.getItem(K_TRIAL));
+  const trialDaysLeft = Math.max(0, Math.ceil(TRIAL_DAYS - daysSince(trialStart)));
+  const hasLicense = lic && daysSince(lic) <= LIC_DAYS;
+  const inTrial = !hasLicense && trialDaysLeft > 0;
+  const expired = !hasLicense && trialDaysLeft <= 0;
 
-    $('#lockbtn').onclick = () => {
-      const pw = $('#lockpw').value;
-      if (simpleHash(pw) === PW_HASH){
-        localStorage.setItem(K_ACT, String(Date.now()));
-        ov.style.display = 'none';
-        document.querySelector('header').style.display = '';
-        document.querySelector('main').style.display = '';
-        document.querySelector('nav').style.display = '';
-        toast('היישום הופעל ל-7 ימים');
-      } else {
-        $('#lockerr').textContent = 'סיסמה שגויה';
-        $('#lockpw').value = '';
-      }
-    };
-    $('#lockpw').addEventListener('keydown', e => { if(e.key==='Enter') $('#lockbtn').click(); });
+  function showLicensePrompt(msg){
+    const ov = $('#lockoverlay');
+    ov.querySelector('h2').textContent = msg;
+    ov.querySelector('p').textContent = 'הקלד/י מפתח רישיון להפעלה לשנה';
+    ov.style.display = 'flex';
+    if (expired){
+      document.querySelector('header').style.display = 'none';
+      document.querySelector('main').style.display = 'none';
+      document.querySelector('nav').style.display = 'none';
+    }
+  }
+
+  function activateLicense(){
+    const pw = $('#lockpw').value;
+    if (simpleHash(pw) === PW_HASH){
+      localStorage.setItem(K_LIC, String(Date.now()));
+      $('#lockoverlay').style.display = 'none';
+      document.querySelector('header').style.display = '';
+      document.querySelector('main').style.display = '';
+      document.querySelector('nav').style.display = '';
+      const banner = document.getElementById('trialbanner');
+      if (banner) banner.remove();
+      toast('רישיון הופעל לשנה!');
+    } else {
+      $('#lockerr').textContent = 'מפתח שגוי';
+      $('#lockpw').value = '';
+    }
+  }
+
+  $('#lockbtn').onclick = activateLicense;
+  $('#lockpw').addEventListener('keydown', e => { if(e.key==='Enter') activateLicense(); });
+
+  if (hasLicense){
+    // Licensed - do nothing
+  } else if (expired){
+    showLicensePrompt('תקופת הניסיון הסתיימה');
+  } else if (inTrial){
+    // Show trial banner
+    const banner = document.createElement('div');
+    banner.id = 'trialbanner';
+    banner.style.cssText = 'background:#FFF3E0;border-bottom:2px solid #FFB74D;padding:10px 16px;text-align:center;font-size:15px;position:sticky;top:0;z-index:100';
+    banner.innerHTML = `<span>תקופת ניסיון — נותרו <strong>${trialDaysLeft} ימים</strong></span> <button id="buylicbtn" style="margin-right:10px;background:#1E4FA8;color:#fff;border:none;border-radius:6px;padding:6px 16px;font-size:14px;cursor:pointer;font-weight:bold">הפעלת רישיון</button>`;
+    document.body.insertBefore(banner, document.querySelector('header'));
+    document.getElementById('buylicbtn').onclick = () => showLicensePrompt('הפעלת רישיון');
   }
 })();
 </script>
