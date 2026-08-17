@@ -529,25 +529,31 @@ function calc(){
     if (t.kind!=='off'){
       const n=el('div','card');
       if (t.kind==='below'){
-        n.innerHTML = `<h2>אין שינוי במנה</h2><p class="hint">${v} אינו מעל ${t.th}. ממשיכים עם ${dose} יחידות.</p>`;
+        n.style.cssText='background:#E8F5E9;border:2px solid #66BB6A;padding:16px';
+        n.innerHTML = `<h2 style="color:#2E7D32;font-size:22px;margin-bottom:8px">✓ אין שינוי במנה</h2>
+          <p style="font-size:18px;margin:0">${v} לא מעל ${t.th}. ממשיכים עם <strong>${dose} יחידות</strong>.</p>`;
       } else if (t.kind==='wait'){
-        n.innerHTML = `<h2>עוד לא מעלים</h2><p class="hint">${v} מעל ${b.threshold}, אבל עברו רק ${t.since} ימים מאז ההעלאה האחרונה. אפשר לשקול בעוד ${t.wait} ימים. היום ${dose} יחידות.</p>`;
+        n.style.cssText='background:#FFF3E0;border:2px solid #FFB74D;padding:16px';
+        n.innerHTML = `<h2 style="color:#E65100;font-size:22px;margin-bottom:8px">⏳ עוד לא מעלים</h2>
+          <p style="font-size:18px;margin:0">${v} מעל ${b.threshold}, אבל עברו רק <strong>${t.since} ימים</strong> מאז ההעלאה האחרונה.</p>
+          <p style="font-size:18px;margin:8px 0 0">אפשר לשקול בעוד <strong>${t.wait} ימים</strong>. היום <strong>${dose} יחידות</strong>.</p>`;
       } else if (t.kind==='capped'){
-        n.className='card alert';
-        n.innerHTML = `<h2>הגעת לגבול העליון</h2><p class="hint">${v} מעל ${b.threshold}, אבל המנה כבר ${dose} והגבול שהגדרת ${t.max}. אל תעלה עוד — פנה לצוות.</p>`;
+        n.style.cssText='background:#FFEBEE;border:2px solid #EF5350;padding:16px';
+        n.innerHTML = `<h2 style="color:#C62828;font-size:22px;margin-bottom:8px">⛔ הגעת לגבול העליון</h2>
+          <p style="font-size:18px;margin:0">${v} מעל ${b.threshold}, אבל המנה כבר <strong>${dose}</strong> והגבול <strong>${t.max}</strong>.</p>
+          <p style="font-size:18px;margin:8px 0 0;color:#C62828"><strong>אל תעלה עוד — פנה לצוות.</strong></p>`;
       } else if (t.kind==='raise'){
-        n.innerHTML = `<h2>אפשר להעלות את המנה</h2><p class="hint">${v} מעל ${b.threshold}, ועברו לפחות ${b.everyDays} ימים מאז השינוי האחרון. ${dose} ← ${t.to} יחידות מהיום.</p>`;
+        n.style.cssText='background:#FFF3E0;border:3px solid #FF9800;padding:20px';
+        n.innerHTML = `<h2 style="color:#E65100;font-size:24px;margin-bottom:12px">⬆️ להעלות את המנה!</h2>
+          <p style="font-size:20px;margin:0">${v} מעל ${b.threshold}, ועברו לפחות ${b.everyDays} ימים מאז השינוי האחרון.</p>
+          <p style="font-size:24px;margin:12px 0;text-align:center"><strong>${dose} ← ${t.to} יחידות</strong></p>`;
         const ok=el('button','btn','העליתי ל־'+t.to+' יחידות');
+        ok.style.cssText='font-size:20px;padding:14px 24px;width:100%';
         ok.onclick=()=>{
           b.history=(b.history||[]); b.history.push({date:today(), from:dose, to:t.to});
           b.dose=String(t.to); b.lastChange=today(); saveCfg(); renderBasal(); calc(); toast('המנה עודכנה ל־'+t.to);
         };
         n.append(ok);
-        if (numOrNull(b.max)===null){
-          const w=el('p','hint'); w.style.cssText='margin-top:10px;color:var(--warn)';
-          w.textContent='לא הגדרת גבול עליון למנה. שווה לברר עם הצוות עד כמה מותר להעלות.';
-          n.append(w);
-        }
       }
       out.append(n);
     }
