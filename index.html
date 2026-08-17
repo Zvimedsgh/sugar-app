@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="he" dir="rtl"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -596,6 +596,11 @@ function calc(){
           <div class="units num">${r.val}</div><div class="unitlbl">יחידות</div>
           ${echo(`${r.row.from}–${r.row.to} → ${r.row.units}`)}
           <div class="src">${foodMode==='meal'?'אינסולין קצר, עם הארוחה.':'אינסולין קצר, תיקון ללא אוכל.'} השווה לדף לפני ההזרקה.</div>`;
+        if (foodMode==='nofood'){
+          const tip=el('div'); tip.style.cssText='background:#E3F2FD;border:2px solid #42A5F5;border-radius:8px;padding:14px;margin-top:10px;font-size:16px;line-height:1.6';
+          tip.innerHTML='<strong>מתי להזריק ללא אוכל:</strong><br>• שעה לאחר הזרקה קודמת, אם הסוכר עדיין מעל 200.<br>• <strong>בכל שעות היום והלילה.</strong><br>• לוודא שהמערכת מעירה אותך בלילה בערכים גבוהים.';
+          d.append(tip);
+        }
       }
       out.append(d);
     });
