@@ -1520,17 +1520,93 @@ $('#impjson').onclick=()=>{
   }
   renderCustomFoods();
 
+  // --- Food database for autocomplete ---
+  const FOOD_DB = [
+    {n:'שניצל',s:'100 גר׳',c:12},{n:'קציצות בשר',s:'2 יח׳',c:8},{n:'המבורגר (לחמנייה)',s:'1',c:30},
+    {n:'כבד עוף',s:'100 גר׳',c:3},{n:'עוף צלוי',s:'100 גר׳',c:0},{n:'דג אפוי',s:'100 גר׳',c:0},
+    {n:'ביצה',s:'1',c:1},{n:'חביתה',s:'2 ביצים',c:2},{n:'שקשוקה',s:'מנה',c:12},
+    {n:'חלה',s:'פרוסה',c:20},{n:'לחמנייה',s:'1',c:25},{n:'באגט',s:'פרוסה',c:15},
+    {n:'מצה',s:'1',c:27},{n:'קרקר',s:'3 יח׳',c:15},{n:'לאפה',s:'1',c:40},
+    {n:'בורקס גבינה',s:'1',c:25},{n:'בורקס תפו״א',s:'1',c:30},{n:'סמבוסק',s:'2 יח׳',c:20},
+    {n:'מלוואח',s:'1',c:45},{n:'ג׳חנון',s:'1',c:50},{n:'לחוח',s:'1',c:35},
+    {n:'אורז עם עדשים',s:'כוס',c:50},{n:'מג׳דרה',s:'כוס',c:48},{n:'בורגול',s:'כוס',c:34},
+    {n:'פתיתים',s:'כוס',c:40},{n:'תירס',s:'קולח',c:25},{n:'תירס בקופסה',s:'חצי כוס',c:15},
+    {n:'שעועית לבנה',s:'כוס',c:40},{n:'שעועית אדומה',s:'כוס',c:40},{n:'עדשים מבושלים',s:'כוס',c:36},
+    {n:'פלאפל',s:'5 כדורים',c:30},{n:'טחינה',s:'2 כפות',c:3},{n:'סלט ירקות',s:'מנה',c:6},
+    {n:'מרק עוף עם אטריות',s:'קערה',c:15},{n:'מרק ירקות',s:'קערה',c:12},{n:'מרק עדשים',s:'קערה',c:20},
+    {n:'פיצה',s:'משולש',c:30},{n:'פיצה שלמה',s:'1',c:180},{n:'סושי',s:'6 יח׳',c:30},
+    {n:'אגס',s:'1 בינוני',c:25},{n:'שזיף',s:'3 יח׳',c:15},{n:'אפרסק',s:'1 בינוני',c:15},
+    {n:'נקטרינה',s:'1',c:14},{n:'מנגו',s:'1',c:35},{n:'אננס',s:'פרוסה',c:11},
+    {n:'קיווי',s:'1',c:10},{n:'תמר',s:'3 יח׳',c:30},{n:'צימוקים',s:'30 גר׳',c:24},
+    {n:'תאנה טרייה',s:'2 יח׳',c:16},{n:'רימון',s:'חצי',c:15},{n:'אשכולית',s:'חצי',c:13},
+    {n:'קלמנטינה',s:'2 יח׳',c:18},{n:'דובדבן',s:'כוס',c:20},{n:'תות',s:'כוס',c:12},
+    {n:'גלידה',s:'כדור',c:15},{n:'שוקולד',s:'4 קוביות',c:15},{n:'עוגת שוקולד',s:'פרוסה',c:40},
+    {n:'עוגת גבינה',s:'פרוסה',c:30},{n:'קרואסון',s:'1',c:26},{n:'מאפין',s:'1',c:35},
+    {n:'דונאט',s:'1',c:30},{n:'וופל',s:'1',c:25},{n:'פנקייק',s:'1',c:15},
+    {n:'גרנולה',s:'חצי כוס',c:30},{n:'שיבולת שועל',s:'חצי כוס',c:27},{n:'חלב שוקו',s:'כוס',c:25},
+    {n:'קפה עם סוכר',s:'כוס',c:5},{n:'מיץ תפוחים',s:'כוס',c:28},{n:'קולה',s:'פחית',c:39},
+    {n:'קולה זירו',s:'פחית',c:0},{n:'בירה',s:'פחית',c:13},{n:'מיץ גזר',s:'כוס',c:22},
+    {n:'סמוזי פירות',s:'כוס',c:35},{n:'לבן',s:'כוס',c:8},{n:'קוטג׳',s:'100 גר׳',c:3},
+    {n:'גבינה לבנה',s:'100 גר׳',c:3},{n:'גבינה צהובה',s:'פרוסה',c:0},{n:'שמנת חמוצה',s:'כפית',c:1},
+    {n:'ממרח שוקולד',s:'כפית',c:8},{n:'ריבה',s:'כפית',c:7},{n:'חמאת בוטנים',s:'כפית',c:3},
+    {n:'צ׳יפס',s:'מנה קטנה',c:30},{n:'פופקורן',s:'כוס',c:6},{n:'במבה',s:'שקית',c:12},
+    {n:'ביסלי',s:'שקית',c:15},{n:'קרקר אורז',s:'2 יח׳',c:14},{n:'חטיף אנרגיה',s:'1',c:20},
+    {n:'סופגנייה',s:'1',c:35},{n:'רוגלך',s:'2 יח׳',c:20},{n:'עוגיות חמאה',s:'3 יח׳',c:18}
+  ];
+
+  // Autocomplete for add-food
+  const nameInput = document.getElementById('newfood-name');
+  const servInput = document.getElementById('newfood-serving');
+  const carbsInput = document.getElementById('newfood-carbs');
+  let acDiv = null;
+
+  function closeAC(){ if(acDiv){ acDiv.remove(); acDiv = null; } }
+
+  if (nameInput) {
+    nameInput.addEventListener('input', () => {
+      closeAC();
+      const q = nameInput.value.trim();
+      if (q.length < 1) return;
+      const matches = FOOD_DB.filter(f => f.n.includes(q)).slice(0, 8);
+      if (!matches.length) return;
+      acDiv = document.createElement('div');
+      acDiv.style.cssText = 'position:absolute;z-index:99;background:#fff;border:1px solid #ccc;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.15);max-height:200px;overflow-y:auto;left:0;right:0;';
+      nameInput.parentElement.style.position = 'relative';
+      matches.forEach(f => {
+        const d = document.createElement('div');
+        d.style.cssText = 'padding:10px 12px;cursor:pointer;border-bottom:1px solid #eee;font-size:15px;';
+        d.innerHTML = `<strong>${f.n}</strong> <span style="color:#888;font-size:13px">${f.s} · ${f.c} גר׳</span>`;
+        d.addEventListener('click', () => {
+          nameInput.value = f.n;
+          servInput.value = f.s;
+          carbsInput.value = f.c;
+          closeAC();
+        });
+        d.addEventListener('touchstart', () => {
+          nameInput.value = f.n;
+          servInput.value = f.s;
+          carbsInput.value = f.c;
+          closeAC();
+        });
+        acDiv.appendChild(d);
+      });
+      nameInput.parentElement.appendChild(acDiv);
+    });
+    document.addEventListener('click', e => { if (!nameInput.contains(e.target) && !(acDiv && acDiv.contains(e.target))) closeAC(); });
+  }
+
   // Add food button
   document.getElementById('addfoodbtn')?.addEventListener('click', () => {
-    const name = document.getElementById('newfood-name').value.trim();
-    const serving = document.getElementById('newfood-serving').value.trim();
-    const carbs = Number(document.getElementById('newfood-carbs').value);
+    const name = nameInput.value.trim();
+    const serving = servInput.value.trim();
+    const carbs = Number(carbsInput.value);
     if (!name || !carbs){ toast('הזן שם ופחמימות'); return; }
     customFoods.push({ name, serving: serving || '1 מנה', carbs });
     localStorage.setItem(K_FOODS, JSON.stringify(customFoods));
-    document.getElementById('newfood-name').value = '';
-    document.getElementById('newfood-serving').value = '';
-    document.getElementById('newfood-carbs').value = '';
+    nameInput.value = '';
+    servInput.value = '';
+    carbsInput.value = '';
+    closeAC();
     // Clear and re-render
     customFoods.forEach(() => { const last = document.querySelector('#foodtable table tr:last-child'); if(last && last.classList.contains('foodrow')) last.remove(); });
     renderCustomFoods();
