@@ -197,10 +197,15 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
       <p class="hint" style="margin-bottom:12px">יחס המרה: יחידת אינסולין לכל <strong id="icr-display">10</strong> גרם פחמימות</p>
 
       <label class="fld">
-        <span style="font-size:18px;font-weight:bold;color:#1E4FA8;text-align:center;margin-bottom:8px">כמות פחמימות בארוחה (גרם)</span>
-        <input id="carbinput" type="tel" placeholder="הקלד/י גרם פחמימות" autocomplete="off" style="font-family:var(--num);font-size:44px;text-align:center;padding:14px;border:3px solid var(--pen);border-radius:14px;background:#fff">
+        <span style="font-size:18px;font-weight:bold;color:#1E4FA8;text-align:center;margin-bottom:8px">רמת סוכר (mg/dL)</span>
+        <input id="carbgluc" type="tel" placeholder="הקלד/י רמת הסוכר" autocomplete="off" style="font-family:var(--num);font-size:44px;text-align:center;padding:14px;border:3px solid var(--pen);border-radius:14px;background:#fff">
       </label>
-      <div id="carbresult" style="margin-top:12px;text-align:center"></div>
+
+      <label class="fld" style="margin-top:12px">
+        <span style="font-size:18px;font-weight:bold;color:#1E4FA8;text-align:center;margin-bottom:8px">כמות פחמימות בארוחה (גרם)</span>
+        <input id="carbinput" type="tel" placeholder="הקלד/י גרם פחמימות" autocomplete="off" style="font-family:var(--num);font-size:44px;text-align:center;padding:14px;border:3px solid #FF9800;border-radius:14px;background:#FFF8E1">
+      </label>
+      <div id="carbresult" style="margin-top:14px;text-align:center"></div>
     </div>
 
     <div class="card" id="foodtable">
@@ -1320,24 +1325,55 @@ $('#impjson').onclick=()=>{
     });
   });
 
-  // Carb calculation
+  // Carb calculation (glucose + carbs = total dose)
+  const carbGluc = document.getElementById('carbgluc');
   const carbInput = document.getElementById('carbinput');
   const carbResult = document.getElementById('carbresult');
-  if (carbInput) {
-    carbInput.addEventListener('input', () => {
-      carbInput.value = carbInput.value.replace(/[^0-9]/g, '').slice(0, 4);
-      const carbs = Number(carbInput.value);
-      if (!carbs || carbs <= 0) { carbResult.innerHTML = ''; return; }
-      const units = Math.round(carbs / ICR * 10) / 10;
-      carbResult.innerHTML = `
-        <div class="dose" style="border:2px solid var(--pen)">
-          <div class="who">אינסולין קצר — לפי פחמימות</div>
-          <div class="units num" style="font-size:48px">${units}</div>
-          <div class="unitlbl">יחידות</div>
-          <div class="math" style="margin-top:6px">${carbs} גרם ÷ ${ICR} = ${units}</div>
-        </div>`;
-    });
+
+  function calcCarbs(){
+    if (!carbGluc || !carbInput) return;
+    carbGluc.value = carbGluc.value.replace(/[^0-9]/g, '').slice(0, 3);
+    carbInput.value = carbInput.value.replace(/[^0-9]/g, '').slice(0, 4);
+    const gluc = Number(carbGluc.value) || 0;
+    const carbs = Number(carbInput.value) || 0;
+    if (!gluc && !carbs){ carbResult.innerHTML = ''; return; }
+
+    // Meal dose from carbs
+    const mealDose = carbs > 0 ? Math.ceil(carbs / ICR) : 0;
+
+    // Correction dose from "with food" table
+    let corrDose = 0;
+    let corrText = '';
+    if (gluc > 0 && cfg && cfg.tables && cfg.tables.length){
+      const t = cfg.tables.find(t => t.food === 'meal') || cfg.tables[0];
+      const match = t.rows.find(r => gluc >= r.from && gluc <= r.to);
+      if (match){
+        corrDose = Number(match.units);
+        corrText = `${gluc} → ${match.from}–${match.to} → ${corrDose} יח׳`;
+      } else {
+        const froms = t.rows.map(r => Number(r.from)).filter(x => !isNaN(x));
+        const min = froms.length ? Math.min(...froms) : 100;
+        if (gluc < min) corrText = `${gluc} מתחת ל-${min} → 0 יח׳`;
+        else corrText = `${gluc} — אין התאמה בטבלה`;
+      }
+    }
+
+    const total = mealDose + corrDose;
+    if (total <= 0 && !corrText){ carbResult.innerHTML = ''; return; }
+
+    let html = `<div class="dose" style="border:2px solid var(--pen);text-align:right;padding:20px">`;
+    html += `<div class="who" style="text-align:center;margin-bottom:12px">חישוב מנה כוללת</div>`;
+    if (carbs > 0) html += `<div style="font-size:17px;margin-bottom:6px">🍞 פחמימות: ${carbs} גר׳ ÷ ${ICR} = <strong>${mealDose} יח׳</strong></div>`;
+    if (gluc > 0) html += `<div style="font-size:17px;margin-bottom:6px">🩸 תיקון סוכר: ${corrText}</div>`;
+    html += `<hr style="margin:12px 0;border-color:#ddd">`;
+    html += `<div style="text-align:center"><div class="units num" style="font-size:54px">${total}</div><div class="unitlbl">יחידות סה"כ</div></div>`;
+    if (mealDose > 0 && corrDose > 0) html += `<div style="text-align:center;margin-top:6px;font-size:15px;color:#666">(${mealDose} ארוחה + ${corrDose} תיקון)</div>`;
+    html += `</div>`;
+    carbResult.innerHTML = html;
   }
+
+  if (carbGluc) carbGluc.addEventListener('input', calcCarbs);
+  if (carbInput) carbInput.addEventListener('input', calcCarbs);
 
   // Food table toggle
   const foodToggle = document.getElementById('foodtoggle');
