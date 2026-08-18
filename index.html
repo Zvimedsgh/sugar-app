@@ -195,8 +195,8 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
   <div id="carbcalc" style="display:none">
     <div class="card" style="background:#F0F4FF;border:2px solid var(--pen);margin-bottom:14px">
       <h2 style="color:var(--pen);margin-bottom:4px">חישוב לפי פחמימות</h2>
-      <p class="hint" style="margin-bottom:4px">יחס המרה: יחידת אינסולין לכל <strong id="icr-display">10</strong> גרם פחמימות</p>
-      <p class="hint" style="margin-bottom:12px">יעד סוכר: <strong id="target-display">150</strong> mg/dL</p>
+      <p class="hint" style="margin-bottom:4px">יחס המרה: 1 יח׳ לכל <strong id="icr-display">10</strong> גר׳ <button id="editicr" style="background:none;border:none;font-size:14px;cursor:pointer;padding:2px">✏️</button></p>
+      <p class="hint" style="margin-bottom:12px">יעד סוכר: <strong id="target-display">150</strong> mg/dL <button id="edittarget" style="background:none;border:none;font-size:14px;cursor:pointer;padding:2px">✏️</button></p>
 
       <label class="fld">
         <span style="font-size:18px;font-weight:bold;color:#1E4FA8;text-align:center;margin-bottom:8px">רמת סוכר (mg/dL)</span>
@@ -243,6 +243,16 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
           <tr class="foodrow" data-name="דבש" data-v="6"><td style="padding:5px;border:1px solid #ddd;text-align:right">דבש</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כפית</td><td style="padding:5px;border:1px solid #ddd;text-align:center">6</td><td style="padding:5px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
           <tr class="foodrow" data-name="ביסקוויט" data-v="15"><td style="padding:5px;border:1px solid #ddd;text-align:right">ביסקוויט</td><td style="padding:5px;border:1px solid #ddd;text-align:center">2 יחידות</td><td style="padding:5px;border:1px solid #ddd;text-align:center">15</td><td style="padding:5px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
         </table>
+        <div id="customfoods"></div>
+        <div style="margin-top:10px;padding:10px;background:#f8f8f8;border-radius:8px">
+          <strong style="font-size:13px">➕ הוסף מאכל</strong>
+          <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap">
+            <input id="newfood-name" placeholder="שם" style="flex:2;min-width:80px;padding:6px;border:1px solid #ccc;border-radius:6px;font-size:13px">
+            <input id="newfood-serving" placeholder="מנה" style="flex:1;min-width:60px;padding:6px;border:1px solid #ccc;border-radius:6px;font-size:13px">
+            <input id="newfood-carbs" placeholder="פחמ׳" type="tel" style="width:50px;padding:6px;border:1px solid #ccc;border-radius:6px;font-size:13px;text-align:center">
+            <button id="addfoodbtn" style="padding:6px 12px;background:#1E4FA8;color:#fff;border:none;border-radius:6px;font-size:13px;cursor:pointer">הוסף</button>
+          </div>
+        </div>
 
       </div>
     </div>
@@ -1320,9 +1330,23 @@ $('#impjson').onclick=()=>{
   goTo('s-dose');
 
   // --- Carb counting mode ---
-  const ICR = (cfg && cfg.icr) ? Number(cfg.icr) : 10;
+  let ICR = (cfg && cfg.icr) ? Number(cfg.icr) : 10;
+  let TARGET_BG = (cfg && cfg.targetBg) ? Number(cfg.targetBg) : 150;
   const icrDisp = document.getElementById('icr-display');
+  const targetDisp = document.getElementById('target-display');
   if (icrDisp) icrDisp.textContent = ICR;
+  if (targetDisp) targetDisp.textContent = TARGET_BG;
+
+  // Edit ICR
+  document.getElementById('editicr')?.addEventListener('click', () => {
+    const v = prompt('יחס המרה: כמה גרם פחמימות ליחידת אינסולין?', ICR);
+    if (v && Number(v) > 0){ ICR = Number(v); cfg.icr = ICR; saveCfg(); icrDisp.textContent = ICR; calcCarbs(); toast('יחס המרה: 1:'+ICR); }
+  });
+  // Edit Target
+  document.getElementById('edittarget')?.addEventListener('click', () => {
+    const v = prompt('יעד סוכר (mg/dL):', TARGET_BG);
+    if (v && Number(v) > 0){ TARGET_BG = Number(v); cfg.targetBg = TARGET_BG; saveCfg(); targetDisp.textContent = TARGET_BG; toast('יעד: '+TARGET_BG); }
+  });
 
   // Mode toggle
   document.querySelectorAll('#calcmode button').forEach(b => {
@@ -1342,28 +1366,22 @@ $('#impjson').onclick=()=>{
   function calcCarbs(){
     if (!carbGluc || !carbInput) return;
     carbGluc.value = carbGluc.value.replace(/[^0-9]/g, '').slice(0, 3);
-    carbInput.value = carbInput.value.replace(/[^0-9]/g, '').slice(0, 4);
+    carbInput.value = carbInput.value.replace(/[^0-9.]/g, '').slice(0, 5);
     const gluc = Number(carbGluc.value) || 0;
     const carbs = Number(carbInput.value) || 0;
     if (!gluc && !carbs){ carbResult.innerHTML = ''; return; }
 
-    // Meal dose from carbs
     const mealDose = carbs > 0 ? Math.ceil(carbs / ICR) : 0;
 
-    // Correction dose from "with food" table
-    let corrDose = 0;
-    let corrText = '';
+    let corrDose = 0; let corrText = '';
     if (gluc > 0 && cfg && cfg.tables && cfg.tables.length){
       const t = cfg.tables.find(t => t.food === 'meal') || cfg.tables[0];
       const match = t.rows.find(r => gluc >= r.from && gluc <= r.to);
-      if (match){
-        corrDose = Number(match.units);
-        corrText = `${gluc} → ${match.from}–${match.to} → ${corrDose} יח׳`;
-      } else {
+      if (match){ corrDose = Number(match.units); corrText = `${gluc} → ${match.from}–${match.to} → ${corrDose} יח׳`; }
+      else {
         const froms = t.rows.map(r => Number(r.from)).filter(x => !isNaN(x));
         const min = froms.length ? Math.min(...froms) : 100;
-        if (gluc < min) corrText = `${gluc} מתחת ל-${min} → 0 יח׳`;
-        else corrText = `${gluc} — אין התאמה בטבלה`;
+        corrText = gluc < min ? `${gluc} מתחת ל-${min} → 0 יח׳` : `${gluc} — אין התאמה בטבלה`;
       }
     }
 
@@ -1395,7 +1413,7 @@ $('#impjson').onclick=()=>{
     });
   }
 
-  // Food +/- quantity selectors
+  // Food +/- quantity selectors (0.5 increments)
   function updateFoodCart(){
     let total = 0;
     const items = [];
@@ -1403,37 +1421,91 @@ $('#impjson').onclick=()=>{
       const qty = Number(row.querySelector('.fqty').textContent);
       if (qty > 0){
         const v = Number(row.dataset.v);
-        total += qty * v;
-        items.push(row.dataset.name + ' x' + qty + ' (' + (qty*v) + ')');
+        const sub = Math.round(qty * v);
+        total += sub;
+        items.push(row.dataset.name + ' ×' + qty + ' (' + sub + ')');
       }
     });
     const cart = document.getElementById('foodcart');
     document.getElementById('foodtotal').textContent = total;
     document.getElementById('foodselected').textContent = items.join(' · ');
     cart.style.display = total > 0 ? '' : 'none';
-    // Auto-fill carb input
     if (carbInput) { carbInput.value = total > 0 ? String(total) : ''; calcCarbs(); }
   }
 
-  document.querySelectorAll('.fplus').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const span = btn.parentElement.querySelector('.fqty');
-      span.textContent = Number(span.textContent) + 1;
-      updateFoodCart();
+  function bindFoodButtons(){
+    document.querySelectorAll('.fplus').forEach(btn => {
+      if (btn._bound) return; btn._bound = true;
+      btn.addEventListener('click', () => {
+        const span = btn.parentElement.querySelector('.fqty');
+        span.textContent = (Number(span.textContent) + 0.5).toString();
+        updateFoodCart();
+      });
     });
-  });
-  document.querySelectorAll('.fminus').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const span = btn.parentElement.querySelector('.fqty');
-      const cur = Number(span.textContent);
-      if (cur > 0) span.textContent = cur - 1;
-      updateFoodCart();
+    document.querySelectorAll('.fminus').forEach(btn => {
+      if (btn._bound) return; btn._bound = true;
+      btn.addEventListener('click', () => {
+        const span = btn.parentElement.querySelector('.fqty');
+        const cur = Number(span.textContent);
+        if (cur > 0) span.textContent = (cur - 0.5).toString();
+        updateFoodCart();
+      });
     });
-  });
+  }
+  bindFoodButtons();
 
   document.getElementById('foodreset')?.addEventListener('click', () => {
     document.querySelectorAll('.fqty').forEach(s => s.textContent = '0');
     updateFoodCart();
+  });
+
+  // --- Custom foods (saved to localStorage) ---
+  const K_FOODS = 'sugar:customFoods';
+  let customFoods = JSON.parse(localStorage.getItem(K_FOODS) || '[]');
+
+  function renderCustomFoods(){
+    const c = document.getElementById('customfoods');
+    if (!c) return;
+    c.innerHTML = '';
+    const td = 'style="padding:5px;border:1px solid #ddd';
+    customFoods.forEach((f, i) => {
+      const tr = document.createElement('tr');
+      tr.className = 'foodrow'; tr.dataset.name = f.name; tr.dataset.v = f.carbs;
+      tr.innerHTML = `<td ${td};text-align:right">${f.name}</td><td ${td};text-align:center">${f.serving}</td><td ${td};text-align:center">${f.carbs}</td><td ${td};text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button><button class="fbtn" style="color:#C62828;margin-right:4px;font-size:14px" data-del="${i}">✕</button></td>`;
+      // Insert into the table before closing
+      const table = document.querySelector('#foodtable table');
+      if (table) table.appendChild(tr);
+    });
+    bindFoodButtons();
+    // Delete buttons
+    document.querySelectorAll('[data-del]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        customFoods.splice(Number(btn.dataset.del), 1);
+        localStorage.setItem(K_FOODS, JSON.stringify(customFoods));
+        // re-render
+        document.querySelectorAll('#foodtable table .foodrow[data-custom]').forEach(r => r.remove());
+        renderCustomFoods();
+        updateFoodCart();
+      });
+    });
+  }
+  renderCustomFoods();
+
+  // Add food button
+  document.getElementById('addfoodbtn')?.addEventListener('click', () => {
+    const name = document.getElementById('newfood-name').value.trim();
+    const serving = document.getElementById('newfood-serving').value.trim();
+    const carbs = Number(document.getElementById('newfood-carbs').value);
+    if (!name || !carbs){ toast('הזן שם ופחמימות'); return; }
+    customFoods.push({ name, serving: serving || '1 מנה', carbs });
+    localStorage.setItem(K_FOODS, JSON.stringify(customFoods));
+    document.getElementById('newfood-name').value = '';
+    document.getElementById('newfood-serving').value = '';
+    document.getElementById('newfood-carbs').value = '';
+    // Clear and re-render
+    customFoods.forEach(() => { const last = document.querySelector('#foodtable table tr:last-child'); if(last && last.classList.contains('foodrow')) last.remove(); });
+    renderCustomFoods();
+    toast(name + ' נוסף');
   });
 
   // --- Trial & License ---
