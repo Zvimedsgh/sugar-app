@@ -211,8 +211,8 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
     </div>
 
     <div class="card" id="foodtable">
-      <h2 style="cursor:pointer" id="foodtoggle">📋 בחר מאכלים מהטבלה ▾</h2>
-      <div id="foodlist" style="display:none">
+      <h2 style="cursor:pointer" id="foodtoggle">📋 בחר מאכלים מהטבלה ▴</h2>
+      <div id="foodlist">
         <div id="foodcart" style="background:#E8F5E9;border:1px solid #66BB6A;border-radius:8px;padding:10px;margin-bottom:10px;display:none">
           <div style="display:flex;justify-content:space-between;align-items:center">
             <strong>🧮 סה"כ: <span id="foodtotal">0</span> גרם פחמימות</strong>
@@ -1393,9 +1393,20 @@ $('#impjson').onclick=()=>{
     const total = mealDose + corrDose;
     if (total <= 0 && !corrText){ carbResult.innerHTML = ''; return; }
 
+    // Gather selected foods for display
+    let foodLines = '';
+    document.querySelectorAll('.foodrow').forEach(row => {
+      const qty = Number(row.querySelector('.fqty').textContent);
+      if (qty > 0){
+        const v = Number(row.dataset.v);
+        foodLines += `<div style="font-size:14px;color:#555;padding:2px 0">• ${row.dataset.name} ×${qty} = ${Math.round(qty*v)} גר׳</div>`;
+      }
+    });
+
     let html = `<div class="dose" style="border:2px solid var(--pen);text-align:right;padding:20px">`;
     html += `<div class="who" style="text-align:center;margin-bottom:12px">חישוב מנה כוללת</div>`;
-    if (carbs > 0) html += `<div style="font-size:17px;margin-bottom:6px">🍞 פחמימות: ${carbs} גר׳ ÷ ${ICR} = <strong>${mealDose} יח׳</strong></div>`;
+    if (foodLines) html += `<div style="margin-bottom:10px;padding:8px;background:#FAFAFA;border-radius:8px;border:1px solid #e0e0e0"><div style="font-size:15px;font-weight:bold;margin-bottom:4px">🍽️ מאכלים שנבחרו:</div>${foodLines}</div>`;
+    if (carbs > 0) html += `<div style="font-size:17px;margin-bottom:6px">🍞 סה"כ פחמימות: ${carbs} גר׳ ÷ ${ICR} = <strong>${mealDose} יח׳</strong></div>`;
     if (gluc > 0) html += `<div style="font-size:17px;margin-bottom:6px">🩸 תיקון סוכר: ${corrText}</div>`;
     html += `<hr style="margin:12px 0;border-color:#ddd">`;
     html += `<div style="text-align:center"><div class="units num" style="font-size:54px">${total}</div><div class="unitlbl">יחידות סה"כ</div></div>`;
