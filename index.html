@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="he" dir="rtl"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -55,7 +55,7 @@ textarea{min-height:70px; resize:vertical}
 .seg{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px}
 .seg button{flex:1 1 40%; font:inherit; font-size:14px; padding:10px 6px; cursor:pointer; background:#fff;
   color:var(--ink-soft); border:1px solid var(--rule); border-radius:9px}
-.seg button[aria-pressed="true"]{background:var(--pen-soft); border-color:var(--pen); color:var(--pen); font-weight:600}
+.seg button[aria-pressed="true"]{background:linear-gradient(135deg,#E3F2FD,#BBDEFB); border-color:var(--pen); color:var(--pen); font-weight:600}
 .now{display:flex; align-items:baseline; justify-content:space-between; gap:8px; margin-bottom:12px;
   padding:11px 14px; background:var(--card); border:1px solid var(--rule); border-radius:11px}
 .now b{font-size:16px} .now .t{font-family:var(--num); font-size:14px; color:var(--ink-soft)}
@@ -88,7 +88,7 @@ textarea{min-height:70px; resize:vertical}
 .msg.bad strong{display:block; font-size:16px; margin-bottom:3px}
 table.grid{width:100%; border-collapse:collapse; font-size:14px}
 table.grid th, table.grid td{border:1px solid var(--rule); padding:5px 6px; text-align:center}
-table.grid th{background:var(--pen-soft); font-weight:600; font-size:12.5px}
+table.grid th{background:linear-gradient(135deg,#E3F2FD,#BBDEFB); font-weight:600; font-size:12.5px}
 table.grid.long th{background:var(--long-soft)}
 table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(--num); font-size:15px; border-radius:0}
 .tbl-wrap{overflow-x:auto; -webkit-overflow-scrolling:touch}
@@ -97,7 +97,7 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
 .slots label{flex:1 1 40%; display:flex; gap:7px; align-items:center; font-size:14px; border:1px solid var(--rule);
   border-radius:8px; padding:8px 10px; cursor:pointer}
 .slots input{width:19px; height:19px; margin:0; flex:0 0 auto}
-.slots label.on{background:var(--pen-soft); border-color:var(--pen)}
+.slots label.on{background:linear-gradient(135deg,#E3F2FD,#BBDEFB); border-color:var(--pen)}
 .sublbl{font-size:13px; color:var(--ink-soft); margin-bottom:5px}
 .verify{border:1px solid var(--rule); border-radius:11px; padding:14px; background:#fff; margin-top:6px}
 .verify.pending{background:var(--warn-soft); border-color:#E3C4B6}
@@ -119,7 +119,7 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
 .b-hi {background:#FBE6D2; color:#8A4A12}
 .b-vhi{background:#F6D5CB; color:#8E2F10; font-weight:700}
 .wknd > summary, .subrow.wknd{background:#F4F6FA}
-.loghead{background:var(--pen-soft); border:1px solid var(--rule); border-radius:9px; padding:7px 8px; margin-bottom:8px}
+.loghead{background:linear-gradient(135deg,#E3F2FD,#BBDEFB); border:1px solid var(--rule); border-radius:9px; padding:7px 8px; margin-bottom:8px}
 .loghead .lgrid{gap:1px 1px}
 .loghead .lgrid > div{font-family:inherit; font-size:10.5px; font-weight:600; color:var(--pen); line-height:1.15}
 .loghead .span2{grid-column:span 2; white-space:nowrap; border-bottom:1px solid #C4D5EC; padding-bottom:2px; margin-bottom:2px}
@@ -193,40 +193,26 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
 
   <!-- CARB MODE (new) -->
   <div id="carbcalc" style="display:none">
-    <!-- 1. Demo warning -->
+    <!-- 1. Demo -->
     <div id="carbdemo" style="background:#FFEBEE;border:2px solid #C62828;border-radius:10px;padding:14px;margin-bottom:14px;text-align:center">
       <div style="font-size:24px;margin-bottom:4px">⚠️</div>
       <div style="font-size:17px;font-weight:bold;color:#C62828;margin-bottom:4px">גרסת הדגמה בלבד</div>
       <div style="font-size:14px;color:#444;line-height:1.4">אין להתייחס לערכים המוצגים כאן לצורך טיפול כלשהו.<br>יש לפעול אך ורק לפי הנחיות הצוות המטפל.</div>
     </div>
 
-    <!-- 2. Glucose + params -->
+    <!-- 2. Glucose -->
     <div class="card" style="background:#E3F2FD;border:2px solid #1E88E5;margin-bottom:14px">
-      <p class="hint" style="margin-bottom:4px">יחס המרה: 1 יח׳ לכל <strong id="icr-display">10</strong> גר׳ <button id="editicr" style="background:none;border:none;font-size:14px;cursor:pointer;padding:2px">✏️</button> · יעד: <strong id="target-display">150</strong> <button id="edittarget" style="background:none;border:none;font-size:14px;cursor:pointer;padding:2px">✏️</button></p>
+      <p class="hint" style="margin-bottom:4px">יחס: 1 יח׳ / <strong id="icr-display">10</strong> גר׳ <button id="editicr" style="background:none;border:none;font-size:14px;cursor:pointer;padding:2px">✏️</button> · יעד: <strong id="target-display">150</strong> <button id="edittarget" style="background:none;border:none;font-size:14px;cursor:pointer;padding:2px">✏️</button></p>
       <label class="fld">
         <span style="font-size:18px;font-weight:bold;color:#1565C0;text-align:center;margin-bottom:8px">🩸 רמת סוכר (mg/dL)</span>
         <input id="carbgluc" type="tel" placeholder="הקלד/י רמת הסוכר" autocomplete="off" style="font-family:var(--num);font-size:44px;text-align:center;padding:14px;border:3px solid #1E88E5;border-radius:14px;background:#fff">
       </label>
     </div>
 
-    <!-- 3. Result (dose) - right after glucose -->
-    <div id="carbresult" style="text-align:center;margin-bottom:14px"></div>
-
-    <!-- 4. Carb total -->
-    <div class="card" style="background:#FFF3E0;border:2px solid #FF9800;margin-bottom:14px">
-      <label class="fld">
-        <span style="font-size:16px;font-weight:bold;color:#E65100;text-align:center;margin-bottom:8px">🍞 סה"כ פחמימות בארוחה (גרם)</span>
-        <input id="carbinput" type="tel" placeholder="הקלד/י או בחר מהטבלה" autocomplete="off" style="font-family:var(--num);font-size:44px;text-align:center;padding:14px;border:3px solid #FF9800;border-radius:14px;background:#fff">
-      </label>
-    </div>
-
-    <!-- 5. Button to scroll to food list -->
-    <button id="scrolltofood" style="width:100%;padding:14px;font-size:18px;font-weight:bold;background:linear-gradient(135deg,#FFB300,#FF8F00);color:#fff;border:none;border-radius:12px;cursor:pointer;margin-bottom:14px;box-shadow:0 2px 6px rgba(0,0,0,0.15)">🍽️ בחר מאכלים בארוחתך ▼</button>
-
-    <!-- 6. Food table -->
+    <!-- 3. Select foods button + food table -->
     <div class="card" id="foodtable" style="background:#FFF8E1;border:2px solid #FFB300;margin-bottom:14px">
-      <h2 style="color:#E65100;margin-bottom:8px" id="foodtoggle">🍽️ מאכלים</h2>
-      <div id="foodlist">
+      <button id="foodtoggle" style="width:100%;padding:12px;font-size:18px;font-weight:bold;background:linear-gradient(135deg,#FFB300,#FF8F00);color:#fff;border:none;border-radius:10px;cursor:pointer">🍽️ בחר מאכלים בארוחתך ▼</button>
+      <div id="foodlist" style="display:none;margin-top:12px">
         <div id="foodcart" style="background:#E8F5E9;border:1px solid #66BB6A;border-radius:8px;padding:10px;margin-bottom:10px;display:none">
           <div style="display:flex;justify-content:space-between;align-items:center">
             <strong>🧮 סה"כ: <span id="foodtotal">0</span> גרם פחמימות</strong>
@@ -269,6 +255,15 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
         </div>
       </div>
     </div>
+
+    <!-- hidden carb input auto-filled from food table -->
+    <input id="carbinput" type="hidden" value="">
+
+    <!-- 4. TOTAL UNITS - big -->
+    <div id="carbresult-total" style="text-align:center;margin-bottom:14px"></div>
+
+    <!-- 5. Calculation breakdown -->
+    <div id="carbresult-detail" style="margin-bottom:14px"></div>
   </div>
 </section>
 
@@ -1374,18 +1369,16 @@ $('#impjson').onclick=()=>{
   // Carb calculation (glucose + carbs = total dose)
   const carbGluc = document.getElementById('carbgluc');
   const carbInput = document.getElementById('carbinput');
-  const carbResult = document.getElementById('carbresult');
+  const carbTotal = document.getElementById('carbresult-total');
+  const carbDetail = document.getElementById('carbresult-detail');
 
   function calcCarbs(){
     if (!carbGluc || !carbInput) return;
     carbGluc.value = carbGluc.value.replace(/[^0-9]/g, '').slice(0, 3);
-    carbInput.value = carbInput.value.replace(/[^0-9.]/g, '').slice(0, 5);
     const gluc = Number(carbGluc.value) || 0;
     const carbs = Number(carbInput.value) || 0;
-    if (!gluc && !carbs){ carbResult.innerHTML = ''; return; }
-
+    if (!gluc && !carbs){ carbTotal.innerHTML = ''; carbDetail.innerHTML = ''; return; }
     const mealDose = carbs > 0 ? Math.ceil(carbs / ICR) : 0;
-
     let corrDose = 0; let corrText = '';
     if (gluc > 0 && cfg && cfg.tables && cfg.tables.length){
       const t = cfg.tables.find(t => t.food === 'meal') || cfg.tables[0];
@@ -1397,30 +1390,28 @@ $('#impjson').onclick=()=>{
         corrText = gluc < min ? `${gluc} מתחת ל-${min} → 0 יח׳` : `${gluc} — אין התאמה בטבלה`;
       }
     }
-
     const total = mealDose + corrDose;
-    if (total <= 0 && !corrText){ carbResult.innerHTML = ''; return; }
-
-    // Gather selected foods for display
-    let foodLines = '';
+    if (total <= 0 && !corrText){ carbTotal.innerHTML = ''; carbDetail.innerHTML = ''; return; }
+    // BIG TOTAL
+    let th = `<div style="background:#E8F5E9;border:3px solid #43A047;border-radius:14px;padding:20px;text-align:center">`;
+    th += `<div style="font-size:16px;font-weight:bold;color:#2E7D32;margin-bottom:8px">💉 סה"כ יחידות להזרקה</div>`;
+    th += `<div class="num" style="font-size:64px;color:#1B5E20;font-weight:bold">${total}</div>`;
+    if (mealDose > 0 && corrDose > 0) th += `<div style="font-size:15px;color:#555;margin-top:6px">(${mealDose} ארוחה + ${corrDose} תיקון)</div>`;
+    th += `</div>`;
+    carbTotal.innerHTML = th;
+    // BREAKDOWN
+    let fl = '';
     document.querySelectorAll('.foodrow').forEach(row => {
       const qty = Number(row.querySelector('.fqty').textContent);
-      if (qty > 0){
-        const v = Number(row.dataset.v);
-        foodLines += `<div style="font-size:14px;color:#555;padding:2px 0">• ${row.dataset.name} ×${qty} = ${Math.round(qty*v)} גר׳</div>`;
-      }
+      if (qty > 0){ const v = Number(row.dataset.v); fl += `<div style="font-size:14px;color:#555;padding:2px 0">• ${row.dataset.name} ×${qty} = ${Math.round(qty*v)} גר׳</div>`; }
     });
-
-    let html = `<div class="dose" style="border:2px solid var(--pen);text-align:right;padding:20px">`;
-    html += `<div class="who" style="text-align:center;margin-bottom:12px">חישוב מנה כוללת</div>`;
-    if (foodLines) html += `<div style="margin-bottom:10px;padding:8px;background:#FAFAFA;border-radius:8px;border:1px solid #e0e0e0"><div style="font-size:15px;font-weight:bold;margin-bottom:4px">🍽️ מאכלים שנבחרו:</div>${foodLines}</div>`;
-    if (carbs > 0) html += `<div style="font-size:17px;margin-bottom:6px">🍞 סה"כ פחמימות: ${carbs} גר׳ ÷ ${ICR} = <strong>${mealDose} יח׳</strong></div>`;
-    if (gluc > 0) html += `<div style="font-size:17px;margin-bottom:6px">🩸 תיקון סוכר: ${corrText}</div>`;
-    html += `<hr style="margin:12px 0;border-color:#ddd">`;
-    html += `<div style="text-align:center"><div class="units num" style="font-size:54px">${total}</div><div class="unitlbl">יחידות סה"כ</div></div>`;
-    if (mealDose > 0 && corrDose > 0) html += `<div style="text-align:center;margin-top:6px;font-size:15px;color:#666">(${mealDose} ארוחה + ${corrDose} תיקון)</div>`;
-    html += `</div>`;
-    carbResult.innerHTML = html;
+    let dh = `<div class="card" style="background:#FAFAFA;border:1px solid #ddd;text-align:right;padding:16px">`;
+    dh += `<div style="font-size:15px;font-weight:bold;margin-bottom:8px;color:#555">📊 פירוט החישוב</div>`;
+    if (fl) dh += `<div style="margin-bottom:8px;padding:8px;background:#FFF8E1;border-radius:8px;border:1px solid #FFE082"><div style="font-size:14px;font-weight:bold;margin-bottom:4px">🍽️ מאכלים:</div>${fl}</div>`;
+    if (carbs > 0) dh += `<div style="font-size:15px;margin-bottom:4px">🍞 פחמימות: ${carbs} גר׳ ÷ ${ICR} = <strong>${mealDose} יח׳</strong></div>`;
+    if (gluc > 0) dh += `<div style="font-size:15px;margin-bottom:4px">🩸 תיקון סוכר: ${corrText}</div>`;
+    dh += `</div>`;
+    carbDetail.innerHTML = dh;
   }
 
   if (carbGluc) carbGluc.addEventListener('input', calcCarbs);
@@ -1433,7 +1424,7 @@ $('#impjson').onclick=()=>{
     foodToggle.addEventListener('click', () => {
       const open = foodList.style.display !== 'none';
       foodList.style.display = open ? 'none' : '';
-      // no toggle needed
+      foodToggle.textContent = open ? '🍽️ בחר מאכלים בארוחתך ▼' : '🍽️ סגור רשימת מאכלים ▲'
     });
   }
 
