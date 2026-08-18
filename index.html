@@ -169,6 +169,14 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
 <div id="persistwarn"></div>
 <section class="screen" id="s-dose">
   <div id="lockcard"></div>
+
+  <!-- Mode toggle -->
+  <div class="seg" id="calcmode" style="margin-bottom:0">
+    <button aria-pressed="true" data-mode="table" style="flex:1">🔢 לפי טבלה</button>
+    <button aria-pressed="false" data-mode="carbs" style="flex:1">🍞 לפי פחמימות</button>
+  </div>
+
+  <!-- TABLE MODE (existing) -->
   <div id="calc">
     <div class="now" id="nowbar"></div>
     <div class="seg" id="slotsel"></div>
@@ -180,6 +188,50 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
     </label>
     <div id="savednote" class="savednote"></div>
     <div id="result"></div>
+  </div>
+
+  <!-- CARB MODE (new) -->
+  <div id="carbcalc" style="display:none">
+    <div class="card" style="background:#F0F4FF;border:2px solid var(--pen);margin-bottom:14px">
+      <h2 style="color:var(--pen);margin-bottom:4px">חישוב לפי פחמימות</h2>
+      <p class="hint" style="margin-bottom:12px">יחס המרה: יחידת אינסולין לכל <strong id="icr-display">10</strong> גרם פחמימות</p>
+
+      <label class="fld">
+        <span style="font-size:18px;font-weight:bold;color:#1E4FA8;text-align:center;margin-bottom:8px">כמות פחמימות בארוחה (גרם)</span>
+        <input id="carbinput" type="tel" placeholder="הקלד/י גרם פחמימות" autocomplete="off" style="font-family:var(--num);font-size:44px;text-align:center;padding:14px;border:3px solid var(--pen);border-radius:14px;background:#fff">
+      </label>
+      <div id="carbresult" style="margin-top:12px;text-align:center"></div>
+    </div>
+
+    <div class="card" id="foodtable">
+      <h2 style="cursor:pointer" id="foodtoggle">📋 טבלת מאכלים נפוצים ▾</h2>
+      <div id="foodlist" style="display:none">
+        <table style="width:100%;border-collapse:collapse;margin-top:8px;font-size:14px">
+          <tr style="background:#e8e8e8"><th style="padding:6px;border:1px solid #ccc;text-align:right">מאכל</th><th style="padding:6px;border:1px solid #ccc">מנה</th><th style="padding:6px;border:1px solid #ccc">פחמימות</th></tr>
+          <tr><td style="padding:5px;border:1px solid #ddd;text-align:right">לחם לבן</td><td style="padding:5px;border:1px solid #ddd;text-align:center">פרוסה</td><td style="padding:5px;border:1px solid #ddd;text-align:center;cursor:pointer" class="carbval" data-v="15"><strong>15</strong></td></tr>
+          <tr><td style="padding:5px;border:1px solid #ddd;text-align:right">לחם מלא</td><td style="padding:5px;border:1px solid #ddd;text-align:center">פרוסה</td><td style="padding:5px;border:1px solid #ddd;text-align:center;cursor:pointer" class="carbval" data-v="12"><strong>12</strong></td></tr>
+          <tr><td style="padding:5px;border:1px solid #ddd;text-align:right">פיתה</td><td style="padding:5px;border:1px solid #ddd;text-align:center">1 בינונית</td><td style="padding:5px;border:1px solid #ddd;text-align:center;cursor:pointer" class="carbval" data-v="33"><strong>33</strong></td></tr>
+          <tr><td style="padding:5px;border:1px solid #ddd;text-align:right">אורז מבושל</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center;cursor:pointer" class="carbval" data-v="45"><strong>45</strong></td></tr>
+          <tr><td style="padding:5px;border:1px solid #ddd;text-align:right">פסטה מבושלת</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center;cursor:pointer" class="carbval" data-v="43"><strong>43</strong></td></tr>
+          <tr><td style="padding:5px;border:1px solid #ddd;text-align:right">קוסקוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center;cursor:pointer" class="carbval" data-v="36"><strong>36</strong></td></tr>
+          <tr><td style="padding:5px;border:1px solid #ddd;text-align:right">תפוח אדמה</td><td style="padding:5px;border:1px solid #ddd;text-align:center">1 בינוני</td><td style="padding:5px;border:1px solid #ddd;text-align:center;cursor:pointer" class="carbval" data-v="26"><strong>26</strong></td></tr>
+          <tr><td style="padding:5px;border:1px solid #ddd;text-align:right">קורנפלקס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">30 גר׳</td><td style="padding:5px;border:1px solid #ddd;text-align:center;cursor:pointer" class="carbval" data-v="25"><strong>25</strong></td></tr>
+          <tr><td style="padding:5px;border:1px solid #ddd;text-align:right">בננה</td><td style="padding:5px;border:1px solid #ddd;text-align:center">1 בינונית</td><td style="padding:5px;border:1px solid #ddd;text-align:center;cursor:pointer" class="carbval" data-v="27"><strong>27</strong></td></tr>
+          <tr><td style="padding:5px;border:1px solid #ddd;text-align:right">תפוח</td><td style="padding:5px;border:1px solid #ddd;text-align:center">1 בינוני</td><td style="padding:5px;border:1px solid #ddd;text-align:center;cursor:pointer" class="carbval" data-v="25"><strong>25</strong></td></tr>
+          <tr><td style="padding:5px;border:1px solid #ddd;text-align:right">תפוז</td><td style="padding:5px;border:1px solid #ddd;text-align:center">1 בינוני</td><td style="padding:5px;border:1px solid #ddd;text-align:center;cursor:pointer" class="carbval" data-v="15"><strong>15</strong></td></tr>
+          <tr><td style="padding:5px;border:1px solid #ddd;text-align:right">ענבים</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center;cursor:pointer" class="carbval" data-v="27"><strong>27</strong></td></tr>
+          <tr><td style="padding:5px;border:1px solid #ddd;text-align:right">אבטיח</td><td style="padding:5px;border:1px solid #ddd;text-align:center">פרוסה</td><td style="padding:5px;border:1px solid #ddd;text-align:center;cursor:pointer" class="carbval" data-v="15"><strong>15</strong></td></tr>
+          <tr><td style="padding:5px;border:1px solid #ddd;text-align:right">מיץ תפוזים</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center;cursor:pointer" class="carbval" data-v="26"><strong>26</strong></td></tr>
+          <tr><td style="padding:5px;border:1px solid #ddd;text-align:right">חלב</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center;cursor:pointer" class="carbval" data-v="12"><strong>12</strong></td></tr>
+          <tr><td style="padding:5px;border:1px solid #ddd;text-align:right">יוגורט</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center;cursor:pointer" class="carbval" data-v="15"><strong>15</strong></td></tr>
+          <tr><td style="padding:5px;border:1px solid #ddd;text-align:right">חומוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">100 גר׳</td><td style="padding:5px;border:1px solid #ddd;text-align:center;cursor:pointer" class="carbval" data-v="14"><strong>14</strong></td></tr>
+          <tr><td style="padding:5px;border:1px solid #ddd;text-align:right">סוכר</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כפית</td><td style="padding:5px;border:1px solid #ddd;text-align:center;cursor:pointer" class="carbval" data-v="5"><strong>5</strong></td></tr>
+          <tr><td style="padding:5px;border:1px solid #ddd;text-align:right">דבש</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כפית</td><td style="padding:5px;border:1px solid #ddd;text-align:center;cursor:pointer" class="carbval" data-v="6"><strong>6</strong></td></tr>
+          <tr><td style="padding:5px;border:1px solid #ddd;text-align:right">ביסקוויט</td><td style="padding:5px;border:1px solid #ddd;text-align:center">2 יחידות</td><td style="padding:5px;border:1px solid #ddd;text-align:center;cursor:pointer" class="carbval" data-v="15"><strong>15</strong></td></tr>
+        </table>
+        <p class="hint" style="margin-top:6px">💡 לחץ על מספר פחמימות כדי להוסיף אותו לחישוב</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1252,6 +1304,62 @@ $('#impjson').onclick=()=>{
   renderBasal(); renderTables(); renderLog(); renderDoseScreen(); renderHypo(); renderBuild();
   $('#newdate').value = today();
   goTo('s-dose');
+
+  // --- Carb counting mode ---
+  const ICR = (cfg && cfg.icr) ? Number(cfg.icr) : 10;
+  const icrDisp = document.getElementById('icr-display');
+  if (icrDisp) icrDisp.textContent = ICR;
+
+  // Mode toggle
+  document.querySelectorAll('#calcmode button').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('#calcmode button').forEach(x => x.setAttribute('aria-pressed', x === b));
+      const mode = b.dataset.mode;
+      $('#calc').style.display = mode === 'table' ? '' : 'none';
+      $('#carbcalc').style.display = mode === 'carbs' ? '' : 'none';
+    });
+  });
+
+  // Carb calculation
+  const carbInput = document.getElementById('carbinput');
+  const carbResult = document.getElementById('carbresult');
+  if (carbInput) {
+    carbInput.addEventListener('input', () => {
+      carbInput.value = carbInput.value.replace(/[^0-9]/g, '').slice(0, 4);
+      const carbs = Number(carbInput.value);
+      if (!carbs || carbs <= 0) { carbResult.innerHTML = ''; return; }
+      const units = Math.round(carbs / ICR * 10) / 10;
+      carbResult.innerHTML = `
+        <div class="dose" style="border:2px solid var(--pen)">
+          <div class="who">אינסולין קצר — לפי פחמימות</div>
+          <div class="units num" style="font-size:48px">${units}</div>
+          <div class="unitlbl">יחידות</div>
+          <div class="math" style="margin-top:6px">${carbs} גרם ÷ ${ICR} = ${units}</div>
+        </div>`;
+    });
+  }
+
+  // Food table toggle
+  const foodToggle = document.getElementById('foodtoggle');
+  const foodList = document.getElementById('foodlist');
+  if (foodToggle && foodList) {
+    foodToggle.addEventListener('click', () => {
+      const open = foodList.style.display !== 'none';
+      foodList.style.display = open ? 'none' : '';
+      foodToggle.textContent = open ? '📋 טבלת מאכלים נפוצים ▾' : '📋 טבלת מאכלים נפוצים ▴';
+    });
+  }
+
+  // Click food carb value to add to input
+  document.querySelectorAll('.carbval').forEach(td => {
+    td.addEventListener('click', () => {
+      const v = Number(td.dataset.v);
+      const cur = Number(carbInput.value) || 0;
+      carbInput.value = String(cur + v);
+      carbInput.dispatchEvent(new Event('input'));
+      toast('+' + v + ' גרם');
+    });
+  });
 
   // --- Trial & License ---
   const K_TRIAL = 'sugar:trialStart';
