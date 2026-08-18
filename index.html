@@ -178,7 +178,7 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
   </div>
 
   <!-- TABLE MODE (existing) -->
-  <div id="calc">
+  <div id="calc" style="background:#F0F4FF;border-radius:14px;padding:14px;border:2px solid #90CAF9">
     <div class="now" id="nowbar"></div>
     <div class="seg" id="slotsel"></div>
     <div class="seg foodseg" id="foodsel"></div>
@@ -200,7 +200,7 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
       <div style="font-size:14px;color:#444;line-height:1.4">אין להתייחס לערכים המוצגים כאן לצורך טיפול כלשהו.<br>יש לפעול אך ורק לפי הנחיות הצוות המטפל.</div>
     </div>
 
-    <!-- 2. Glucose -->
+    <!-- 2. Glucose + params -->
     <div class="card" style="background:#E3F2FD;border:2px solid #1E88E5;margin-bottom:14px">
       <p class="hint" style="margin-bottom:4px">יחס המרה: 1 יח׳ לכל <strong id="icr-display">10</strong> גר׳ <button id="editicr" style="background:none;border:none;font-size:14px;cursor:pointer;padding:2px">✏️</button> · יעד: <strong id="target-display">150</strong> <button id="edittarget" style="background:none;border:none;font-size:14px;cursor:pointer;padding:2px">✏️</button></p>
       <label class="fld">
@@ -209,9 +209,23 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
       </label>
     </div>
 
-    <!-- 3. Food selection -->
+    <!-- 3. Result (dose) - right after glucose -->
+    <div id="carbresult" style="text-align:center;margin-bottom:14px"></div>
+
+    <!-- 4. Carb total -->
+    <div class="card" style="background:#FFF3E0;border:2px solid #FF9800;margin-bottom:14px">
+      <label class="fld">
+        <span style="font-size:16px;font-weight:bold;color:#E65100;text-align:center;margin-bottom:8px">🍞 סה"כ פחמימות בארוחה (גרם)</span>
+        <input id="carbinput" type="tel" placeholder="הקלד/י או בחר מהטבלה" autocomplete="off" style="font-family:var(--num);font-size:44px;text-align:center;padding:14px;border:3px solid #FF9800;border-radius:14px;background:#fff">
+      </label>
+    </div>
+
+    <!-- 5. Button to scroll to food list -->
+    <button id="scrolltofood" style="width:100%;padding:14px;font-size:18px;font-weight:bold;background:linear-gradient(135deg,#FFB300,#FF8F00);color:#fff;border:none;border-radius:12px;cursor:pointer;margin-bottom:14px;box-shadow:0 2px 6px rgba(0,0,0,0.15)">🍽️ בחר מאכלים בארוחתך ▼</button>
+
+    <!-- 6. Food table -->
     <div class="card" id="foodtable" style="background:#FFF8E1;border:2px solid #FFB300;margin-bottom:14px">
-      <h2 style="color:#E65100;margin-bottom:8px;cursor:pointer" id="foodtoggle">🍽️ בחר מאכלים בארוחתך ▴</h2>
+      <h2 style="color:#E65100;margin-bottom:8px" id="foodtoggle">🍽️ מאכלים</h2>
       <div id="foodlist">
         <div id="foodcart" style="background:#E8F5E9;border:1px solid #66BB6A;border-radius:8px;padding:10px;margin-bottom:10px;display:none">
           <div style="display:flex;justify-content:space-between;align-items:center">
@@ -225,10 +239,10 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
           <tr class="foodrow" data-name="לחם לבן" data-v="15"><td style="padding:5px;border:1px solid #ddd;text-align:right">🍞 לחם לבן</td><td style="padding:5px;border:1px solid #ddd;text-align:center">פרוסה</td><td style="padding:5px;border:1px solid #ddd;text-align:center">15</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
           <tr class="foodrow" data-name="לחם מלא" data-v="12"><td style="padding:5px;border:1px solid #ddd;text-align:right">🍞 לחם מלא</td><td style="padding:5px;border:1px solid #ddd;text-align:center">פרוסה</td><td style="padding:5px;border:1px solid #ddd;text-align:center">12</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
           <tr class="foodrow" data-name="פיתה" data-v="33"><td style="padding:5px;border:1px solid #ddd;text-align:right">🫓 פיתה</td><td style="padding:5px;border:1px solid #ddd;text-align:center">1 בינונית</td><td style="padding:5px;border:1px solid #ddd;text-align:center">33</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
-          <tr class="foodrow" data-name="אורז" data-v="45"><td style="padding:5px;border:1px solid #ddd;text-align:right">🍚 אורז מבושל</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">45</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
+          <tr class="foodrow" data-name="אורז" data-v="45"><td style="padding:5px;border:1px solid #ddd;text-align:right">🍚 אורז</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">45</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
           <tr class="foodrow" data-name="פסטה" data-v="43"><td style="padding:5px;border:1px solid #ddd;text-align:right">🍝 פסטה</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">43</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
           <tr class="foodrow" data-name="קוסקוס" data-v="36"><td style="padding:5px;border:1px solid #ddd;text-align:right">🥘 קוסקוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">36</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
-          <tr class="foodrow" data-name="תפו״א" data-v="26"><td style="padding:5px;border:1px solid #ddd;text-align:right">🥔 תפוח אדמה</td><td style="padding:5px;border:1px solid #ddd;text-align:center">1 בינוני</td><td style="padding:5px;border:1px solid #ddd;text-align:center">26</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
+          <tr class="foodrow" data-name="תפו״א" data-v="26"><td style="padding:5px;border:1px solid #ddd;text-align:right">🥔 תפו״א</td><td style="padding:5px;border:1px solid #ddd;text-align:center">1 בינוני</td><td style="padding:5px;border:1px solid #ddd;text-align:center">26</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
           <tr class="foodrow" data-name="קורנפלקס" data-v="25"><td style="padding:5px;border:1px solid #ddd;text-align:right">🥣 קורנפלקס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">30 גר׳</td><td style="padding:5px;border:1px solid #ddd;text-align:center">25</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
           <tr class="foodrow" data-name="בננה" data-v="27"><td style="padding:5px;border:1px solid #ddd;text-align:right">🍌 בננה</td><td style="padding:5px;border:1px solid #ddd;text-align:center">1 בינונית</td><td style="padding:5px;border:1px solid #ddd;text-align:center">27</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
           <tr class="foodrow" data-name="תפוח" data-v="25"><td style="padding:5px;border:1px solid #ddd;text-align:right">🍎 תפוח</td><td style="padding:5px;border:1px solid #ddd;text-align:center">1 בינוני</td><td style="padding:5px;border:1px solid #ddd;text-align:center">25</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
@@ -255,16 +269,6 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
         </div>
       </div>
     </div>
-
-    <!-- Carb total + result -->
-    <div class="card" style="background:#FFF3E0;border:2px solid #FF9800;margin-bottom:14px">
-      <label class="fld">
-        <span style="font-size:16px;font-weight:bold;color:#E65100;text-align:center;margin-bottom:8px">🍞 סה"כ פחמימות בארוחה (גרם)</span>
-        <input id="carbinput" type="tel" placeholder="הקלד/י או בחר מהטבלה" autocomplete="off" style="font-family:var(--num);font-size:44px;text-align:center;padding:14px;border:3px solid #FF9800;border-radius:14px;background:#fff">
-      </label>
-    </div>
-
-    <div id="carbresult" style="text-align:center"></div>
   </div>
 </section>
 
@@ -1429,9 +1433,14 @@ $('#impjson').onclick=()=>{
     foodToggle.addEventListener('click', () => {
       const open = foodList.style.display !== 'none';
       foodList.style.display = open ? 'none' : '';
-      foodToggle.textContent = open ? '🍽️ בחר מאכלים בארוחתך ▾' : '🍽️ בחר מאכלים בארוחתך ▴';
+      // no toggle needed
     });
   }
+
+  // Scroll to food table button
+  document.getElementById('scrolltofood')?.addEventListener('click', () => {
+    document.getElementById('foodtable')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 
   // Food +/- quantity selectors (0.5 increments)
   function updateFoodCart(){
