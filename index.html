@@ -500,7 +500,9 @@ function renderDoseScreen(){
   if (longSlot){
     const lb=el('button',null,longSlot.label);
     lb.setAttribute('aria-pressed', longSlot.id===curSlot);
-    lb.style.cssText='flex:1 1 100%;margin-bottom:2px';
+    lb.style.cssText = longSlot.id===curSlot
+      ? 'width:100%;margin-bottom:2px'
+      : 'width:100%;margin-bottom:2px;background:#F0EAF8;color:#6A1B9A;border:2px solid #CE93D8';
     lb.onclick=()=>{ setSlot(longSlot.id, true); };
     sel.append(lb);
   }
