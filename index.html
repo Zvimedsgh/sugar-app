@@ -55,7 +55,7 @@ textarea{min-height:70px; resize:vertical}
 .seg{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px}
 .seg button{flex:1 1 40%; font:inherit; font-size:14px; padding:10px 6px; cursor:pointer; background:#fff;
   color:var(--ink-soft); border:1px solid var(--rule); border-radius:9px}
-.seg button[aria-pressed="true"]{background:linear-gradient(135deg,#E3F2FD,#BBDEFB); border-color:var(--pen); color:var(--pen); font-weight:600}
+.seg button[aria-pressed="true"]{background:var(--pen-soft); border-color:var(--pen); color:var(--pen); font-weight:600}
 .now{display:flex; align-items:baseline; justify-content:space-between; gap:8px; margin-bottom:12px;
   padding:11px 14px; background:var(--card); border:1px solid var(--rule); border-radius:11px}
 .now b{font-size:16px} .now .t{font-family:var(--num); font-size:14px; color:var(--ink-soft)}
@@ -88,7 +88,7 @@ textarea{min-height:70px; resize:vertical}
 .msg.bad strong{display:block; font-size:16px; margin-bottom:3px}
 table.grid{width:100%; border-collapse:collapse; font-size:14px}
 table.grid th, table.grid td{border:1px solid var(--rule); padding:5px 6px; text-align:center}
-table.grid th{background:linear-gradient(135deg,#E3F2FD,#BBDEFB); font-weight:600; font-size:12.5px}
+table.grid th{background:var(--pen-soft); font-weight:600; font-size:12.5px}
 table.grid.long th{background:var(--long-soft)}
 table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(--num); font-size:15px; border-radius:0}
 .tbl-wrap{overflow-x:auto; -webkit-overflow-scrolling:touch}
@@ -97,7 +97,7 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
 .slots label{flex:1 1 40%; display:flex; gap:7px; align-items:center; font-size:14px; border:1px solid var(--rule);
   border-radius:8px; padding:8px 10px; cursor:pointer}
 .slots input{width:19px; height:19px; margin:0; flex:0 0 auto}
-.slots label.on{background:linear-gradient(135deg,#E3F2FD,#BBDEFB); border-color:var(--pen)}
+.slots label.on{background:var(--pen-soft); border-color:var(--pen)}
 .sublbl{font-size:13px; color:var(--ink-soft); margin-bottom:5px}
 .verify{border:1px solid var(--rule); border-radius:11px; padding:14px; background:#fff; margin-top:6px}
 .verify.pending{background:var(--warn-soft); border-color:#E3C4B6}
@@ -119,7 +119,7 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
 .b-hi {background:#FBE6D2; color:#8A4A12}
 .b-vhi{background:#F6D5CB; color:#8E2F10; font-weight:700}
 .wknd > summary, .subrow.wknd{background:#F4F6FA}
-.loghead{background:linear-gradient(135deg,#E3F2FD,#BBDEFB); border:1px solid var(--rule); border-radius:9px; padding:7px 8px; margin-bottom:8px}
+.loghead{background:var(--pen-soft); border:1px solid var(--rule); border-radius:9px; padding:7px 8px; margin-bottom:8px}
 .loghead .lgrid{gap:1px 1px}
 .loghead .lgrid > div{font-family:inherit; font-size:10.5px; font-weight:600; color:var(--pen); line-height:1.15}
 .loghead .span2{grid-column:span 2; white-space:nowrap; border-bottom:1px solid #C4D5EC; padding-bottom:2px; margin-bottom:2px}
@@ -171,18 +171,14 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
 <section class="screen" id="s-dose">
   <div id="lockcard"></div>
 
-  <!-- Carb toggle row -->
-  <div id="carbtoggle-row" style="display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:#FFF8E1;border:1px solid #FFE082;border-radius:10px;margin-bottom:8px">
-    <span style="font-size:15px;font-weight:bold;color:#E65100">🍞 חישוב לפי פחמימות</span>
-    <label style="position:relative;display:inline-block;width:52px;height:28px;cursor:pointer">
-      <input type="checkbox" id="carbtoggle" style="opacity:0;width:0;height:0">
-      <span style="position:absolute;top:0;left:0;right:0;bottom:0;background:#ccc;border-radius:28px;transition:.3s"></span>
-      <span id="carbtoggle-knob" style="position:absolute;top:2px;left:2px;width:24px;height:24px;background:#fff;border-radius:50%;transition:.3s;box-shadow:0 1px 3px rgba(0,0,0,.3)"></span>
-    </label>
+  <!-- Mode toggle -->
+  <div class="seg" id="calcmode" style="margin-bottom:0">
+    <button aria-pressed="true" data-mode="table" style="flex:1">🔢 לפי טבלה</button>
+    <button aria-pressed="false" data-mode="carbs" style="flex:1">🍞 לפי פחמימות</button>
   </div>
 
   <!-- TABLE MODE (existing) -->
-  <div id="calc" style="background:#F0F4FF;border-radius:14px;padding:14px;border:2px solid #90CAF9">
+  <div id="calc">
     <div class="now" id="nowbar"></div>
     <div class="seg" id="slotsel"></div>
     <div class="seg foodseg" id="foodsel"></div>
@@ -197,32 +193,26 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
 
   <!-- CARB MODE (new) -->
   <div id="carbcalc" style="display:none">
-    <!-- 1. Demo -->
-    <div id="carbdemo" style="background:#FFEBEE;border:2px solid #C62828;border-radius:10px;padding:14px;margin-bottom:14px;text-align:center">
-      <div style="font-size:24px;margin-bottom:4px">⚠️</div>
-      <div style="font-size:17px;font-weight:bold;color:#C62828;margin-bottom:4px">גרסת הדגמה בלבד</div>
-      <div style="font-size:14px;color:#444;line-height:1.4">אין להתייחס לערכים המוצגים כאן לצורך טיפול כלשהו.<br>יש לפעול אך ורק לפי הנחיות הצוות המטפל.</div>
-    </div>
+    <div class="card" style="background:#F0F4FF;border:2px solid var(--pen);margin-bottom:14px">
+      <h2 style="color:var(--pen);margin-bottom:4px">חישוב לפי פחמימות</h2>
+      <p class="hint" style="margin-bottom:4px">יחס המרה: 1 יח׳ לכל <strong id="icr-display">10</strong> גר׳ <button id="editicr" style="background:none;border:none;font-size:14px;cursor:pointer;padding:2px">✏️</button></p>
+      <p class="hint" style="margin-bottom:12px">יעד סוכר: <strong id="target-display">150</strong> mg/dL <button id="edittarget" style="background:none;border:none;font-size:14px;cursor:pointer;padding:2px">✏️</button></p>
 
-    <!-- 2. Glucose -->
-    <div class="card" style="background:#E3F2FD;border:2px solid #1E88E5;margin-bottom:14px">
-      <p class="hint" style="margin-bottom:4px">יחס: 1 יח׳ / <strong id="icr-display">10</strong> גר׳ <button id="editicr" style="background:none;border:none;font-size:14px;cursor:pointer;padding:2px">✏️</button> · יעד: <strong id="target-display">150</strong> <button id="edittarget" style="background:none;border:none;font-size:14px;cursor:pointer;padding:2px">✏️</button></p>
       <label class="fld">
-        <span style="font-size:18px;font-weight:bold;color:#1565C0;text-align:center;margin-bottom:8px">🩸 רמת סוכר (mg/dL)</span>
-        <input id="carbgluc" type="tel" placeholder="הקלד/י רמת הסוכר" autocomplete="off" style="font-family:var(--num);font-size:44px;text-align:center;padding:14px;border:3px solid #1E88E5;border-radius:14px;background:#fff">
+        <span style="font-size:18px;font-weight:bold;color:#1E4FA8;text-align:center;margin-bottom:8px">רמת סוכר (mg/dL)</span>
+        <input id="carbgluc" type="tel" placeholder="הקלד/י רמת הסוכר" autocomplete="off" style="font-family:var(--num);font-size:44px;text-align:center;padding:14px;border:3px solid var(--pen);border-radius:14px;background:#fff">
       </label>
+
+      <label class="fld" style="margin-top:12px">
+        <span style="font-size:18px;font-weight:bold;color:#1E4FA8;text-align:center;margin-bottom:8px">כמות פחמימות בארוחה (גרם)</span>
+        <input id="carbinput" type="tel" placeholder="הקלד/י גרם פחמימות" autocomplete="off" style="font-family:var(--num);font-size:44px;text-align:center;padding:14px;border:3px solid #FF9800;border-radius:14px;background:#FFF8E1">
+      </label>
+      <div id="carbresult" style="margin-top:14px;text-align:center"></div>
     </div>
 
-    <!-- 3. TOTAL UNITS -->
-    <div id="carbresult-total" style="text-align:center;margin-bottom:14px"></div>
-    <!-- 4. Breakdown -->
-    <div id="carbresult-detail" style="margin-bottom:14px"></div>
-    <input id="carbinput" type="hidden" value="">
-
-    <!-- 3. Select foods button + food table -->
-    <div class="card" id="foodtable" style="background:#FFF8E1;border:2px solid #FFB300;margin-bottom:14px">
-      <button id="foodtoggle" style="width:100%;padding:12px;font-size:18px;font-weight:bold;background:linear-gradient(135deg,#FFB300,#FF8F00);color:#fff;border:none;border-radius:10px;cursor:pointer">🍽️ בחר מאכלים בארוחתך ▼</button>
-      <div id="foodlist" style="display:none;margin-top:12px">
+    <div class="card" id="foodtable">
+      <h2 style="cursor:pointer" id="foodtoggle">📋 בחר מאכלים מהטבלה ▴</h2>
+      <div id="foodlist">
         <div id="foodcart" style="background:#E8F5E9;border:1px solid #66BB6A;border-radius:8px;padding:10px;margin-bottom:10px;display:none">
           <div style="display:flex;justify-content:space-between;align-items:center">
             <strong>🧮 סה"כ: <span id="foodtotal">0</span> גרם פחמימות</strong>
@@ -231,27 +221,27 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
           <div id="foodselected" style="margin-top:6px;font-size:13px;color:#444"></div>
         </div>
         <table style="width:100%;border-collapse:collapse;font-size:14px">
-          <tr style="background:#FFE082"><th style="padding:6px;border:1px solid #ddd;text-align:right">מאכל</th><th style="padding:6px;border:1px solid #ddd">מנה</th><th style="padding:6px;border:1px solid #ddd">פחמ׳</th><th style="padding:6px;border:1px solid #ddd;width:100px">כמות</th></tr>
-          <tr class="foodrow" data-name="לחם לבן" data-v="15"><td style="padding:5px;border:1px solid #ddd;text-align:right">🍞 לחם לבן</td><td style="padding:5px;border:1px solid #ddd;text-align:center">פרוסה</td><td style="padding:5px;border:1px solid #ddd;text-align:center">15</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
-          <tr class="foodrow" data-name="לחם מלא" data-v="12"><td style="padding:5px;border:1px solid #ddd;text-align:right">🍞 לחם מלא</td><td style="padding:5px;border:1px solid #ddd;text-align:center">פרוסה</td><td style="padding:5px;border:1px solid #ddd;text-align:center">12</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
-          <tr class="foodrow" data-name="פיתה" data-v="33"><td style="padding:5px;border:1px solid #ddd;text-align:right">🫓 פיתה</td><td style="padding:5px;border:1px solid #ddd;text-align:center">1 בינונית</td><td style="padding:5px;border:1px solid #ddd;text-align:center">33</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
-          <tr class="foodrow" data-name="אורז" data-v="45"><td style="padding:5px;border:1px solid #ddd;text-align:right">🍚 אורז</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">45</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
-          <tr class="foodrow" data-name="פסטה" data-v="43"><td style="padding:5px;border:1px solid #ddd;text-align:right">🍝 פסטה</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">43</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
-          <tr class="foodrow" data-name="קוסקוס" data-v="36"><td style="padding:5px;border:1px solid #ddd;text-align:right">🥘 קוסקוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">36</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
-          <tr class="foodrow" data-name="תפו״א" data-v="26"><td style="padding:5px;border:1px solid #ddd;text-align:right">🥔 תפו״א</td><td style="padding:5px;border:1px solid #ddd;text-align:center">1 בינוני</td><td style="padding:5px;border:1px solid #ddd;text-align:center">26</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
-          <tr class="foodrow" data-name="קורנפלקס" data-v="25"><td style="padding:5px;border:1px solid #ddd;text-align:right">🥣 קורנפלקס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">30 גר׳</td><td style="padding:5px;border:1px solid #ddd;text-align:center">25</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
-          <tr class="foodrow" data-name="בננה" data-v="27"><td style="padding:5px;border:1px solid #ddd;text-align:right">🍌 בננה</td><td style="padding:5px;border:1px solid #ddd;text-align:center">1 בינונית</td><td style="padding:5px;border:1px solid #ddd;text-align:center">27</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
-          <tr class="foodrow" data-name="תפוח" data-v="25"><td style="padding:5px;border:1px solid #ddd;text-align:right">🍎 תפוח</td><td style="padding:5px;border:1px solid #ddd;text-align:center">1 בינוני</td><td style="padding:5px;border:1px solid #ddd;text-align:center">25</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
-          <tr class="foodrow" data-name="תפוז" data-v="15"><td style="padding:5px;border:1px solid #ddd;text-align:right">🍊 תפוז</td><td style="padding:5px;border:1px solid #ddd;text-align:center">1 בינוני</td><td style="padding:5px;border:1px solid #ddd;text-align:center">15</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
-          <tr class="foodrow" data-name="ענבים" data-v="27"><td style="padding:5px;border:1px solid #ddd;text-align:right">🍇 ענבים</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">27</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
-          <tr class="foodrow" data-name="אבטיח" data-v="15"><td style="padding:5px;border:1px solid #ddd;text-align:right">🍉 אבטיח</td><td style="padding:5px;border:1px solid #ddd;text-align:center">פרוסה</td><td style="padding:5px;border:1px solid #ddd;text-align:center">15</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
-          <tr class="foodrow" data-name="מיץ תפוזים" data-v="26"><td style="padding:5px;border:1px solid #ddd;text-align:right">🧃 מיץ תפוזים</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">26</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
-          <tr class="foodrow" data-name="חלב" data-v="12"><td style="padding:5px;border:1px solid #ddd;text-align:right">🥛 חלב</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">12</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
-          <tr class="foodrow" data-name="יוגורט" data-v="15"><td style="padding:5px;border:1px solid #ddd;text-align:right">🥛 יוגורט</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">15</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
-          <tr class="foodrow" data-name="חומוס" data-v="14"><td style="padding:5px;border:1px solid #ddd;text-align:right">🫘 חומוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">100 גר׳</td><td style="padding:5px;border:1px solid #ddd;text-align:center">14</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
-          <tr class="foodrow" data-name="סוכר" data-v="5"><td style="padding:5px;border:1px solid #ddd;text-align:right">🍬 סוכר</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כפית</td><td style="padding:5px;border:1px solid #ddd;text-align:center">5</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
-          <tr class="foodrow" data-name="דבש" data-v="6"><td style="padding:5px;border:1px solid #ddd;text-align:right">🍯 דבש</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כפית</td><td style="padding:5px;border:1px solid #ddd;text-align:center">6</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
-          <tr class="foodrow" data-name="ביסקוויט" data-v="15"><td style="padding:5px;border:1px solid #ddd;text-align:right">🍪 ביסקוויט</td><td style="padding:5px;border:1px solid #ddd;text-align:center">2 יח׳</td><td style="padding:5px;border:1px solid #ddd;text-align:center">15</td><td style="padding:3px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
+          <tr style="background:#e8e8e8"><th style="padding:6px;border:1px solid #ccc;text-align:right">מאכל</th><th style="padding:6px;border:1px solid #ccc">מנה</th><th style="padding:6px;border:1px solid #ccc">פחמ׳</th><th style="padding:6px;border:1px solid #ccc;width:100px">כמות</th></tr>
+          <tr class="foodrow" data-name="לחם לבן" data-v="15"><td style="padding:5px;border:1px solid #ddd;text-align:right">לחם לבן</td><td style="padding:5px;border:1px solid #ddd;text-align:center">פרוסה</td><td style="padding:5px;border:1px solid #ddd;text-align:center">15</td><td style="padding:5px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
+          <tr class="foodrow" data-name="לחם מלא" data-v="12"><td style="padding:5px;border:1px solid #ddd;text-align:right">לחם מלא</td><td style="padding:5px;border:1px solid #ddd;text-align:center">פרוסה</td><td style="padding:5px;border:1px solid #ddd;text-align:center">12</td><td style="padding:5px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
+          <tr class="foodrow" data-name="פיתה" data-v="33"><td style="padding:5px;border:1px solid #ddd;text-align:right">פיתה</td><td style="padding:5px;border:1px solid #ddd;text-align:center">1 בינונית</td><td style="padding:5px;border:1px solid #ddd;text-align:center">33</td><td style="padding:5px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
+          <tr class="foodrow" data-name="אורז מבושל" data-v="45"><td style="padding:5px;border:1px solid #ddd;text-align:right">אורז מבושל</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">45</td><td style="padding:5px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
+          <tr class="foodrow" data-name="פסטה מבושלת" data-v="43"><td style="padding:5px;border:1px solid #ddd;text-align:right">פסטה מבושלת</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">43</td><td style="padding:5px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
+          <tr class="foodrow" data-name="קוסקוס" data-v="36"><td style="padding:5px;border:1px solid #ddd;text-align:right">קוסקוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">36</td><td style="padding:5px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
+          <tr class="foodrow" data-name="תפוח אדמה" data-v="26"><td style="padding:5px;border:1px solid #ddd;text-align:right">תפוח אדמה</td><td style="padding:5px;border:1px solid #ddd;text-align:center">1 בינוני</td><td style="padding:5px;border:1px solid #ddd;text-align:center">26</td><td style="padding:5px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
+          <tr class="foodrow" data-name="קורנפלקס" data-v="25"><td style="padding:5px;border:1px solid #ddd;text-align:right">קורנפלקס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">30 גר׳</td><td style="padding:5px;border:1px solid #ddd;text-align:center">25</td><td style="padding:5px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
+          <tr class="foodrow" data-name="בננה" data-v="27"><td style="padding:5px;border:1px solid #ddd;text-align:right">בננה</td><td style="padding:5px;border:1px solid #ddd;text-align:center">1 בינונית</td><td style="padding:5px;border:1px solid #ddd;text-align:center">27</td><td style="padding:5px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
+          <tr class="foodrow" data-name="תפוח" data-v="25"><td style="padding:5px;border:1px solid #ddd;text-align:right">תפוח</td><td style="padding:5px;border:1px solid #ddd;text-align:center">1 בינוני</td><td style="padding:5px;border:1px solid #ddd;text-align:center">25</td><td style="padding:5px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
+          <tr class="foodrow" data-name="תפוז" data-v="15"><td style="padding:5px;border:1px solid #ddd;text-align:right">תפוז</td><td style="padding:5px;border:1px solid #ddd;text-align:center">1 בינוני</td><td style="padding:5px;border:1px solid #ddd;text-align:center">15</td><td style="padding:5px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
+          <tr class="foodrow" data-name="ענבים" data-v="27"><td style="padding:5px;border:1px solid #ddd;text-align:right">ענבים</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">27</td><td style="padding:5px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
+          <tr class="foodrow" data-name="אבטיח" data-v="15"><td style="padding:5px;border:1px solid #ddd;text-align:right">אבטיח</td><td style="padding:5px;border:1px solid #ddd;text-align:center">פרוסה</td><td style="padding:5px;border:1px solid #ddd;text-align:center">15</td><td style="padding:5px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
+          <tr class="foodrow" data-name="מיץ תפוזים" data-v="26"><td style="padding:5px;border:1px solid #ddd;text-align:right">מיץ תפוזים</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">26</td><td style="padding:5px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
+          <tr class="foodrow" data-name="חלב" data-v="12"><td style="padding:5px;border:1px solid #ddd;text-align:right">חלב</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">12</td><td style="padding:5px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
+          <tr class="foodrow" data-name="יוגורט" data-v="15"><td style="padding:5px;border:1px solid #ddd;text-align:right">יוגורט</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">15</td><td style="padding:5px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
+          <tr class="foodrow" data-name="חומוס" data-v="14"><td style="padding:5px;border:1px solid #ddd;text-align:right">חומוס</td><td style="padding:5px;border:1px solid #ddd;text-align:center">100 גר׳</td><td style="padding:5px;border:1px solid #ddd;text-align:center">14</td><td style="padding:5px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
+          <tr class="foodrow" data-name="סוכר" data-v="5"><td style="padding:5px;border:1px solid #ddd;text-align:right">סוכר</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כפית</td><td style="padding:5px;border:1px solid #ddd;text-align:center">5</td><td style="padding:5px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
+          <tr class="foodrow" data-name="דבש" data-v="6"><td style="padding:5px;border:1px solid #ddd;text-align:right">דבש</td><td style="padding:5px;border:1px solid #ddd;text-align:center">כפית</td><td style="padding:5px;border:1px solid #ddd;text-align:center">6</td><td style="padding:5px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
+          <tr class="foodrow" data-name="ביסקוויט" data-v="15"><td style="padding:5px;border:1px solid #ddd;text-align:right">ביסקוויט</td><td style="padding:5px;border:1px solid #ddd;text-align:center">2 יחידות</td><td style="padding:5px;border:1px solid #ddd;text-align:center">15</td><td style="padding:5px;border:1px solid #ddd;text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button></td></tr>
         </table>
         <div id="customfoods"></div>
         <div style="margin-top:10px;padding:10px;background:#f8f8f8;border-radius:8px">
@@ -263,9 +253,14 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
             <button id="addfoodbtn" style="padding:6px 12px;background:#1E4FA8;color:#fff;border:none;border-radius:6px;font-size:13px;cursor:pointer">הוסף</button>
           </div>
         </div>
+
       </div>
     </div>
-
+    <div id="carbdemo" style="background:#FFEBEE;border:2px solid #C62828;border-radius:10px;padding:16px;margin-top:14px;text-align:center">
+      <div style="font-size:28px;margin-bottom:6px">⚠️</div>
+      <div style="font-size:18px;font-weight:bold;color:#C62828;margin-bottom:6px">גרסת הדגמה בלבד</div>
+      <div style="font-size:15px;color:#444;line-height:1.5">אין להתייחס לערכים המוצגים כאן לצורך טיפול כלשהו.<br>יש לפעול אך ורק לפי הנחיות הצוות המטפל.</div>
+    </div>
   </div>
 </section>
 
@@ -500,36 +495,21 @@ function renderDoseScreen(){
 
   const sel=$('#slotsel'); sel.innerHTML='';
   SLOTS.forEach(x=>{
-    if (x.kind==='long') return;
     const b=el('button',null,x.label);
-    b.setAttribute('aria-pressed', x.id===curSlot && foodMode==='meal');
-    b.style.cssText = (x.id===curSlot && foodMode==='meal') ? '' : 'background:#E3F2FD;color:#1565C0;border:2px solid #90CAF9';
-    b.onclick=()=>{
-      foodMode='meal'; setSlot(x.id, true);
-      if (typeof carbModeOn !== 'undefined' && carbModeOn && typeof showMode === 'function'){
-        showMode('carbs');
-      }
-    };
+    b.setAttribute('aria-pressed', x.id===curSlot);
+    b.onclick=()=>{ setSlot(x.id, x.id!==slotNow()); };
     sel.append(b);
   });
-
-  const fs=$('#foodsel'); fs.innerHTML=''; fs.hidden=false;
-  const nfb=el('button',null,'ללא אוכל');
-  nfb.setAttribute('aria-pressed', foodMode==='nofood');
-  nfb.style.cssText = foodMode==='nofood'
-    ? 'width:100%;padding:10px;font-size:17px;font-weight:bold;background:#E53935;color:#fff;border:none;border-radius:10px;cursor:pointer'
-    : 'width:100%;padding:10px;font-size:17px;font-weight:bold;background:#FFCDD2;color:#C62828;border:2px solid #EF9A9A;border-radius:10px;cursor:pointer';
-  nfb.onclick=()=>{
-    foodMode='nofood';
-    // If on a long slot, switch to nearest short slot
-    if (slotBy(curSlot).kind==='long'){
-      const nearest = SLOTS.find(x=>x.kind==='short') || SLOTS[1];
-      setSlot(nearest.id, true);
-    } else {
-      renderDoseScreen(); calc();
-    }
-  };
-  fs.append(nfb);
+  const fs=$('#foodsel'); fs.innerHTML='';
+  if (s.kind==='short'){
+    fs.hidden=false;
+    [['meal','עם אוכל'],['nofood','ללא אוכל']].forEach(([id,lbl])=>{
+      const fb=el('button',null,lbl);
+      fb.setAttribute('aria-pressed', id===foodMode);
+      fb.onclick=()=>{ foodMode=id; renderDoseScreen(); calc(); };
+      fs.append(fb);
+    });
+  } else { fs.hidden=true; foodMode='meal'; }
 
   $('#gluclbl').textContent = s.glucLabel+' (mg/dL)';
 
@@ -1373,49 +1353,31 @@ $('#impjson').onclick=()=>{
     if (v && Number(v) > 0){ TARGET_BG = Number(v); cfg.targetBg = TARGET_BG; saveCfg(); targetDisp.textContent = TARGET_BG; toast('יעד: '+TARGET_BG); }
   });
 
-  // Carb toggle switch
-  const carbToggleEl = document.getElementById('carbtoggle');
-  const carbToggleKnob = document.getElementById('carbtoggle-knob');
-  const carbToggleBg = carbToggleEl?.previousElementSibling;
-  let carbModeOn = localStorage.getItem('sugar:carbMode') === 'on';
-
-  function updateCarbToggle(){
-    if (!carbToggleEl) return;
-    carbToggleEl.checked = carbModeOn;
-    if (carbToggleBg) carbToggleBg.style.background = carbModeOn ? '#FF9800' : '#ccc';
-    if (carbToggleKnob) carbToggleKnob.style.left = carbModeOn ? '26px' : '2px';
-  }
-  updateCarbToggle();
-
-  function showMode(mode){
-    $('#calc').style.display = mode === 'table' ? '' : 'none';
-    $('#carbcalc').style.display = mode === 'carbs' ? '' : 'none';
-  }
-  // Start in table mode
-  showMode('table');
-
-  carbToggleEl?.addEventListener('change', () => {
-    carbModeOn = carbToggleEl.checked;
-    localStorage.setItem('sugar:carbMode', carbModeOn ? 'on' : 'off');
-    updateCarbToggle();
-    // If toggle just turned on, stay on current screen until meal click
-    // If toggle turned off, switch back to table
-    if (!carbModeOn) showMode('table');
+  // Mode toggle
+  document.querySelectorAll('#calcmode button').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('#calcmode button').forEach(x => x.setAttribute('aria-pressed', x === b));
+      const mode = b.dataset.mode;
+      $('#calc').style.display = mode === 'table' ? '' : 'none';
+      $('#carbcalc').style.display = mode === 'carbs' ? '' : 'none';
+    });
   });
 
   // Carb calculation (glucose + carbs = total dose)
   const carbGluc = document.getElementById('carbgluc');
   const carbInput = document.getElementById('carbinput');
-  const carbTotal = document.getElementById('carbresult-total');
-  const carbDetail = document.getElementById('carbresult-detail');
+  const carbResult = document.getElementById('carbresult');
 
   function calcCarbs(){
     if (!carbGluc || !carbInput) return;
     carbGluc.value = carbGluc.value.replace(/[^0-9]/g, '').slice(0, 3);
+    carbInput.value = carbInput.value.replace(/[^0-9.]/g, '').slice(0, 5);
     const gluc = Number(carbGluc.value) || 0;
     const carbs = Number(carbInput.value) || 0;
-    if (!gluc && !carbs){ carbTotal.innerHTML = ''; carbDetail.innerHTML = ''; return; }
+    if (!gluc && !carbs){ carbResult.innerHTML = ''; return; }
+
     const mealDose = carbs > 0 ? Math.ceil(carbs / ICR) : 0;
+
     let corrDose = 0; let corrText = '';
     if (gluc > 0 && cfg && cfg.tables && cfg.tables.length){
       const t = cfg.tables.find(t => t.food === 'meal') || cfg.tables[0];
@@ -1427,55 +1389,30 @@ $('#impjson').onclick=()=>{
         corrText = gluc < min ? `${gluc} מתחת ל-${min} → 0 יח׳` : `${gluc} — אין התאמה בטבלה`;
       }
     }
+
     const total = mealDose + corrDose;
-    if (total <= 0 && !corrText){ carbTotal.innerHTML = ''; carbDetail.innerHTML = ''; return; }
-    // BIG TOTAL
-    let th = `<div style="background:#E8F5E9;border:3px solid #43A047;border-radius:14px;padding:20px;text-align:center">`;
-    th += `<div style="font-size:16px;font-weight:bold;color:#2E7D32;margin-bottom:8px">💉 סה"כ יחידות להזרקה</div>`;
-    th += `<div class="num" style="font-size:64px;color:#1B5E20;font-weight:bold">${total}</div>`;
-    if (mealDose > 0 && corrDose > 0) th += `<div style="font-size:15px;color:#555;margin-top:6px">(${mealDose} ארוחה + ${corrDose} תיקון)</div>`;
-    th += `</div>`;
-    carbTotal.innerHTML = th;
-    // BREAKDOWN
-    let fl = '';
+    if (total <= 0 && !corrText){ carbResult.innerHTML = ''; return; }
+
+    // Gather selected foods for display
+    let foodLines = '';
     document.querySelectorAll('.foodrow').forEach(row => {
       const qty = Number(row.querySelector('.fqty').textContent);
-      if (qty > 0){ const v = Number(row.dataset.v); fl += `<div style="font-size:14px;color:#555;padding:2px 0">• ${row.dataset.name} ×${qty} = ${Math.round(qty*v)} גר׳</div>`; }
+      if (qty > 0){
+        const v = Number(row.dataset.v);
+        foodLines += `<div style="font-size:14px;color:#555;padding:2px 0">• ${row.dataset.name} ×${qty} = ${Math.round(qty*v)} גר׳</div>`;
+      }
     });
-    let dh = `<div class="card" style="background:#FAFAFA;border:1px solid #ddd;text-align:right;padding:16px">`;
-    dh += `<div style="font-size:15px;font-weight:bold;margin-bottom:8px;color:#555">📊 פירוט החישוב</div>`;
-    if (fl) dh += `<div style="margin-bottom:8px;padding:8px;background:#FFF8E1;border-radius:8px;border:1px solid #FFE082"><div style="font-size:14px;font-weight:bold;margin-bottom:4px">🍽️ מאכלים:</div>${fl}</div>`;
-    if (carbs > 0) dh += `<div style="font-size:15px;margin-bottom:4px">🍞 פחמימות: ${carbs} גר׳ ÷ ${ICR} = <strong>${mealDose} יח׳</strong></div>`;
-    if (gluc > 0) dh += `<div style="font-size:15px;margin-bottom:4px">🩸 תיקון סוכר: ${corrText}</div>`;
-    dh += `</div>`;
-    carbDetail.innerHTML = dh;
 
-    // Add "בוצע" button for journal logging
-    if (total > 0){
-      const doneBtn = document.createElement('button');
-      doneBtn.className = 'btn';
-      doneBtn.textContent = 'בוצע';
-      doneBtn.style.cssText = 'width:100%;margin-top:14px;padding:14px;font-size:18px';
-      doneBtn.onclick = () => {
-        // Save to journal like table mode
-        const slot = slotBy(curSlot);
-        const today = new Date().toISOString().slice(0,10);
-        let day = log.find(d => d.date === today);
-        if (!day){ day = {date:today, marks:{}}; log.push(day); }
-        const mk = day.marks[curSlot] || {};
-        mk.glucose = gluc || undefined;
-        mk.rapid = total;
-        mk.food = 'meal';
-        mk.carbMode = true;
-        mk.carbs = carbs;
-        mk.ts = new Date().toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'});
-        day.marks[curSlot] = mk;
-        saveLog();
-        renderSaved(slot.label + ' · ' + mk.ts);
-        toast('נרשם — ' + slot.label + ' (פחמימות)');
-      };
-      carbDetail.appendChild(doneBtn);
-    }
+    let html = `<div class="dose" style="border:2px solid var(--pen);text-align:right;padding:20px">`;
+    html += `<div class="who" style="text-align:center;margin-bottom:12px">חישוב מנה כוללת</div>`;
+    if (foodLines) html += `<div style="margin-bottom:10px;padding:8px;background:#FAFAFA;border-radius:8px;border:1px solid #e0e0e0"><div style="font-size:15px;font-weight:bold;margin-bottom:4px">🍽️ מאכלים שנבחרו:</div>${foodLines}</div>`;
+    if (carbs > 0) html += `<div style="font-size:17px;margin-bottom:6px">🍞 סה"כ פחמימות: ${carbs} גר׳ ÷ ${ICR} = <strong>${mealDose} יח׳</strong></div>`;
+    if (gluc > 0) html += `<div style="font-size:17px;margin-bottom:6px">🩸 תיקון סוכר: ${corrText}</div>`;
+    html += `<hr style="margin:12px 0;border-color:#ddd">`;
+    html += `<div style="text-align:center"><div class="units num" style="font-size:54px">${total}</div><div class="unitlbl">יחידות סה"כ</div></div>`;
+    if (mealDose > 0 && corrDose > 0) html += `<div style="text-align:center;margin-top:6px;font-size:15px;color:#666">(${mealDose} ארוחה + ${corrDose} תיקון)</div>`;
+    html += `</div>`;
+    carbResult.innerHTML = html;
   }
 
   if (carbGluc) carbGluc.addEventListener('input', calcCarbs);
@@ -1488,14 +1425,9 @@ $('#impjson').onclick=()=>{
     foodToggle.addEventListener('click', () => {
       const open = foodList.style.display !== 'none';
       foodList.style.display = open ? 'none' : '';
-      foodToggle.textContent = open ? '🍽️ בחר מאכלים בארוחתך ▼' : '🍽️ סגור רשימת מאכלים ▲'
+      foodToggle.textContent = open ? '📋 בחר מאכלים מהטבלה ▾' : '📋 בחר מאכלים מהטבלה ▴';
     });
   }
-
-  // Scroll to food table button
-  document.getElementById('scrolltofood')?.addEventListener('click', () => {
-    document.getElementById('foodtable')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
 
   // Food +/- quantity selectors (0.5 increments)
   function updateFoodCart(){
@@ -1547,28 +1479,6 @@ $('#impjson').onclick=()=>{
   const K_FOODS = 'sugar:customFoods';
   let customFoods = JSON.parse(localStorage.getItem(K_FOODS) || '[]');
 
-  // Auto-detect emoji for food name
-  function foodEmoji(name){
-    const m = [
-      [/לחם|חלה|באגט|טוסט/,'🍞'],[/פיתה|לאפה|טורטייה/,'🫓'],[/אורז|ריזוטו/,'🍚'],
-      [/פסטה|ספגטי|אטריות|פתיתים/,'🍝'],[/תפו.א|צ.יפס/,'🥔'],[/בננה/,'🍌'],
-      [/תפוח(?!.*אדמה)/,'🍎'],[/תפוז|קלמנטינה|הדר/,'🍊'],[/ענב/,'🍇'],[/אבטיח/,'🍉'],
-      [/מיץ/,'🧃'],[/חלב|לבן/,'🥛'],[/יוגורט|דנונה/,'🥛'],[/גבינ/,'🧀'],
-      [/ביצ|חביתה|שקשוקה/,'🥚'],[/עוף|שניצל|נקניק|הודו/,'🍗'],[/בשר|המבורגר|קבב/,'🥩'],
-      [/דג|סלמון|טונה|סושי/,'🐟'],[/סלט|ירק|מלפפון|עגבני/,'🥗'],
-      [/מרק/,'🍲'],[/פיצה/,'🍕'],[/חומוס|שעועית|עדש|פלאפל/,'🫘'],
-      [/שוקולד|ממרח/,'🍫'],[/עוגה|עוגת|מאפין|קרואסון/,'🧁'],[/ביסקוויט|עוגי/,'🍪'],
-      [/גלידה/,'🍦'],[/סוכר|ממתק|סוכרי/,'🍬'],[/דבש/,'🍯'],[/קפה/,'☕'],
-      [/תמר|צימוק/,'🫘'],[/מנגו|אננס|קיווי|אגס|שזיף|אפרסק|נקטרינ/,'🍑'],
-      [/תות|דובדבן/,'🍓'],[/בורקס|סמבוסק|מלוואח|ג.חנון/,'🥟'],
-      [/קורנפלקס|גרנולה|שיבולת/,'🥣'],[/לחמני/,'🥖'],[/מצה|קרקר/,'🫓'],
-      [/תירס/,'🌽'],[/פופקורן/,'🍿'],[/במבה|ביסלי|חטיף/,'🍿'],
-      [/בירה/,'🍺'],[/קולה|משקה/,'🥤'],[/ריבה/,'🍓']
-    ];
-    for (const [re, emoji] of m) if (re.test(name)) return emoji;
-    return '🍽️';
-  }
-
   function renderCustomFoods(){
     const c = document.getElementById('customfoods');
     if (!c) return;
@@ -1577,7 +1487,7 @@ $('#impjson').onclick=()=>{
     customFoods.forEach((f, i) => {
       const tr = document.createElement('tr');
       tr.className = 'foodrow'; tr.dataset.name = f.name; tr.dataset.v = f.carbs;
-      tr.innerHTML = `<td ${td};text-align:right">${foodEmoji(f.name)} ${f.name}</td><td ${td};text-align:center">${f.serving}</td><td ${td};text-align:center">${f.carbs}</td><td ${td};text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button><button class="fbtn" style="color:#C62828;margin-right:4px;font-size:14px" data-del="${i}">✕</button></td>`;
+      tr.innerHTML = `<td ${td};text-align:right">${f.name}</td><td ${td};text-align:center">${f.serving}</td><td ${td};text-align:center">${f.carbs}</td><td ${td};text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button><button class="fbtn" style="color:#C62828;margin-right:4px;font-size:14px" data-del="${i}">✕</button></td>`;
       // Insert into the table before closing
       const table = document.querySelector('#foodtable table');
       if (table) table.appendChild(tr);
@@ -1597,93 +1507,17 @@ $('#impjson').onclick=()=>{
   }
   renderCustomFoods();
 
-  // --- Food database for autocomplete ---
-  const FOOD_DB = [
-    {n:'שניצל',s:'100 גר׳',c:12},{n:'קציצות בשר',s:'2 יח׳',c:8},{n:'המבורגר (לחמנייה)',s:'1',c:30},
-    {n:'כבד עוף',s:'100 גר׳',c:3},{n:'עוף צלוי',s:'100 גר׳',c:0},{n:'דג אפוי',s:'100 גר׳',c:0},
-    {n:'ביצה',s:'1',c:1},{n:'חביתה',s:'2 ביצים',c:2},{n:'שקשוקה',s:'מנה',c:12},
-    {n:'חלה',s:'פרוסה',c:20},{n:'לחמנייה',s:'1',c:25},{n:'באגט',s:'פרוסה',c:15},
-    {n:'מצה',s:'1',c:27},{n:'קרקר',s:'3 יח׳',c:15},{n:'לאפה',s:'1',c:40},
-    {n:'בורקס גבינה',s:'1',c:25},{n:'בורקס תפו״א',s:'1',c:30},{n:'סמבוסק',s:'2 יח׳',c:20},
-    {n:'מלוואח',s:'1',c:45},{n:'ג׳חנון',s:'1',c:50},{n:'לחוח',s:'1',c:35},
-    {n:'אורז עם עדשים',s:'כוס',c:50},{n:'מג׳דרה',s:'כוס',c:48},{n:'בורגול',s:'כוס',c:34},
-    {n:'פתיתים',s:'כוס',c:40},{n:'תירס',s:'קולח',c:25},{n:'תירס בקופסה',s:'חצי כוס',c:15},
-    {n:'שעועית לבנה',s:'כוס',c:40},{n:'שעועית אדומה',s:'כוס',c:40},{n:'עדשים מבושלים',s:'כוס',c:36},
-    {n:'פלאפל',s:'5 כדורים',c:30},{n:'טחינה',s:'2 כפות',c:3},{n:'סלט ירקות',s:'מנה',c:6},
-    {n:'מרק עוף עם אטריות',s:'קערה',c:15},{n:'מרק ירקות',s:'קערה',c:12},{n:'מרק עדשים',s:'קערה',c:20},
-    {n:'פיצה',s:'משולש',c:30},{n:'פיצה שלמה',s:'1',c:180},{n:'סושי',s:'6 יח׳',c:30},
-    {n:'אגס',s:'1 בינוני',c:25},{n:'שזיף',s:'3 יח׳',c:15},{n:'אפרסק',s:'1 בינוני',c:15},
-    {n:'נקטרינה',s:'1',c:14},{n:'מנגו',s:'1',c:35},{n:'אננס',s:'פרוסה',c:11},
-    {n:'קיווי',s:'1',c:10},{n:'תמר',s:'3 יח׳',c:30},{n:'צימוקים',s:'30 גר׳',c:24},
-    {n:'תאנה טרייה',s:'2 יח׳',c:16},{n:'רימון',s:'חצי',c:15},{n:'אשכולית',s:'חצי',c:13},
-    {n:'קלמנטינה',s:'2 יח׳',c:18},{n:'דובדבן',s:'כוס',c:20},{n:'תות',s:'כוס',c:12},
-    {n:'גלידה',s:'כדור',c:15},{n:'שוקולד',s:'4 קוביות',c:15},{n:'עוגת שוקולד',s:'פרוסה',c:40},
-    {n:'עוגת גבינה',s:'פרוסה',c:30},{n:'קרואסון',s:'1',c:26},{n:'מאפין',s:'1',c:35},
-    {n:'דונאט',s:'1',c:30},{n:'וופל',s:'1',c:25},{n:'פנקייק',s:'1',c:15},
-    {n:'גרנולה',s:'חצי כוס',c:30},{n:'שיבולת שועל',s:'חצי כוס',c:27},{n:'חלב שוקו',s:'כוס',c:25},
-    {n:'קפה עם סוכר',s:'כוס',c:5},{n:'מיץ תפוחים',s:'כוס',c:28},{n:'קולה',s:'פחית',c:39},
-    {n:'קולה זירו',s:'פחית',c:0},{n:'בירה',s:'פחית',c:13},{n:'מיץ גזר',s:'כוס',c:22},
-    {n:'סמוזי פירות',s:'כוס',c:35},{n:'לבן',s:'כוס',c:8},{n:'קוטג׳',s:'100 גר׳',c:3},
-    {n:'גבינה לבנה',s:'100 גר׳',c:3},{n:'גבינה צהובה',s:'פרוסה',c:0},{n:'שמנת חמוצה',s:'כפית',c:1},
-    {n:'ממרח שוקולד',s:'כפית',c:8},{n:'ריבה',s:'כפית',c:7},{n:'חמאת בוטנים',s:'כפית',c:3},
-    {n:'צ׳יפס',s:'מנה קטנה',c:30},{n:'פופקורן',s:'כוס',c:6},{n:'במבה',s:'שקית',c:12},
-    {n:'ביסלי',s:'שקית',c:15},{n:'קרקר אורז',s:'2 יח׳',c:14},{n:'חטיף אנרגיה',s:'1',c:20},
-    {n:'סופגנייה',s:'1',c:35},{n:'רוגלך',s:'2 יח׳',c:20},{n:'עוגיות חמאה',s:'3 יח׳',c:18}
-  ];
-
-  // Autocomplete for add-food
-  const nameInput = document.getElementById('newfood-name');
-  const servInput = document.getElementById('newfood-serving');
-  const carbsInput = document.getElementById('newfood-carbs');
-  let acDiv = null;
-
-  function closeAC(){ if(acDiv){ acDiv.remove(); acDiv = null; } }
-
-  if (nameInput) {
-    nameInput.addEventListener('input', () => {
-      closeAC();
-      const q = nameInput.value.trim();
-      if (q.length < 1) return;
-      const matches = FOOD_DB.filter(f => f.n.includes(q)).slice(0, 8);
-      if (!matches.length) return;
-      acDiv = document.createElement('div');
-      acDiv.style.cssText = 'position:absolute;z-index:99;background:#fff;border:1px solid #ccc;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.15);max-height:200px;overflow-y:auto;left:0;right:0;';
-      nameInput.parentElement.style.position = 'relative';
-      matches.forEach(f => {
-        const d = document.createElement('div');
-        d.style.cssText = 'padding:10px 12px;cursor:pointer;border-bottom:1px solid #eee;font-size:15px;';
-        d.innerHTML = `<strong>${f.n}</strong> <span style="color:#888;font-size:13px">${f.s} · ${f.c} גר׳</span>`;
-        d.addEventListener('click', () => {
-          nameInput.value = f.n;
-          servInput.value = f.s;
-          carbsInput.value = f.c;
-          closeAC();
-        });
-        d.addEventListener('touchstart', () => {
-          nameInput.value = f.n;
-          servInput.value = f.s;
-          carbsInput.value = f.c;
-          closeAC();
-        });
-        acDiv.appendChild(d);
-      });
-      nameInput.parentElement.appendChild(acDiv);
-    });
-    document.addEventListener('click', e => { if (!nameInput.contains(e.target) && !(acDiv && acDiv.contains(e.target))) closeAC(); });
-  }
-
   // Add food button
   document.getElementById('addfoodbtn')?.addEventListener('click', () => {
-    const name = nameInput.value.trim();
-    const serving = servInput.value.trim();
-    const carbs = Number(carbsInput.value);
+    const name = document.getElementById('newfood-name').value.trim();
+    const serving = document.getElementById('newfood-serving').value.trim();
+    const carbs = Number(document.getElementById('newfood-carbs').value);
     if (!name || !carbs){ toast('הזן שם ופחמימות'); return; }
     customFoods.push({ name, serving: serving || '1 מנה', carbs });
     localStorage.setItem(K_FOODS, JSON.stringify(customFoods));
-    nameInput.value = '';
-    servInput.value = '';
-    carbsInput.value = '';
-    closeAC();
+    document.getElementById('newfood-name').value = '';
+    document.getElementById('newfood-serving').value = '';
+    document.getElementById('newfood-carbs').value = '';
     // Clear and re-render
     customFoods.forEach(() => { const last = document.querySelector('#foodtable table tr:last-child'); if(last && last.classList.contains('foodrow')) last.remove(); });
     renderCustomFoods();
