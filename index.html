@@ -1371,14 +1371,12 @@ $('#impjson').onclick=()=>{
     if (v && Number(v) > 0){ TARGET_BG = Number(v); cfg.targetBg = TARGET_BG; saveCfg(); targetDisp.textContent = TARGET_BG; toast('יעד: '+TARGET_BG); }
   });
 
-  // Carb confirm checkbox
+  // Carb confirm checkbox (visual only, no mode switch yet)
   const carbCheck = document.getElementById('carbcheck');
   const carbConfirmBox = document.getElementById('carbconfirm');
   if (carbCheck) {
     carbCheck.addEventListener('change', () => {
       const on = carbCheck.checked;
-      $('#calc').style.display = on ? 'none' : '';
-      $('#carbcalc').style.display = on ? '' : 'none';
       carbConfirmBox.style.background = on ? '#B2DFDB' : '#E0F2F1';
       carbConfirmBox.style.borderColor = on ? '#00897B' : '#26A69A';
     });
