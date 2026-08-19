@@ -496,19 +496,31 @@ function renderDoseScreen(){
 
   const sel=$('#slotsel'); sel.innerHTML='';
   SLOTS.forEach(x=>{
-    if (x.kind==='long') return; // skip basal slots from this row
+    if (x.kind==='long') return;
     const b=el('button',null,x.label);
     b.setAttribute('aria-pressed', x.id===curSlot && foodMode==='meal');
-    b.onclick=()=>{ foodMode='meal'; setSlot(x.id, x.id!==slotNow()); };
+    b.style.cssText = (x.id===curSlot && foodMode==='meal') ? '' : 'background:#E3F2FD;color:#1565C0;border:2px solid #90CAF9';
+    b.onclick=()=>{ foodMode='meal'; setSlot(x.id, true); };
     sel.append(b);
   });
-  // Add 'ללא אוכל' button in same row
+
+  const fs=$('#foodsel'); fs.innerHTML=''; fs.hidden=false;
   const nfb=el('button',null,'ללא אוכל');
   nfb.setAttribute('aria-pressed', foodMode==='nofood');
-  nfb.style.cssText = foodMode==='nofood' ? 'background:#FF7043;color:#fff;border-color:#FF7043' : '';
-  nfb.onclick=()=>{ foodMode='nofood'; renderDoseScreen(); calc(); };
-  sel.append(nfb);
-  const fs=$('#foodsel'); fs.innerHTML=''; fs.hidden=true;
+  nfb.style.cssText = foodMode==='nofood'
+    ? 'width:100%;padding:10px;font-size:17px;font-weight:bold;background:#E53935;color:#fff;border:none;border-radius:10px;cursor:pointer'
+    : 'width:100%;padding:10px;font-size:17px;font-weight:bold;background:#FFCDD2;color:#C62828;border:2px solid #EF9A9A;border-radius:10px;cursor:pointer';
+  nfb.onclick=()=>{
+    foodMode='nofood';
+    // If on a long slot, switch to nearest short slot
+    if (slotBy(curSlot).kind==='long'){
+      const nearest = SLOTS.find(x=>x.kind==='short') || SLOTS[1];
+      setSlot(nearest.id, true);
+    } else {
+      renderDoseScreen(); calc();
+    }
+  };
+  fs.append(nfb);
 
   $('#gluclbl').textContent = s.glucLabel+' (mg/dL)';
 
