@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="he" dir="rtl"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -171,10 +171,10 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
 <section class="screen" id="s-dose">
   <div id="lockcard"></div>
 
-  <!-- Mode toggle -->
-  <div class="seg" id="calcmode" style="margin-bottom:0">
-    <button aria-pressed="true" data-mode="table" style="flex:1">🔢 לפי טבלה</button>
-    <button aria-pressed="false" data-mode="carbs" style="flex:1">🍞 לפי פחמימות</button>
+  <!-- Carb confirm checkbox -->
+  <div id="carbconfirm" style="background:#E0F2F1;border:2px solid #26A69A;border-radius:10px;padding:12px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:10px" onclick="var c=document.getElementById('carbcheck');c.checked=!c.checked;c.dispatchEvent(new Event('change'))">
+    <input type="checkbox" id="carbcheck" onclick="event.stopPropagation()" style="width:22px;height:22px;accent-color:#00897B;cursor:pointer;flex-shrink:0">
+    <span style="font-size:14px;color:#004D40;line-height:1.4">טבלת פחמימות מאושרת ע״י הצוות, עודכנה ביישום, ואני רוצה לחשב פחמימות</span>
   </div>
 
   <!-- TABLE MODE (existing) -->
@@ -1371,15 +1371,18 @@ $('#impjson').onclick=()=>{
     if (v && Number(v) > 0){ TARGET_BG = Number(v); cfg.targetBg = TARGET_BG; saveCfg(); targetDisp.textContent = TARGET_BG; toast('יעד: '+TARGET_BG); }
   });
 
-  // Mode toggle
-  document.querySelectorAll('#calcmode button').forEach(b => {
-    b.addEventListener('click', () => {
-      document.querySelectorAll('#calcmode button').forEach(x => x.setAttribute('aria-pressed', x === b));
-      const mode = b.dataset.mode;
-      $('#calc').style.display = mode === 'table' ? '' : 'none';
-      $('#carbcalc').style.display = mode === 'carbs' ? '' : 'none';
+  // Carb confirm checkbox
+  const carbCheck = document.getElementById('carbcheck');
+  const carbConfirmBox = document.getElementById('carbconfirm');
+  if (carbCheck) {
+    carbCheck.addEventListener('change', () => {
+      const on = carbCheck.checked;
+      $('#calc').style.display = on ? 'none' : '';
+      $('#carbcalc').style.display = on ? '' : 'none';
+      carbConfirmBox.style.background = on ? '#B2DFDB' : '#E0F2F1';
+      carbConfirmBox.style.borderColor = on ? '#00897B' : '#26A69A';
     });
-  });
+  }
 
   // Carb calculation (glucose + carbs = total dose)
   const carbGluc = document.getElementById('carbgluc');
