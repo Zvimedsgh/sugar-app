@@ -495,12 +495,11 @@ function renderDoseScreen(){
 
   const sel=$('#slotsel'); sel.innerHTML='';
   SLOTS.forEach(x=>{
-    if (x.kind==='long') return;
     const b=el('button',null,x.label);
-    const active = x.id===curSlot && foodMode==='meal';
+    const active = x.id===curSlot && (x.kind==='long' || foodMode==='meal');
     b.setAttribute('aria-pressed', active);
-    if (!active) b.style.cssText='background:#E3F2FD;color:#1565C0;border:2px solid #90CAF9';
-    b.onclick=()=>{ foodMode='meal'; setSlot(x.id, true); };
+    if (!active && x.kind==='short') b.style.cssText='background:#E3F2FD;color:#1565C0;border:2px solid #90CAF9';
+    b.onclick=()=>{ if(x.kind==='short') foodMode='meal'; setSlot(x.id, true); };
     sel.append(b);
   });
   const fs=$('#foodsel'); fs.innerHTML=''; fs.hidden=false;
