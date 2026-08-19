@@ -517,7 +517,7 @@ function renderDoseScreen(){
   });
   sel.append(mealRow);
   const fs=$('#foodsel'); fs.innerHTML=''; fs.hidden=false;
-  const nfb=el('button',null, foodMode==='nofood' ? 'לפני אוכל' : 'ללא אוכל');
+  const nfb=el('button',null, foodMode==='nofood' ? 'ללא אוכל' : 'לפני אוכל');
   nfb.setAttribute('aria-pressed', foodMode==='nofood');
   nfb.style.cssText = foodMode==='nofood'
     ? 'width:100%;padding:10px;font-size:17px;font-weight:bold;background:#E53935;color:#fff;border:none;border-radius:10px;cursor:pointer'
