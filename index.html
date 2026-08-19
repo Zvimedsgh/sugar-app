@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="he" dir="rtl"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -1441,6 +1441,11 @@ $('#impjson').onclick=()=>{
       const on = carbCheck.checked;
       carbConfirmBox.style.background = on ? '#B2DFDB' : '#E0F2F1';
       carbConfirmBox.style.borderColor = on ? '#00897B' : '#26A69A';
+      const demo = document.getElementById('carbdemo');
+      if (demo) {
+        demo.style.display = on ? 'none' : '';
+        if (!on) { demo.scrollIntoView({behavior:'smooth',block:'center'}); }
+      }
     });
   }
 
