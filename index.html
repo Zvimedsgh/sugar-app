@@ -216,7 +216,10 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
     </div>
 
     <div class="card" id="foodtable">
-      <h2 style="cursor:pointer" id="foodtoggle">📋 בחר מאכלים מהטבלה ▴</h2>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <h2 style="cursor:pointer;margin:0;flex-shrink:0" id="foodtoggle">📋 בחר מאכלים מהטבלה ▴</h2>
+        <div style="flex:1;min-width:120px"><input id="foodsearch" type="text" placeholder="🔍 חיפוש מאכל..." style="width:100%;padding:6px 10px;border:1px solid #ccc;border-radius:8px;font-size:14px" autocomplete="off"></div>
+      </div>
       <div id="foodlist">
         <div id="foodcart" style="display:none!important">
           <div style="display:flex;justify-content:space-between;align-items:center">
@@ -1512,6 +1515,28 @@ $('#impjson').onclick=()=>{
       const open = foodList.style.display !== 'none';
       foodList.style.display = open ? 'none' : '';
       foodToggle.textContent = open ? '📋 בחר מאכלים מהטבלה ▾' : '📋 בחר מאכלים מהטבלה ▴';
+    });
+  }
+
+  // Food search filter
+  const foodSearch = document.getElementById('foodsearch');
+  if (foodSearch) {
+    foodSearch.addEventListener('input', () => {
+      const q = foodSearch.value.trim();
+      document.querySelectorAll('.foodrow').forEach(row => {
+        row.style.display = !q || row.dataset.name.includes(q) ? '' : 'none';
+      });
+      // Show/hide category headers based on visible rows after them
+      document.querySelectorAll('#foodtable table tr[style*="background"]').forEach(cat => {
+        let next = cat.nextElementSibling;
+        let hasVisible = false;
+        while (next && !next.style.background) {
+          if (next.classList.contains('foodrow') && next.style.display !== 'none') hasVisible = true;
+          next = next.nextElementSibling;
+          if (next && next.style.background) break;
+        }
+        cat.style.display = !q || hasVisible ? '' : 'none';
+      });
     });
   }
 
