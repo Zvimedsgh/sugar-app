@@ -496,19 +496,19 @@ function renderDoseScreen(){
 
   const sel=$('#slotsel'); sel.innerHTML='';
   SLOTS.forEach(x=>{
+    if (x.kind==='long') return; // skip basal slots from this row
     const b=el('button',null,x.label);
     b.setAttribute('aria-pressed', x.id===curSlot && foodMode==='meal');
     b.onclick=()=>{ foodMode='meal'; setSlot(x.id, x.id!==slotNow()); };
     sel.append(b);
   });
-  const fs=$('#foodsel'); fs.innerHTML='';
-  if (s.kind==='short'){
-    fs.hidden=false;
-    const fb=el('button',null,'ללא אוכל');
-    fb.setAttribute('aria-pressed', foodMode==='nofood');
-    fb.onclick=()=>{ foodMode = foodMode==='nofood' ? 'meal' : 'nofood'; renderDoseScreen(); calc(); };
-    fs.append(fb);
-  } else { fs.hidden=true; foodMode='meal'; }
+  // Add 'ללא אוכל' button in same row
+  const nfb=el('button',null,'ללא אוכל');
+  nfb.setAttribute('aria-pressed', foodMode==='nofood');
+  nfb.style.cssText = foodMode==='nofood' ? 'background:#FF7043;color:#fff;border-color:#FF7043' : '';
+  nfb.onclick=()=>{ foodMode='nofood'; renderDoseScreen(); calc(); };
+  sel.append(nfb);
+  const fs=$('#foodsel'); fs.innerHTML=''; fs.hidden=true;
 
   $('#gluclbl').textContent = s.glucLabel+' (mg/dL)';
 
