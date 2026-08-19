@@ -500,7 +500,7 @@ function renderDoseScreen(){
   if (longSlot){
     const lb=el('button',null,longSlot.label);
     lb.setAttribute('aria-pressed', longSlot.id===curSlot);
-    lb.style.cssText='width:100%;margin-bottom:6px';
+    lb.style.cssText='flex:1 1 100%;margin-bottom:2px';
     lb.onclick=()=>{ setSlot(longSlot.id, true); };
     sel.append(lb);
   }
@@ -511,7 +511,7 @@ function renderDoseScreen(){
     const b=el('button',null,x.label);
     const active = x.id===curSlot && foodMode==='meal';
     b.setAttribute('aria-pressed', active);
-    b.style.cssText = active ? 'flex:1' : 'flex:1;background:'+pastels[x.id];
+    b.style.cssText = active ? 'flex:1 1 30%' : 'flex:1 1 30%;background:'+pastels[x.id];
     b.onclick=()=>{ foodMode='meal'; setSlot(x.id, true); };
     mealRow.append(b);
   });
