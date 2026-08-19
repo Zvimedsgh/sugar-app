@@ -171,6 +171,10 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
 <section class="screen" id="s-dose">
   <div id="lockcard"></div>
 
+  <!-- Table mode header -->
+  <div style="background:#E3F2FD;border:2px solid #1E88E5;border-radius:10px;padding:10px;margin-bottom:8px;text-align:center">
+    <span style="font-size:17px;font-weight:bold;color:#1565C0">🔢 לפי טבלה</span>
+  </div>
   <!-- Carb confirm checkbox -->
   <div id="carbconfirm" style="background:#E0F2F1;border:2px solid #26A69A;border-radius:10px;padding:12px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:10px" onclick="var c=document.getElementById('carbcheck');c.checked=!c.checked;c.dispatchEvent(new Event('change'))">
     <input type="checkbox" id="carbcheck" onclick="event.stopPropagation()" style="width:22px;height:22px;accent-color:#00897B;cursor:pointer;flex-shrink:0">
