@@ -494,14 +494,28 @@ function renderDoseScreen(){
   nb.append(R);
 
   const sel=$('#slotsel'); sel.innerHTML='';
+  const pastels = {m_meal:'#E3F2FD;color:#1565C0;border:2px solid #90CAF9', noon:'#FFF3E0;color:#E65100;border:2px solid #FFCC80', eve:'#F3E5F5;color:#6A1B9A;border:2px solid #CE93D8'};
+  // Row 1: בוקר ארוך full width
+  const longSlot = SLOTS.find(x=>x.kind==='long');
+  if (longSlot){
+    const lb=el('button',null,longSlot.label);
+    lb.setAttribute('aria-pressed', longSlot.id===curSlot);
+    lb.style.cssText='width:100%;margin-bottom:6px';
+    lb.onclick=()=>{ setSlot(longSlot.id, true); };
+    sel.append(lb);
+  }
+  // Row 2: 3 meals
+  const mealRow=el('div'); mealRow.style.cssText='display:flex;gap:6px';
   SLOTS.forEach(x=>{
+    if (x.kind==='long') return;
     const b=el('button',null,x.label);
-    const active = x.id===curSlot && (x.kind==='long' || foodMode==='meal');
+    const active = x.id===curSlot && foodMode==='meal';
     b.setAttribute('aria-pressed', active);
-    if (!active && x.kind==='short') b.style.cssText='background:#E3F2FD;color:#1565C0;border:2px solid #90CAF9';
-    b.onclick=()=>{ if(x.kind==='short') foodMode='meal'; setSlot(x.id, true); };
-    sel.append(b);
+    b.style.cssText = active ? 'flex:1' : 'flex:1;background:'+pastels[x.id];
+    b.onclick=()=>{ foodMode='meal'; setSlot(x.id, true); };
+    mealRow.append(b);
   });
+  sel.append(mealRow);
   const fs=$('#foodsel'); fs.innerHTML=''; fs.hidden=false;
   const nfb=el('button',null,'ללא אוכל');
   nfb.setAttribute('aria-pressed', foodMode==='nofood');
