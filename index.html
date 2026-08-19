@@ -497,8 +497,8 @@ function renderDoseScreen(){
     const lb=el('button',null,longSlot.label);
     lb.setAttribute('aria-pressed', longSlot.id===curSlot);
     lb.style.cssText = longSlot.id===curSlot
-      ? 'width:100%;margin-bottom:2px;background:#FFD54F;color:#E65100;border:2px solid #FF8F00;font-weight:bold'
-      : 'width:100%;margin-bottom:2px;background:#FFF8E1;color:#F57F17;border:2px solid #FFD54F';
+      ? 'width:100%;margin-bottom:2px;background:#66BB6A;color:#fff;border:2px solid #2E7D32;font-weight:bold'
+      : 'width:100%;margin-bottom:2px;background:#E8F5E9;color:#2E7D32;border:2px solid #81C784';
     lb.onclick=()=>{ setSlot(longSlot.id, true); };
     sel.append(lb);
   }
