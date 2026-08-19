@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="he" dir="rtl"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -173,7 +173,7 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
 
   <!-- Table mode header -->
   <div style="background:#E3F2FD;border:2px solid #1E88E5;border-radius:10px;padding:10px;margin-bottom:8px;text-align:center">
-    <span style="font-size:17px;font-weight:bold;color:#1565C0">🔢 לפי טבלה</span>
+    <span id="modeheader" style="font-size:17px;font-weight:bold;color:#1565C0">🔢 לפי טבלה</span>
   </div>
   <!-- Carb confirm checkbox -->
   <div id="carbconfirm" style="background:#E0F2F1;border:2px solid #26A69A;border-radius:10px;padding:12px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:10px" onclick="var c=document.getElementById('carbcheck');c.checked=!c.checked;c.dispatchEvent(new Event('change'))">
@@ -517,7 +517,16 @@ function renderDoseScreen(){
     b.onclick=()=>{
       foodMode='meal'; setSlot(x.id, true);
       var cc=document.getElementById('carbcheck');
-      if(cc && cc.checked){ $('#calc').style.display='none'; $('#carbcalc').style.display=''; }
+      var hdr=document.getElementById('modeheader');
+      var hdrBox=hdr?.parentElement;
+      if(cc && cc.checked){
+        $('#calc').style.display='none'; $('#carbcalc').style.display='';
+        if(hdr){ hdr.textContent='🍞 לפי פחמימות'; hdr.style.color='#00695C'; }
+        if(hdrBox){ hdrBox.style.background='#E0F2F1'; hdrBox.style.borderColor='#00897B'; }
+      } else {
+        if(hdr){ hdr.textContent='🔢 לפי טבלה'; hdr.style.color='#1565C0'; }
+        if(hdrBox){ hdrBox.style.background='#E3F2FD'; hdrBox.style.borderColor='#1E88E5'; }
+      }
     };
     mealRow.append(b);
   });
