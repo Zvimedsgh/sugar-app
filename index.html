@@ -171,10 +171,14 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
 <section class="screen" id="s-dose">
   <div id="lockcard"></div>
 
-  <!-- Mode toggle -->
-  <div class="seg" id="calcmode" style="margin-bottom:0">
-    <button aria-pressed="true" data-mode="table" style="flex:1">🔢 לפי טבלה</button>
-    <button aria-pressed="false" data-mode="carbs" style="flex:1">🍞 לפי פחמימות</button>
+  <!-- Carb toggle row -->
+  <div id="carbtoggle-row" style="display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:#FFF8E1;border:1px solid #FFE082;border-radius:10px;margin-bottom:8px">
+    <span style="font-size:15px;font-weight:bold;color:#E65100">🍞 חישוב לפי פחמימות</span>
+    <label style="position:relative;display:inline-block;width:52px;height:28px;cursor:pointer">
+      <input type="checkbox" id="carbtoggle" style="opacity:0;width:0;height:0">
+      <span style="position:absolute;top:0;left:0;right:0;bottom:0;background:#ccc;border-radius:28px;transition:.3s"></span>
+      <span id="carbtoggle-knob" style="position:absolute;top:2px;left:2px;width:24px;height:24px;background:#fff;border-radius:50%;transition:.3s;box-shadow:0 1px 3px rgba(0,0,0,.3)"></span>
+    </label>
   </div>
 
   <!-- TABLE MODE (existing) -->
@@ -500,7 +504,12 @@ function renderDoseScreen(){
     const b=el('button',null,x.label);
     b.setAttribute('aria-pressed', x.id===curSlot && foodMode==='meal');
     b.style.cssText = (x.id===curSlot && foodMode==='meal') ? '' : 'background:#E3F2FD;color:#1565C0;border:2px solid #90CAF9';
-    b.onclick=()=>{ foodMode='meal'; setSlot(x.id, true); };
+    b.onclick=()=>{
+      foodMode='meal'; setSlot(x.id, true);
+      if (typeof carbModeOn !== 'undefined' && carbModeOn && typeof showMode === 'function'){
+        showMode('carbs');
+      }
+    };
     sel.append(b);
   });
 
@@ -1364,14 +1373,34 @@ $('#impjson').onclick=()=>{
     if (v && Number(v) > 0){ TARGET_BG = Number(v); cfg.targetBg = TARGET_BG; saveCfg(); targetDisp.textContent = TARGET_BG; toast('יעד: '+TARGET_BG); }
   });
 
-  // Mode toggle
-  document.querySelectorAll('#calcmode button').forEach(b => {
-    b.addEventListener('click', () => {
-      document.querySelectorAll('#calcmode button').forEach(x => x.setAttribute('aria-pressed', x === b));
-      const mode = b.dataset.mode;
-      $('#calc').style.display = mode === 'table' ? '' : 'none';
-      $('#carbcalc').style.display = mode === 'carbs' ? '' : 'none';
-    });
+  // Carb toggle switch
+  const carbToggleEl = document.getElementById('carbtoggle');
+  const carbToggleKnob = document.getElementById('carbtoggle-knob');
+  const carbToggleBg = carbToggleEl?.previousElementSibling;
+  let carbModeOn = localStorage.getItem('sugar:carbMode') === 'on';
+
+  function updateCarbToggle(){
+    if (!carbToggleEl) return;
+    carbToggleEl.checked = carbModeOn;
+    if (carbToggleBg) carbToggleBg.style.background = carbModeOn ? '#FF9800' : '#ccc';
+    if (carbToggleKnob) carbToggleKnob.style.left = carbModeOn ? '26px' : '2px';
+  }
+  updateCarbToggle();
+
+  function showMode(mode){
+    $('#calc').style.display = mode === 'table' ? '' : 'none';
+    $('#carbcalc').style.display = mode === 'carbs' ? '' : 'none';
+  }
+  // Start in table mode
+  showMode('table');
+
+  carbToggleEl?.addEventListener('change', () => {
+    carbModeOn = carbToggleEl.checked;
+    localStorage.setItem('sugar:carbMode', carbModeOn ? 'on' : 'off');
+    updateCarbToggle();
+    // If toggle just turned on, stay on current screen until meal click
+    // If toggle turned off, switch back to table
+    if (!carbModeOn) showMode('table');
   });
 
   // Carb calculation (glucose + carbs = total dose)
@@ -1420,6 +1449,33 @@ $('#impjson').onclick=()=>{
     if (gluc > 0) dh += `<div style="font-size:15px;margin-bottom:4px">🩸 תיקון סוכר: ${corrText}</div>`;
     dh += `</div>`;
     carbDetail.innerHTML = dh;
+
+    // Add "בוצע" button for journal logging
+    if (total > 0){
+      const doneBtn = document.createElement('button');
+      doneBtn.className = 'btn';
+      doneBtn.textContent = 'בוצע';
+      doneBtn.style.cssText = 'width:100%;margin-top:14px;padding:14px;font-size:18px';
+      doneBtn.onclick = () => {
+        // Save to journal like table mode
+        const slot = slotBy(curSlot);
+        const today = new Date().toISOString().slice(0,10);
+        let day = log.find(d => d.date === today);
+        if (!day){ day = {date:today, marks:{}}; log.push(day); }
+        const mk = day.marks[curSlot] || {};
+        mk.glucose = gluc || undefined;
+        mk.rapid = total;
+        mk.food = 'meal';
+        mk.carbMode = true;
+        mk.carbs = carbs;
+        mk.ts = new Date().toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'});
+        day.marks[curSlot] = mk;
+        saveLog();
+        renderSaved(slot.label + ' · ' + mk.ts);
+        toast('נרשם — ' + slot.label + ' (פחמימות)');
+      };
+      carbDetail.appendChild(doneBtn);
+    }
   }
 
   if (carbGluc) carbGluc.addEventListener('input', calcCarbs);
