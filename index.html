@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="he" dir="rtl"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -486,22 +486,18 @@ function renderDoseScreen(){
   $('#calc').hidden=false;
 
   const s=slotBy(curSlot);
-  const nb=$('#nowbar'); nb.innerHTML='';
-  const L=el('div'); L.append(el('b',null,s.label)); nb.append(L);
-  const R=el('div'); R.style.textAlign='left';
-  R.append(el('div','t',clock()));
-  R.append(el('div','auto', manualSlot?'נבחר ידנית':'לפי השעה'));
-  nb.append(R);
+  const nb=$('#nowbar'); nb.style.display='none';
 
   const sel=$('#slotsel'); sel.innerHTML=''; sel.style.cssText='display:flex;flex-direction:column;gap:6px';
   const pastels = {m_meal:'#E3F2FD;color:#1565C0;border:2px solid #90CAF9', noon:'#FFF3E0;color:#E65100;border:2px solid #FFCC80', eve:'#F3E5F5;color:#6A1B9A;border:2px solid #CE93D8'};
+  const strongPastels = {m_meal:'background:#90CAF9;color:#0D47A1;border:2px solid #1565C0;font-weight:bold', noon:'background:#FFCC80;color:#BF360C;border:2px solid #E65100;font-weight:bold', eve:'background:#CE93D8;color:#4A148C;border:2px solid #6A1B9A;font-weight:bold'};
   // Row 1: בוקר ארוך full width
   const longSlot = SLOTS.find(x=>x.kind==='long');
   if (longSlot){
     const lb=el('button',null,longSlot.label);
     lb.setAttribute('aria-pressed', longSlot.id===curSlot);
     lb.style.cssText = longSlot.id===curSlot
-      ? 'width:100%;margin-bottom:2px'
+      ? 'width:100%;margin-bottom:2px;background:#FFD54F;color:#E65100;border:2px solid #FF8F00;font-weight:bold'
       : 'width:100%;margin-bottom:2px;background:#FFF8E1;color:#F57F17;border:2px solid #FFD54F';
     lb.onclick=()=>{ setSlot(longSlot.id, true); };
     sel.append(lb);
@@ -513,7 +509,7 @@ function renderDoseScreen(){
     const b=el('button',null,x.label);
     const active = x.id===curSlot && foodMode==='meal';
     b.setAttribute('aria-pressed', active);
-    b.style.cssText = active ? 'flex:1 1 30%' : 'flex:1 1 30%;background:'+pastels[x.id];
+    b.style.cssText = active ? 'flex:1 1 30%;'+strongPastels[x.id] : 'flex:1 1 30%;background:'+pastels[x.id];
     b.onclick=()=>{ foodMode='meal'; setSlot(x.id, true); };
     mealRow.append(b);
   });
