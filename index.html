@@ -493,7 +493,7 @@ function renderDoseScreen(){
   R.append(el('div','auto', manualSlot?'נבחר ידנית':'לפי השעה'));
   nb.append(R);
 
-  const sel=$('#slotsel'); sel.innerHTML='';
+  const sel=$('#slotsel'); sel.innerHTML=''; sel.style.cssText='display:flex;flex-direction:column;gap:6px';
   const pastels = {m_meal:'#E3F2FD;color:#1565C0;border:2px solid #90CAF9', noon:'#FFF3E0;color:#E65100;border:2px solid #FFCC80', eve:'#F3E5F5;color:#6A1B9A;border:2px solid #CE93D8'};
   // Row 1: בוקר ארוך full width
   const longSlot = SLOTS.find(x=>x.kind==='long');
