@@ -197,6 +197,7 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
 
   <!-- CARB MODE (new) -->
   <div id="carbcalc" style="display:none">
+    <button id="backToTable" style="width:100%;padding:10px;font-size:16px;font-weight:bold;background:#E3F2FD;color:#1565C0;border:2px solid #1E88E5;border-radius:10px;cursor:pointer;margin-bottom:10px" onclick="document.getElementById('calc').style.display='';document.getElementById('carbcalc').style.display='none';var h=document.getElementById('modeheader'),b=h.parentElement;h.textContent='🔢 לפי טבלה';h.style.color='#1565C0';b.style.background='#E3F2FD';b.style.borderColor='#1E88E5'">⬅️ חזרה למסך ראשי</button>
     <div class="card" style="background:#F0F4FF;border:2px solid var(--pen);margin-bottom:14px">
       <h2 style="color:var(--pen);margin-bottom:4px">לפי פחמימות</h2>
       <p class="hint" style="margin-bottom:4px">יחס המרה: 1 יח׳ לכל <strong id="icr-display">10</strong> גר׳ <button id="editicr" style="background:none;border:none;font-size:14px;cursor:pointer;padding:2px">✏️</button></p>
