@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="he" dir="rtl"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -497,19 +497,17 @@ function renderDoseScreen(){
   const sel=$('#slotsel'); sel.innerHTML='';
   SLOTS.forEach(x=>{
     const b=el('button',null,x.label);
-    b.setAttribute('aria-pressed', x.id===curSlot);
-    b.onclick=()=>{ setSlot(x.id, x.id!==slotNow()); };
+    b.setAttribute('aria-pressed', x.id===curSlot && foodMode==='meal');
+    b.onclick=()=>{ foodMode='meal'; setSlot(x.id, x.id!==slotNow()); };
     sel.append(b);
   });
   const fs=$('#foodsel'); fs.innerHTML='';
   if (s.kind==='short'){
     fs.hidden=false;
-    [['meal','עם אוכל'],['nofood','ללא אוכל']].forEach(([id,lbl])=>{
-      const fb=el('button',null,lbl);
-      fb.setAttribute('aria-pressed', id===foodMode);
-      fb.onclick=()=>{ foodMode=id; renderDoseScreen(); calc(); };
-      fs.append(fb);
-    });
+    const fb=el('button',null,'ללא אוכל');
+    fb.setAttribute('aria-pressed', foodMode==='nofood');
+    fb.onclick=()=>{ foodMode = foodMode==='nofood' ? 'meal' : 'nofood'; renderDoseScreen(); calc(); };
+    fs.append(fb);
   } else { fs.hidden=true; foodMode='meal'; }
 
   $('#gluclbl').textContent = s.glucLabel+' (mg/dL)';
@@ -1481,6 +1479,28 @@ $('#impjson').onclick=()=>{
   const K_FOODS = 'sugar:customFoods';
   let customFoods = JSON.parse(localStorage.getItem(K_FOODS) || '[]');
 
+  // Auto-detect emoji for food name
+  function foodEmoji(name){
+    const m = [
+      [/לחם|חלה|באגט|טוסט/,'🍞'],[/פיתה|לאפה|טורטייה/,'🫓'],[/אורז|ריזוטו/,'🍚'],
+      [/פסטה|ספגטי|אטריות|פתיתים/,'🍝'],[/תפו.א|צ.יפס/,'🥔'],[/בננה/,'🍌'],
+      [/תפוח(?!.*אדמה)/,'🍎'],[/תפוז|קלמנטינה|הדר/,'🍊'],[/ענב/,'🍇'],[/אבטיח/,'🍉'],
+      [/מיץ/,'🧃'],[/חלב|לבן/,'🥛'],[/יוגורט|דנונה/,'🥛'],[/גבינ/,'🧀'],
+      [/ביצ|חביתה|שקשוקה/,'🥚'],[/עוף|שניצל|נקניק|הודו/,'🍗'],[/בשר|המבורגר|קבב/,'🥩'],
+      [/דג|סלמון|טונה|סושי/,'🐟'],[/סלט|ירק|מלפפון|עגבני/,'🥗'],
+      [/מרק/,'🍲'],[/פיצה/,'🍕'],[/חומוס|שעועית|עדש|פלאפל/,'🫘'],
+      [/שוקולד|ממרח/,'🍫'],[/עוגה|עוגת|מאפין|קרואסון/,'🧁'],[/ביסקוויט|עוגי/,'🍪'],
+      [/גלידה/,'🍦'],[/סוכר|ממתק|סוכרי/,'🍬'],[/דבש/,'🍯'],[/קפה/,'☕'],
+      [/תמר|צימוק/,'🫘'],[/מנגו|אננס|קיווי|אגס|שזיף|אפרסק|נקטרינ/,'🍑'],
+      [/תות|דובדבן/,'🍓'],[/בורקס|סמבוסק|מלוואח|ג.חנון/,'🥟'],
+      [/קורנפלקס|גרנולה|שיבולת/,'🥣'],[/לחמני/,'🥖'],[/מצה|קרקר/,'🫓'],
+      [/תירס/,'🌽'],[/פופקורן/,'🍿'],[/במבה|ביסלי|חטיף/,'🍿'],
+      [/בירה/,'🍺'],[/קולה|משקה/,'🥤'],[/ריבה/,'🍓']
+    ];
+    for (const [re, emoji] of m) if (re.test(name)) return emoji;
+    return '🍽️';
+  }
+
   function renderCustomFoods(){
     const c = document.getElementById('customfoods');
     if (!c) return;
@@ -1489,7 +1509,7 @@ $('#impjson').onclick=()=>{
     customFoods.forEach((f, i) => {
       const tr = document.createElement('tr');
       tr.className = 'foodrow'; tr.dataset.name = f.name; tr.dataset.v = f.carbs;
-      tr.innerHTML = `<td ${td};text-align:right">${f.name}</td><td ${td};text-align:center">${f.serving}</td><td ${td};text-align:center">${f.carbs}</td><td ${td};text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button><button class="fbtn" style="color:#C62828;margin-right:4px;font-size:14px" data-del="${i}">✕</button></td>`;
+      tr.innerHTML = `<td ${td};text-align:right">${foodEmoji(f.name)} ${f.name}</td><td ${td};text-align:center">${f.serving}</td><td ${td};text-align:center">${f.carbs}</td><td ${td};text-align:center"><button class="fbtn fminus">−</button><span class="fqty">0</span><button class="fbtn fplus">+</button><button class="fbtn" style="color:#C62828;margin-right:4px;font-size:14px" data-del="${i}">✕</button></td>`;
       // Insert into the table before closing
       const table = document.querySelector('#foodtable table');
       if (table) table.appendChild(tr);
