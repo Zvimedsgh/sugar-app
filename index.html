@@ -208,10 +208,7 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
         <input id="carbgluc" type="tel" placeholder="הקלד/י רמת הסוכר" autocomplete="off" style="font-family:var(--num);font-size:44px;text-align:center;padding:14px;border:3px solid var(--pen);border-radius:14px;background:#fff">
       </label>
 
-      <label class="fld" style="margin-top:12px">
-        <span style="font-size:18px;font-weight:bold;color:#1E4FA8;text-align:center;margin-bottom:8px">מה ברצונך לאכול כעת?</span>
-        <input id="carbinput" type="tel" placeholder="בחר מהרשימה" autocomplete="off" style="font-family:var(--num);font-size:44px;text-align:center;padding:14px;border:3px solid #FF9800;border-radius:14px;background:#FFF8E1">
-      </label>
+      <input id="carbinput" type="hidden" value="0">
       <div id="carbresult" style="margin-top:14px;text-align:center"></div>
     </div>
 
@@ -1460,7 +1457,7 @@ $('#impjson').onclick=()=>{
     const carbs = Number(carbInput.value) || 0;
     if (!gluc && !carbs){ carbResult.innerHTML = ''; return; }
 
-    const mealDose = carbs > 0 ? Math.ceil(carbs / ICR) : 0;
+    const mealDose = carbs > 0 ? Math.ceil(carbs) : 0;
 
     let corrDose = 0; let corrText = '';
     if (gluc > 0 && cfg && cfg.tables && cfg.tables.length){
@@ -1483,14 +1480,14 @@ $('#impjson').onclick=()=>{
       const qty = Number(row.querySelector('.fqty').textContent);
       if (qty > 0){
         const v = Number(row.dataset.v);
-        foodLines += `<div style="font-size:14px;color:#555;padding:2px 0">• ${row.dataset.name} ×${qty} = ${Math.round(qty*v)} גר׳</div>`;
+        foodLines += `<div style="font-size:14px;color:#555;padding:2px 0">• ${row.dataset.name} ×${qty} = ${qty*v} מנות׳</div>`;
       }
     });
 
     let html = `<div class="dose" style="border:2px solid var(--pen);text-align:right;padding:20px">`;
     html += `<div class="who" style="text-align:center;margin-bottom:12px">חישוב מנה כוללת</div>`;
     if (foodLines) html += `<div style="margin-bottom:10px;padding:8px;background:#FAFAFA;border-radius:8px;border:1px solid #e0e0e0"><div style="font-size:15px;font-weight:bold;margin-bottom:4px">🍽️ מאכלים שנבחרו:</div>${foodLines}</div>`;
-    if (carbs > 0) html += `<div style="font-size:17px;margin-bottom:6px">🍞 סה"כ פחמימות: ${carbs} גר׳ ÷ ${ICR} = <strong>${mealDose} יח׳</strong></div>`;
+    if (carbs > 0) html += `<div style="font-size:17px;margin-bottom:6px">🍞 סה"כ מנות ארוחה: <strong>${mealDose} יח׳</strong></div>`;
     if (gluc > 0) html += `<div style="font-size:17px;margin-bottom:6px">🩸 תיקון סוכר: ${corrText}</div>`;
     html += `<hr style="margin:12px 0;border-color:#ddd">`;
     html += `<div style="text-align:center"><div class="units num" style="font-size:54px">${total}</div><div class="unitlbl">יחידות סה"כ</div></div>`;
