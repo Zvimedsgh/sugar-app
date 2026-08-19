@@ -495,21 +495,28 @@ function renderDoseScreen(){
 
   const sel=$('#slotsel'); sel.innerHTML='';
   SLOTS.forEach(x=>{
+    if (x.kind==='long') return;
     const b=el('button',null,x.label);
-    b.setAttribute('aria-pressed', x.id===curSlot);
-    b.onclick=()=>{ setSlot(x.id, x.id!==slotNow()); };
+    const active = x.id===curSlot && foodMode==='meal';
+    b.setAttribute('aria-pressed', active);
+    if (!active) b.style.cssText='background:#E3F2FD;color:#1565C0;border:2px solid #90CAF9';
+    b.onclick=()=>{ foodMode='meal'; setSlot(x.id, true); };
     sel.append(b);
   });
-  const fs=$('#foodsel'); fs.innerHTML='';
-  if (s.kind==='short'){
-    fs.hidden=false;
-    [['meal','עם אוכל'],['nofood','ללא אוכל']].forEach(([id,lbl])=>{
-      const fb=el('button',null,lbl);
-      fb.setAttribute('aria-pressed', id===foodMode);
-      fb.onclick=()=>{ foodMode=id; renderDoseScreen(); calc(); };
-      fs.append(fb);
-    });
-  } else { fs.hidden=true; foodMode='meal'; }
+  const fs=$('#foodsel'); fs.innerHTML=''; fs.hidden=false;
+  const nfb=el('button',null,'ללא אוכל');
+  nfb.setAttribute('aria-pressed', foodMode==='nofood');
+  nfb.style.cssText = foodMode==='nofood'
+    ? 'width:100%;padding:10px;font-size:17px;font-weight:bold;background:#E53935;color:#fff;border:none;border-radius:10px;cursor:pointer'
+    : 'width:100%;padding:10px;font-size:17px;font-weight:bold;background:#FFCDD2;color:#C62828;border:2px solid #EF9A9A;border-radius:10px;cursor:pointer';
+  nfb.onclick=()=>{
+    foodMode='nofood';
+    if (slotBy(curSlot).kind==='long'){
+      const nearest = SLOTS.find(x=>x.kind==='short') || SLOTS[1];
+      setSlot(nearest.id, true);
+    } else { renderDoseScreen(); calc(); }
+  };
+  fs.append(nfb);
 
   $('#gluclbl').textContent = s.glucLabel+' (mg/dL)';
 
