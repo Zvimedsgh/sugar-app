@@ -165,8 +165,8 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
 
 <header>
   <div style="display:flex;justify-content:space-between;align-items:center">
-    <div style="font-size:10px;color:#999;line-height:1.2">GorenTech<br>WhatsApp:<br>054-6677396<br>V1.19</div>
-    <!-- GorenTech<br>054-6677396<br>V1.19 -->
+    <div style="font-size:10px;color:#999;line-height:1.2">GorenTech<br>WhatsApp:<br>054-6677396<br>V1.20</div>
+    <!-- GorenTech<br>054-6677396<br>V1.20 -->
     <button id="guideBtn" onclick="goTo('s-guide')" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;border-radius:12px;padding:10px 18px;font-size:11px;font-weight:bold;cursor:pointer;box-shadow:0 2px 8px rgba(102,126,234,0.4)">📖 מדריך<br>למשתמש</button>
     <div style="text-align:right">
       <h1 style="margin:0">סוכר ואינסולין <button onclick="location.reload(true)" style="background:none;border:none;font-size:18px;cursor:pointer;vertical-align:middle;padding:4px" title="רענון">⟳</button></h1>
@@ -461,38 +461,129 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
     <button onclick="goTo('s-dose')" style="width:100%;padding:10px;font-size:16px;font-weight:bold;background:#E3F2FD;color:#1565C0;border:2px solid #1E88E5;border-radius:10px;cursor:pointer;margin-bottom:16px">⬅️ חזרה למסך ראשי</button>
 
     <div style="line-height:1.8;font-size:15px">
-      <h3 style="color:#1565C0;border-bottom:2px solid #1565C0;padding-bottom:4px">🏠 מסך ראשי — מינון לפי טבלה</h3>
-      <p><strong>1. בחירת ארוחה:</strong> לחצו על אחד הכפתורים — בוקר, צהריים, ערב.</p>
-      <p><strong>2. לפני אוכל / ללא אוכל:</strong> לחצו כדי לעבור בין המצבים. "ללא אוכל" הוא תיקון סוכר גבוה בלי ארוחה.</p>
-      <p><strong>3. הקלדת סוכר:</strong> הקלידו את רמת הסוכר. המינון <strong>מחושב ונשמר אוטומטית</strong> ביומן.</p>
-      <p><strong>4. הערות:</strong> שדה חופשי לרשום הערות (למשל: כאב ראש, שתייה מתוקה).</p>
 
-      <h3 style="color:#00695C;border-bottom:2px solid #00695C;padding-bottom:4px;margin-top:20px">🍞 מצב פחמימות</h3>
-      <p><strong>1. הפעלה:</strong> סמנו ✓ בתיבה "טבלת פחמימות מאושרת..." ואז לחצו על ארוחה.</p>
-      <p><strong>2. רמת סוכר:</strong> הקלידו את רמת הסוכר במסך הפחמימות.</p>
-      <p><strong>3. בחירת מאכלים:</strong> לחצו על "🍽️ בחירת מאכלים מהטבלה" ובחרו מאכלים עם כפתורי +/−.</p>
-      <p><strong>4. חיפוש:</strong> הקלידו שם מאכל בשדה החיפוש לסינון מהיר.</p>
-      <p><strong>5. חישוב:</strong> המינון מחושב אוטומטית: מנות מזון + תיקון סוכר.</p>
-      <p><strong>6. פרמטרים:</strong> לחצו ✏️ ליד יעד סוכר, ISF, או יחס המרה כדי לשנות.</p>
+      <h3 style="color:#4a148c;border-bottom:2px solid #4a148c;padding-bottom:4px">🔝 כותרת האפליקציה</h3>
+      <p>הכותרת מופיעה בכל המסכים ומכילה:</p>
+      <div style="background:#f5f5f5;border-radius:8px;padding:10px;margin:8px 0">
+        <p style="margin:4px 0">• <strong>⟳ (רענון)</strong> — לחיצה מרעננת את הדף ידנית.</p>
+        <p style="margin:4px 0">• <strong>📖 מדריך למשתמש</strong> — הכפתור הסגול שהביא אותך לכאן.</p>
+        <p style="margin:4px 0">• <strong>GorenTech + WhatsApp</strong> — פרטי יצירת קשר לתמיכה.</p>
+        <p style="margin:4px 0">• <strong>מספר גרסה</strong> — הגרסה הנוכחית של האפליקציה.</p>
+      </div>
+      <p>💡 <strong>משיכה למטה</strong> (Pull-to-refresh) — משכו את הדף כלפי מטה מהחלק העליון כדי לרענן.</p>
 
-      <h3 style="color:#E65100;border-bottom:2px solid #E65100;padding-bottom:4px;margin-top:20px">💉 אינסולין ארוך טווח (בזאלי)</h3>
-      <p>בחרו "ערב בצום" לקבלת המנה היומית הקבועה.</p>
-      <p>המערכת תתריע כשצריך <strong>להעלות מנה</strong> (לפי הגדרות הצוות).</p>
+      <h3 style="color:#1565C0;border-bottom:2px solid #1565C0;padding-bottom:4px;margin-top:24px">🏠 מסך ראשי — מינון לפי טבלה</h3>
+      <p>זהו המסך הראשי. כאן מחשבים את מינון האינסולין לפי טבלת המינון של הצוות המטפל.</p>
 
-      <h3 style="color:#C62828;border-bottom:2px solid #C62828;padding-bottom:4px;margin-top:20px">⚠️ סוכר נמוך (היפו)</h3>
-      <p>אם הסוכר מתחת לסף — יופיע <strong>פרוטוקול היפו</strong> עם טיימר 15 דקות.</p>
-      <p>לא תינתן המלצה להזרקה. יש לטפל לפי ההנחיות.</p>
+      <h4 style="color:#1565C0;margin-top:16px">📌 כפתורי הארוחות</h4>
+      <div style="background:#f5f5f5;border-radius:8px;padding:10px;margin:8px 0">
+        <p style="margin:4px 0">• <strong>ערב בצום</strong> — אינסולין ארוך טווח (בזאלי). מנה יומית קבועה, לא תלויה בגובה הסוכר.</p>
+        <p style="margin:4px 0">• <strong>בוקר / צהריים / ערב</strong> — אינסולין מהיר לפני ארוחה. המינון נקבע לפי רמת הסוכר שמקלידים.</p>
+      </div>
+      <p>✅ הכפתור שנבחר מקבל <strong>צבע חזק</strong>. כל ארוחה בצבע שונה כדי למנוע טעויות.</p>
 
-      <h3 style="color:#4a148c;border-bottom:2px solid #4a148c;padding-bottom:4px;margin-top:20px">📋 יומן</h3>
-      <p>כל המדידות וההזרקות נשמרות אוטומטית ביומן לפי תאריך.</p>
-      <p>ניתן <strong>לערוך הערות</strong> ביומן בלחיצה על הרשומה.</p>
-      <p>ניתן להוסיף ימים קודמים ולמחוק רשומות.</p>
+      <h4 style="color:#1565C0;margin-top:16px">📌 כפתור "לפני אוכל" / "ללא אוכל"</h4>
+      <div style="background:#f5f5f5;border-radius:8px;padding:10px;margin:8px 0">
+        <p style="margin:4px 0">• <strong>לפני אוכל</strong> — בדיקה רגילה לפני ארוחה. המינון לפי טבלת "עם אוכל".</p>
+        <p style="margin:4px 0">• <strong>ללא אוכל</strong> — תיקון סוכר גבוה בלי ארוחה. המינון לפי טבלת "ללא אוכל" (טווחים גבוהים יותר).</p>
+      </div>
+      <p>לחצו על הכפתור כדי <strong>לעבור בין המצבים</strong>.</p>
 
-      <h3 style="color:#1B5E20;border-bottom:2px solid #1B5E20;padding-bottom:4px;margin-top:20px">💡 טיפים</h3>
-      <p>• <strong>עדכון אוטומטי:</strong> האפליקציה מתעדכנת אוטומטית כשיש גרסה חדשה.</p>
-      <p>• <strong>הנתונים שלך:</strong> נשמרים במכשיר. עדכוני גרסה לא מוחקים אותם.</p>
-      <p>• <strong>רענון:</strong> לחצו ⟳ בכותרת לרענון ידני.</p>
-      <p>• <strong>WhatsApp תמיכה:</strong> 054-6677396</p>
+      <h4 style="color:#1565C0;margin-top:16px">📌 הקלדת רמת סוכר</h4>
+      <div style="background:#f5f5f5;border-radius:8px;padding:10px;margin:8px 0">
+        <p style="margin:4px 0">1. הקלידו את המספר (3 ספרות מקסימום).</p>
+        <p style="margin:4px 0">2. המינון <strong>מחושב מיד</strong> ומוצג על המסך.</p>
+        <p style="margin:4px 0">3. התוצאה <strong>נשמרת אוטומטית</strong> ביומן — אין צורך בלחיצה נוספת.</p>
+        <p style="margin:4px 0">4. הודעה ירוקה <strong>"✅ נשמר ביומן"</strong> מאשרת את השמירה.</p>
+        <p style="margin:4px 0">5. ניתן <strong>לשנות</strong> את המספר — הנתון ביומן יתעדכן.</p>
+      </div>
+
+      <h4 style="color:#1565C0;margin-top:16px">📌 שדה הערות</h4>
+      <p>מתחת לתוצאה יש שדה <strong>📝 הערות</strong>. רשמו כל מידע רלוונטי — תחושה, מאכל מיוחד, פעילות גופנית. ההערה נשמרת ביומן.</p>
+
+      <h3 style="color:#00695C;border-bottom:2px solid #00695C;padding-bottom:4px;margin-top:24px">🍞 מצב פחמימות</h3>
+      <p>מצב מתקדם שמחשב מינון לפי ספירת מנות פחמימה.</p>
+
+      <h4 style="color:#00695C;margin-top:16px">📌 הפעלה (צ'קבוקס)</h4>
+      <div style="background:#E0F2F1;border-radius:8px;padding:10px;margin:8px 0">
+        <p style="margin:4px 0">1. מתחת לכפתורי הארוחות, סמנו <strong>✓</strong> בתיבה "טבלת פחמימות מאושרת ע״י הצוות..."</p>
+        <p style="margin:4px 0">2. עכשיו לחצו על <strong>ארוחה</strong> (בוקר/צהריים/ערב).</p>
+        <p style="margin:4px 0">3. תועברו <strong>ישירות למסך בחירת מאכלים</strong>.</p>
+      </div>
+
+      <h4 style="color:#00695C;margin-top:16px">📌 מסך בחירת מאכלים</h4>
+      <div style="background:#E0F2F1;border-radius:8px;padding:10px;margin:8px 0">
+        <p style="margin:4px 0">• <strong>🔍 חיפוש</strong> — הקלידו שם מאכל. הרשימה מסתננת בזמן אמת.</p>
+        <p style="margin:4px 0">• <strong>כפתור +</strong> — מוסיף חצי מנה (0.5) בכל לחיצה.</p>
+        <p style="margin:4px 0">• <strong>כפתור −</strong> — מפחית חצי מנה.</p>
+        <p style="margin:4px 0">• <strong>מספר באמצע</strong> — מציג את הכמות שנבחרה.</p>
+        <p style="margin:4px 0">• המאכלים מחולקים ל<strong>קטגוריות צבעוניות</strong>: חג, קטניות, חלב, מסעדות, פירות, דגנים, ירקות, חטיפים, שונות.</p>
+      </div>
+      <p>בסיום, לחצו <strong>"⬅️ סיימתי — חזרה לחישוב"</strong>.</p>
+
+      <h4 style="color:#00695C;margin-top:16px">📌 מסך חישוב פחמימות</h4>
+      <div style="background:#E0F2F1;border-radius:8px;padding:10px;margin:8px 0">
+        <p style="margin:4px 0">• הקלידו את <strong>רמת הסוכר</strong>.</p>
+        <p style="margin:4px 0">• החישוב מורכב משני חלקים:</p>
+        <p style="margin:4px 0;padding-right:20px">🍽️ <strong>מנת ארוחה</strong> = סך המנות שנבחרו (מעוגל למעלה).</p>
+        <p style="margin:4px 0;padding-right:20px">💉 <strong>מנת תיקון</strong> = (סוכר − יעד) ÷ ISF (מעוגל למעלה).</p>
+        <p style="margin:4px 0">• <strong>סה"כ</strong> = מנת ארוחה + מנת תיקון.</p>
+      </div>
+
+      <h4 style="color:#00695C;margin-top:16px">📌 פרמטרים אישיים ✏️</h4>
+      <div style="background:#E0F2F1;border-radius:8px;padding:10px;margin:8px 0">
+        <p style="margin:4px 0">• <strong>יחס המרה (ICR)</strong> — כמה גרם פחמימות ליחידת אינסולין. לחצו ✏️ לשינוי.</p>
+        <p style="margin:4px 0">• <strong>יעד סוכר לתיקון</strong> — ברירת מחדל 100. לחצו ✏️ לשינוי.</p>
+        <p style="margin:4px 0">• <strong>פקטור תיקון (ISF)</strong> — כמה mg/dL יורד הסוכר ליחידת אינסולין. ברירת מחדל 50. לחצו ✏️ לשינוי.</p>
+      </div>
+      <p>⚠️ הפרמטרים נשמרים במכשיר ולא נמחקים בעדכוני גרסה.</p>
+
+      <h3 style="color:#E65100;border-bottom:2px solid #E65100;padding-bottom:4px;margin-top:24px">💉 אינסולין ארוך טווח (בזאלי)</h3>
+      <div style="background:#FFF3E0;border-radius:8px;padding:10px;margin:8px 0">
+        <p style="margin:4px 0">• לחצו על <strong>"ערב בצום"</strong> והקלידו את רמת הסוכר.</p>
+        <p style="margin:4px 0">• המנה היומית הקבועה מוצגת. היא <strong>לא משתנה לפי הסוכר</strong>.</p>
+        <p style="margin:4px 0">• אם הסוכר מעל הסף מספיק ימים:</p>
+        <p style="margin:4px 0;padding-right:20px">✅ <strong>ירוק</strong> — אין שינוי במנה.</p>
+        <p style="margin:4px 0;padding-right:20px">⏳ <strong>כתום</strong> — עוד לא הגיע הזמן להעלות.</p>
+        <p style="margin:4px 0;padding-right:20px">⬆️ <strong>כתום חזק</strong> — אפשר להעלות! כפתור <strong>"העליתי ל־X יחידות"</strong>.</p>
+        <p style="margin:4px 0;padding-right:20px">⛔ <strong>אדום</strong> — הגעת לגבול העליון. פנה לצוות.</p>
+      </div>
+
+      <h3 style="color:#C62828;border-bottom:2px solid #C62828;padding-bottom:4px;margin-top:24px">⚠️ סוכר נמוך (היפוגליקמיה)</h3>
+      <div style="background:#FFEBEE;border-radius:8px;padding:10px;margin:8px 0">
+        <p style="margin:4px 0">• אם הסוכר <strong>מתחת לסף</strong> (ברירת מחדל: 80) — יופיע כרטיס אדום.</p>
+        <p style="margin:4px 0">• <strong>לא תינתן המלצה להזרקה</strong>.</p>
+        <p style="margin:4px 0">• יוצג <strong>פרוטוקול היפו</strong>:</p>
+        <p style="margin:4px 0;padding-right:20px">1. שתו מי סוכר / ג'ל גלוקוז.</p>
+        <p style="margin:4px 0;padding-right:20px">2. לחצו <strong>"התחלת טיימר 15 דקות"</strong>.</p>
+        <p style="margin:4px 0;padding-right:20px">3. לאחר 15 דקות — בדקו שוב.</p>
+      </div>
+
+      <h3 style="color:#4a148c;border-bottom:2px solid #4a148c;padding-bottom:4px;margin-top:24px">📋 יומן</h3>
+      <p>כל המדידות וההזרקות נשמרות אוטומטית ביומן, מסודרות לפי תאריך.</p>
+      <div style="background:#f5f5f5;border-radius:8px;padding:10px;margin:8px 0">
+        <p style="margin:4px 0">• <strong>הוספת יום</strong> — בחרו תאריך ולחצו "הוספה". אפשר גם ימים שעברו.</p>
+        <p style="margin:4px 0">• <strong>לחיצה על רשומה</strong> — פותח אפשרות לערוך הערות.</p>
+        <p style="margin:4px 0">• <strong>מחיקת רשומה</strong> — כפתור "מחק יום" בתחתית הרשומה.</p>
+        <p style="margin:4px 0">• כל רשומה מציגה: <strong>תאריך</strong>, <strong>ארוחות</strong> (סוכר + מינון), <strong>הערות</strong>.</p>
+      </div>
+
+      <h3 style="color:#1B5E20;border-bottom:2px solid #1B5E20;padding-bottom:4px;margin-top:24px">🧭 ניווט בין מסכים</h3>
+      <div style="background:#E8F5E9;border-radius:8px;padding:10px;margin:8px 0">
+        <p style="margin:4px 0">• <strong>תפריט תחתון</strong>: 4 כפתורים — מינון | יומן | הטבלה שלי | הגדרות.</p>
+        <p style="margin:4px 0">• <strong>"⬅️ חזרה למסך ראשי"</strong> — חוזר ממצב פחמימות למצב טבלה רגיל.</p>
+        <p style="margin:4px 0">• <strong>"⬅️ סיימתי"</strong> — חוזר ממסך מאכלים למסך חישוב.</p>
+      </div>
+
+      <h3 style="color:#333;border-bottom:2px solid #333;padding-bottom:4px;margin-top:24px">💡 טיפים חשובים</h3>
+      <div style="background:#f5f5f5;border-radius:8px;padding:10px;margin:8px 0">
+        <p style="margin:4px 0">✅ <strong>עדכון אוטומטי</strong> — האפליקציה בודקת גרסה חדשה בכל פתיחה ומתעדכנת אוטומטית.</p>
+        <p style="margin:4px 0">✅ <strong>הנתונים שלך</strong> — נשמרים במכשיר. עדכונים לא מוחקים טבלאות, הגדרות או יומן.</p>
+        <p style="margin:4px 0">✅ <strong>משיכה למטה</strong> — מרעננת את הדף (Pull-to-refresh).</p>
+        <p style="margin:4px 0">✅ <strong>רענון ידני</strong> — לחצו ⟳ בכותרת.</p>
+        <p style="margin:4px 0">📞 <strong>תמיכה בוואטסאפ</strong> — 054-6677396</p>
+      </div>
+
     </div>
 
     <button onclick="goTo('s-dose')" style="width:100%;padding:10px;font-size:16px;font-weight:bold;background:#E3F2FD;color:#1565C0;border:2px solid #1E88E5;border-radius:10px;cursor:pointer;margin-top:16px">⬅️ חזרה למסך ראשי</button>
@@ -1950,7 +2041,7 @@ $('#impjson').onclick=()=>{
 <script>
 // Auto-update: check for newer version every page load
 (function(){
-  const MY_VER = 'V1.19';
+  const MY_VER = 'V1.20';
   setTimeout(function(){
     fetch('index.html?_nocache='+Date.now(), {cache:'no-store'})
       .then(r => r.text())
