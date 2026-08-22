@@ -163,7 +163,7 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
 
 <header>
   <div style="display:flex;justify-content:space-between;align-items:center">
-    <div style="font-size:10px;color:#999;line-height:1.2">GorenTech<br>054-6677396<br>V1.06</div>
+    <div style="font-size:10px;color:#999;line-height:1.2">GorenTech<br>054-6677396<br>V1.07</div>
     <div style="text-align:right">
       <h1 style="margin:0">סוכר ואינסולין <button onclick="location.reload(true)" style="background:none;border:none;font-size:18px;cursor:pointer;vertical-align:middle;padding:4px" title="רענון">⟳</button></h1>
       <div class="sub" id="hdrsub"></div>
@@ -210,7 +210,8 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
     <div class="card" style="background:#F0F4FF;border:2px solid var(--pen);margin-bottom:14px">
       <h2 style="color:var(--pen);margin-bottom:4px">לפי פחמימות</h2>
       <p class="hint" style="margin-bottom:4px">יחס המרה: 1 יח׳ לכל <strong id="icr-display">10</strong> גר׳ <button id="editicr" style="background:none;border:none;font-size:14px;cursor:pointer;padding:2px">✏️</button></p>
-      <p class="hint" style="margin-bottom:12px">יעד סוכר: <strong id="target-display">150</strong> mg/dL <button id="edittarget" style="background:none;border:none;font-size:14px;cursor:pointer;padding:2px">✏️</button></p>
+      <p class="hint" style="margin-bottom:4px">יעד סוכר לתיקון: <strong id="carbtarget-display">100</strong> mg/dL <button id="editcarbtarget" style="background:none;border:none;font-size:14px;cursor:pointer;padding:2px">✏️</button></p>
+      <p class="hint" style="margin-bottom:12px">פקטור תיקון (ISF): <strong id="isf-display">50</strong> <button id="editisf" style="background:none;border:none;font-size:14px;cursor:pointer;padding:2px">✏️</button></p>
 
       <label class="fld">
         <span style="font-size:18px;font-weight:bold;color:#1E4FA8;text-align:center;margin-bottom:8px">רמת סוכר (mg/dL)</span>
@@ -1515,8 +1516,8 @@ $('#impjson').onclick=()=>{
   renderPersist();
   const savedStamp = await store.get(K_STAMP);
   const freshBuild = !!(EMBEDDED && EMBEDDED.stamp && EMBEDDED.stamp !== savedStamp);
-  let c = freshBuild ? null : await store.get(K_CFG);
-  if (!c && EMBEDDED && EMBEDDED.cfg) c = EMBEDDED.cfg;
+  let c = await store.get(K_CFG);
+  if (!c && EMBEDDED && EMBEDDED.cfg) c = JSON.parse(JSON.stringify(EMBEDDED.cfg));
   if (freshBuild) await store.set(K_STAMP, EMBEDDED.stamp);
   if (!c){
     const oldCfg = await store.get('sugar:config');
@@ -1551,10 +1552,16 @@ $('#impjson').onclick=()=>{
   // --- Carb counting mode ---
   let ICR = (cfg && cfg.icr) ? Number(cfg.icr) : 10;
   let TARGET_BG = (cfg && cfg.targetBg) ? Number(cfg.targetBg) : 150;
+  let CARB_TARGET = (cfg && cfg.carbTarget) ? Number(cfg.carbTarget) : 100;
+  let CARB_ISF = (cfg && cfg.carbISF) ? Number(cfg.carbISF) : 50;
   const icrDisp = document.getElementById('icr-display');
   const targetDisp = document.getElementById('target-display');
+  const carbTargetDisp = document.getElementById('carbtarget-display');
+  const isfDisp = document.getElementById('isf-display');
   if (icrDisp) icrDisp.textContent = ICR;
   if (targetDisp) targetDisp.textContent = TARGET_BG;
+  if (carbTargetDisp) carbTargetDisp.textContent = CARB_TARGET;
+  if (isfDisp) isfDisp.textContent = CARB_ISF;
 
   // Edit ICR
   document.getElementById('editicr')?.addEventListener('click', () => {
@@ -1565,6 +1572,16 @@ $('#impjson').onclick=()=>{
   document.getElementById('edittarget')?.addEventListener('click', () => {
     const v = prompt('יעד סוכר (mg/dL):', TARGET_BG);
     if (v && Number(v) > 0){ TARGET_BG = Number(v); cfg.targetBg = TARGET_BG; saveCfg(); targetDisp.textContent = TARGET_BG; toast('יעד: '+TARGET_BG); }
+  });
+  // Edit Carb Target
+  document.getElementById('editcarbtarget')?.addEventListener('click', () => {
+    const v = prompt('יעד סוכר לתיקון פחמימות (mg/dL):', CARB_TARGET);
+    if (v && Number(v) > 0){ CARB_TARGET = Number(v); cfg.carbTarget = CARB_TARGET; saveCfg(); carbTargetDisp.textContent = CARB_TARGET; calcCarbs(); toast('יעד תיקון: '+CARB_TARGET); }
+  });
+  // Edit ISF
+  document.getElementById('editisf')?.addEventListener('click', () => {
+    const v = prompt('פקטור תיקון (ISF): כמה mg/dL יורד הסוכר ליחידת אינסולין?', CARB_ISF);
+    if (v && Number(v) > 0){ CARB_ISF = Number(v); cfg.carbISF = CARB_ISF; saveCfg(); isfDisp.textContent = CARB_ISF; calcCarbs(); toast('ISF: '+CARB_ISF); }
   });
 
   // Carb confirm checkbox (visual only, no mode switch yet)
@@ -1598,13 +1615,11 @@ $('#impjson').onclick=()=>{
     const mealDose = carbs > 0 ? Math.ceil(carbs) : 0;
 
     let corrDose = 0; let corrText = '';
-    const TARGET = 100;
-    const ISF = 50;
-    if (gluc > TARGET){
-      corrDose = Math.ceil((gluc - TARGET) / ISF);
-      corrText = `(${gluc} − ${TARGET}) ÷ ${ISF} = ${corrDose} יח׳`;
+    if (gluc > CARB_TARGET){
+      corrDose = Math.ceil((gluc - CARB_TARGET) / CARB_ISF);
+      corrText = `(${gluc} − ${CARB_TARGET}) ÷ ${CARB_ISF} = ${corrDose} יח׳`;
     } else if (gluc > 0){
-      corrText = `${gluc} ≤ ${TARGET} → 0 יח׳ (תיקון לא נדרש)`;
+      corrText = `${gluc} ≤ ${CARB_TARGET} → 0 יח׳ (תיקון לא נדרש)`;
     }
 
     const total = mealDose + corrDose;
