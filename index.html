@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="he" dir="rtl"><head>
 <!-- Google Analytics GA4 -->
 <script>
@@ -96,6 +96,7 @@ textarea{min-height:70px; resize:vertical}
 .dose .unitlbl{font-size:14px; color:var(--ink-soft)}
 .dose .math{font-family:var(--num); font-size:14px; color:var(--ink-soft); margin-top:4px}
 .dose .src{font-size:12px; color:var(--ink-soft); margin-top:8px; padding-top:8px; border-top:1px dashed var(--rule)}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 .rowecho{position:relative; display:inline-block; padding:7px 16px; margin-top:8px}
 .rowecho .txt{font-family:var(--num); font-size:18px; position:relative; z-index:1}
 .rowecho svg{position:absolute; inset:-4px -6px; width:calc(100% + 12px); height:calc(100% + 8px); overflow:visible}
@@ -189,8 +190,8 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
 
 <header>
   <div style="display:flex;justify-content:space-between;align-items:center">
-    <div style="font-size:10px;color:#999;line-height:1.2">GorenTech<br>WhatsApp:<br>054-6677396<br>V1.29</div>
-    <!-- GorenTech<br>054-6677396<br>V1.29 -->
+    <div style="font-size:10px;color:#999;line-height:1.2">GorenTech<br>WhatsApp:<br>054-6677396<br>V1.30</div>
+    <!-- GorenTech<br>054-6677396<br>V1.30 -->
     <button id="guideBtn" onclick="goTo('s-guide')" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;border-radius:12px;padding:10px 18px;font-size:11px;font-weight:bold;cursor:pointer;box-shadow:0 2px 8px rgba(102,126,234,0.4)">📖 מדריך<br>למשתמש</button>
     <div style="text-align:right">
       <h1 style="margin:0">סוכר ואינסולין <button onclick="location.reload(true)" style="background:none;border:none;font-size:18px;cursor:pointer;vertical-align:middle;padding:4px" title="רענון">⟳</button></h1>
@@ -259,6 +260,20 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px">
         <h2 style="margin:0;flex-shrink:0;font-size:16px">📋 בחר מאכלים</h2>
         <div style="flex:1;min-width:120px"><input id="foodsearch" type="text" placeholder="🔍 חיפוש מאכל..." style="width:100%;padding:6px 10px;border:1px solid #ccc;border-radius:8px;font-size:14px" autocomplete="off"></div>
+        <button id="aiFoodBtn" onclick="document.getElementById('aiFoodInput').click()" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;border-radius:8px;padding:6px 12px;font-size:13px;cursor:pointer;font-weight:bold;white-space:nowrap">📷 צלם מנה</button>
+        <input type="file" id="aiFoodInput" accept="image/*" capture="environment" style="display:none" onchange="analyzeFood(this)">
+      </div>
+      <!-- AI Results -->
+      <div id="aiResults" style="display:none;background:linear-gradient(135deg,#EDE7F6,#F3E5F5);border:2px solid #9C27B0;border-radius:10px;padding:10px;margin-bottom:6px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <strong style="color:#6A1B9A">🤖 זיהוי AI</strong>
+          <button onclick="document.getElementById('aiResults').style.display='none'" style="background:#EF5350;color:#fff;border:none;border-radius:6px;padding:2px 10px;font-size:12px;cursor:pointer">✕</button>
+        </div>
+        <div id="aiLoading" style="text-align:center;padding:10px;display:none">
+          <div style="font-size:24px;animation:spin 1s linear infinite;display:inline-block">⟳</div>
+          <p style="margin:4px 0;color:#6A1B9A">מנתח את התמונה...</p>
+        </div>
+        <div id="aiResultList" style="font-size:14px"></div>
       </div>
       <table style="width:100%;border-collapse:collapse;font-size:14px;margin:0"><tr style="background:#e8e8e8"><th style="padding:6px;border:1px solid #ccc;text-align:right">מאכל</th><th style="padding:6px;border:1px solid #ccc">מנה</th><th style="padding:6px;border:1px solid #ccc">מנות</th><th style="padding:6px;border:1px solid #ccc;width:120px">כמות</th></tr></table>
     </div>
@@ -2129,7 +2144,7 @@ $('#impjson').onclick=()=>{
 <script>
 // Auto-update: check for newer version every page load
 (function(){
-  const MY_VER = 'V1.29';
+  const MY_VER = 'V1.30';
   setTimeout(function(){
     fetch('index.html?_nocache='+Date.now(), {cache:'no-store'})
       .then(r => r.text())
@@ -2181,6 +2196,129 @@ $('#impjson').onclick=()=>{
     }
   });
 })();
+</script>
+
+<script>
+// AI Food Analysis with Gemini
+function getGeminiKey() {
+  let k = localStorage.getItem('gemini_key');
+  if (!k) {
+    k = prompt('הכנס מפתח Gemini API (פעם אחת):');
+    if (k) localStorage.setItem('gemini_key', k);
+  }
+  return k;
+}
+
+function analyzeFood(input) {
+  if (!input.files || !input.files[0]) return;
+  const file = input.files[0];
+  const reader = new FileReader();
+  
+  const aiResults = document.getElementById('aiResults');
+  const aiLoading = document.getElementById('aiLoading');
+  const aiResultList = document.getElementById('aiResultList');
+  
+  aiResults.style.display = 'block';
+  aiLoading.style.display = 'block';
+  aiResultList.innerHTML = '';
+  gaEvent('ai_food_photo', {});
+
+  reader.onload = async function(e) {
+    const base64 = e.target.result.split(',')[1];
+    const mimeType = file.type || 'image/jpeg';
+
+    try {
+      const apiKey = getGeminiKey();
+      if (!apiKey) { aiLoading.style.display='none'; aiResults.style.display='none'; return; }
+      const resp = await fetch(
+        'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + apiKey,
+        {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            contents: [{
+              parts: [
+                {text: 'אתה דיאטן מומחה. נתח את התמונה וזהה את כל המאכלים.\nעבור כל מאכל החזר שורה בפורמט:\nשם_המאכל|גודל_מנה|מנות_פחמימה\n\nדוגמה:\nאורז לבן|כוס|3\nחזה עוף|100 גרם|0\nלחם|פרוסה|1\n\nמנת פחמימה = 15 גרם פחמימות.\nהחזר רק את הטבלה, בלי הסברים. אם אין מאכלים בתמונה כתוב: לא_זוהו_מאכלים'},
+                {inlineData: {mimeType: mimeType, data: base64}}
+              ]
+            }]
+          })
+        }
+      );
+
+      const data = await resp.json();
+      aiLoading.style.display = 'none';
+
+      if (data.error) {
+        aiResultList.innerHTML = '<p style="color:red">❌ שגיאה: ' + (data.error.message || 'לא ניתן לנתח') + '</p>';
+        return;
+      }
+
+      const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+      
+      if (text.includes('לא_זוהו_מאכלים') || !text.trim()) {
+        aiResultList.innerHTML = '<p style="color:#666">🤷 לא זוהו מאכלים בתמונה. נסה לצלם שוב.</p>';
+        return;
+      }
+
+      const lines = text.trim().split('\n').filter(l => l.includes('|'));
+      if (lines.length === 0) {
+        aiResultList.innerHTML = '<p style="color:#666">🤷 לא הצלחתי לזהות מאכלים. נסה לצלם מקרוב יותר.</p>';
+        return;
+      }
+
+      let html = '<table style="width:100%;border-collapse:collapse;font-size:13px">';
+      html += '<tr style="background:#CE93D8;color:#fff"><th style="padding:4px;border:1px solid #9C27B0;text-align:right">מאכל</th><th style="padding:4px;border:1px solid #9C27B0">מנה</th><th style="padding:4px;border:1px solid #9C27B0">מנות פחמימה</th><th style="padding:4px;border:1px solid #9C27B0">הוסף</th></tr>';
+      
+      lines.forEach((line, i) => {
+        const parts = line.split('|').map(p => p.trim());
+        if (parts.length >= 3) {
+          const name = parts[0], portion = parts[1], carbs = parts[2];
+          html += '<tr style="background:' + (i%2===0?'#F3E5F5':'#fff') + '">';
+          html += '<td style="padding:4px;border:1px solid #ddd;text-align:right">' + name + '</td>';
+          html += '<td style="padding:4px;border:1px solid #ddd;text-align:center">' + portion + '</td>';
+          html += '<td style="padding:4px;border:1px solid #ddd;text-align:center;font-weight:bold">' + carbs + '</td>';
+          html += '<td style="padding:4px;border:1px solid #ddd;text-align:center"><button onclick="addAiFood(\'' + name.replace(/'/g,"\\'") + '\',' + parseFloat(carbs) + ',this)" style="background:#7B1FA2;color:#fff;border:none;border-radius:6px;padding:3px 10px;font-size:12px;cursor:pointer">➕</button></td>';
+          html += '</tr>';
+        }
+      });
+      html += '</table>';
+      html += '<p style="margin:6px 0 0;font-size:11px;color:#9C27B0">⚠️ הערכת AI — יש לבדוק ולהתאים לפי הצורך</p>';
+      aiResultList.innerHTML = html;
+      gaEvent('ai_food_result', {items: lines.length});
+
+    } catch(err) {
+      aiLoading.style.display = 'none';
+      aiResultList.innerHTML = '<p style="color:red">❌ שגיאת חיבור: ' + err.message + '</p>';
+    }
+  };
+  reader.readAsDataURL(file);
+  input.value = '';
+}
+
+function addAiFood(name, carbPortions, btn) {
+  const carbInput = document.getElementById('carbinput');
+  const current = parseFloat(carbInput.value) || 0;
+  carbInput.value = String(current + carbPortions);
+  carbInput.dispatchEvent(new Event('input'));
+  btn.textContent = '✅';
+  btn.disabled = true;
+  btn.style.background = '#4CAF50';
+  gaEvent('ai_food_added', {name: name, portions: carbPortions});
+
+  // Update food cart display
+  const cartDiv = document.getElementById('foodcart');
+  const selDiv = document.getElementById('foodselected');
+  const totalSpan = document.getElementById('foodtotal');
+  if (cartDiv) cartDiv.style.display = 'block';
+  if (totalSpan) totalSpan.textContent = carbInput.value;
+  if (selDiv) {
+    const tag = document.createElement('span');
+    tag.style.cssText = 'display:inline-block;background:#E1BEE7;color:#4A148C;padding:2px 8px;border-radius:12px;margin:2px;font-size:12px';
+    tag.textContent = '🤖 ' + name + ' (' + carbPortions + ')';
+    selDiv.appendChild(tag);
+  }
+}
 </script>
 
 </body></html>
