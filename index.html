@@ -190,8 +190,8 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
 
 <header>
   <div style="display:flex;justify-content:space-between;align-items:center">
-    <div style="font-size:10px;color:#999;line-height:1.2">GorenTech<br>WhatsApp:<br>054-6677396<br>V1.32</div>
-    <!-- GorenTech<br>054-6677396<br>V1.32 -->
+    <div style="font-size:10px;color:#999;line-height:1.2">GorenTech<br>WhatsApp:<br>054-6677396<br>V1.33</div>
+    <!-- GorenTech<br>054-6677396<br>V1.33 -->
     <button id="guideBtn" onclick="goTo('s-guide')" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;border-radius:12px;padding:10px 18px;font-size:11px;font-weight:bold;cursor:pointer;box-shadow:0 2px 8px rgba(102,126,234,0.4)">📖 מדריך<br>למשתמש</button>
     <div style="text-align:right">
       <h1 style="margin:0">סוכר ואינסולין <button onclick="location.reload(true)" style="background:none;border:none;font-size:18px;cursor:pointer;vertical-align:middle;padding:4px" title="רענון">⟳</button></h1>
@@ -500,6 +500,24 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
     <button onclick="goTo('s-dose')" style="width:100%;padding:10px;font-size:16px;font-weight:bold;background:#E3F2FD;color:#1565C0;border:2px solid #1E88E5;border-radius:10px;cursor:pointer;margin-bottom:16px">⬅️ חזרה למסך ראשי</button>
 
     <div style="line-height:1.8;font-size:15px">
+
+      <h3 style="color:#4a148c;border-bottom:2px solid #4a148c;padding-bottom:4px">📲 הוספה למסך הבית</h3>
+      <p>כדי שהיישום ייראה ויתנהג כמו אפליקציה רגילה, מומלץ להוסיף אותו למסך הבית:</p>
+      <div style="background:#E8F5E9;border-radius:8px;padding:10px;margin:8px 0">
+        <p style="margin:4px 0;font-weight:bold;color:#2E7D32">באייפון (Safari):</p>
+        <p style="margin:4px 0">1. פתחו את היישום בספארי</p>
+        <p style="margin:4px 0">2. לחצו על <strong>⬆️ (כפתור השיתוף)</strong> בתחתית המסך</p>
+        <p style="margin:4px 0">3. גללו ובחרו <strong>"הוסף למסך הבית"</strong></p>
+        <p style="margin:4px 0">4. לחצו <strong>"הוסף"</strong> — האייקון יופיע במסך הבית!</p>
+      </div>
+      <div style="background:#E3F2FD;border-radius:8px;padding:10px;margin:8px 0">
+        <p style="margin:4px 0;font-weight:bold;color:#1565C0">באנדרואיד (Chrome):</p>
+        <p style="margin:4px 0">1. פתחו את היישום בכרום</p>
+        <p style="margin:4px 0">2. לחצו על <strong>⋮ (שלוש נקודות)</strong> למעלה מימין</p>
+        <p style="margin:4px 0">3. בחרו <strong>"הוספה למסך הבית"</strong></p>
+        <p style="margin:4px 0">4. לחצו <strong>"הוסף"</strong> — מוכן!</p>
+      </div>
+      <p>✅ מעכשיו תוכלו לפתוח את היישום בלחיצה אחת, בדיוק כמו אפליקציה מהחנות.</p>
 
       <h3 style="color:#4a148c;border-bottom:2px solid #4a148c;padding-bottom:4px">🔝 כותרת האפליקציה</h3>
       <p>הכותרת מופיעה בכל המסכים ומכילה:</p>
@@ -2144,7 +2162,7 @@ $('#impjson').onclick=()=>{
 <script>
 // Auto-update: check for newer version every page load
 (function(){
-  const MY_VER = 'V1.32';
+  const MY_VER = 'V1.33';
   setTimeout(function(){
     fetch('index.html?_nocache='+Date.now(), {cache:'no-store'})
       .then(r => r.text())
