@@ -190,8 +190,8 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
 
 <header>
   <div style="display:flex;justify-content:space-between;align-items:center">
-    <div style="font-size:10px;color:#999;line-height:1.2">GorenTech<br>WhatsApp:<br>054-6677396<br>V1.35</div>
-    <!-- GorenTech<br>054-6677396<br>V1.35 -->
+    <div style="font-size:10px;color:#999;line-height:1.2">GorenTech<br>WhatsApp:<br>054-6677396<br>V1.36</div>
+    <!-- GorenTech<br>054-6677396<br>V1.36 -->
     <button id="guideBtn" onclick="goTo('s-guide')" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;border-radius:12px;padding:10px 18px;font-size:11px;font-weight:bold;cursor:pointer;box-shadow:0 2px 8px rgba(102,126,234,0.4)">📖 מדריך<br>למשתמש</button>
     <div style="text-align:right">
       <h1 style="margin:0">סוכר ואינסולין <button onclick="location.reload(true)" style="background:none;border:none;font-size:18px;cursor:pointer;vertical-align:middle;padding:4px" title="רענון">⟳</button></h1>
@@ -1202,6 +1202,11 @@ function calc(){
     });
   }
 
+  if (!cfg.tableConfirmed) {
+    const w = el('div'); w.style.cssText = 'background:#FFEBEE;border:2px solid #C62828;border-radius:10px;padding:10px;margin-top:10px;text-align:center';
+    w.innerHTML = '<strong style="color:#C62828;font-size:14px">⚠️ הנתונים לא אושרו ע״י הצוות הרפואי — אין להסתמך על מינון זה!</strong>';
+    out.append(w);
+  }
   out.append(doneBtn(lastRapid,lastBasal));
 }
 $('#gluc').addEventListener('input', ()=>{
@@ -1992,6 +1997,9 @@ $('#impjson').onclick=()=>{
     html += `<div style="text-align:center"><div class="units num" style="font-size:54px">${total}</div><div class="unitlbl">יחידות סה"כ</div></div>`;
     if (mealDose > 0 && corrDose > 0) html += `<div style="text-align:center;margin-top:6px;font-size:15px;color:#666">(${mealDose} ארוחה + ${corrDose} תיקון)</div>`;
     html += `</div>`;
+    if (!cfg.tableConfirmed) {
+      html += '<div style="background:#FFEBEE;border:2px solid #C62828;border-radius:10px;padding:10px;margin-top:10px;text-align:center"><strong style="color:#C62828;font-size:14px">⚠️ הנתונים לא אושרו ע״י הצוות הרפואי — אין להסתמך על מינון זה!</strong></div>';
+    }
     carbResult.innerHTML = html;
   }
 
@@ -2201,7 +2209,7 @@ $('#impjson').onclick=()=>{
 <script>
 // Auto-update: check for newer version every page load
 (function(){
-  const MY_VER = 'V1.35';
+  const MY_VER = 'V1.36';
   setTimeout(function(){
     fetch('index.html?_nocache='+Date.now(), {cache:'no-store'})
       .then(r => r.text())
