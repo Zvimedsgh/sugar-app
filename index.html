@@ -190,8 +190,8 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
 
 <header>
   <div style="display:flex;justify-content:space-between;align-items:center">
-    <div style="font-size:10px;color:#999;line-height:1.2">GorenTech<br>WhatsApp:<br>054-6677396<br>V1.41</div>
-    <!-- GorenTech<br>054-6677396<br>V1.41 -->
+    <div style="font-size:10px;color:#999;line-height:1.2">GorenTech<br>WhatsApp:<br>054-6677396<br>V1.42</div>
+    <!-- GorenTech<br>054-6677396<br>V1.42 -->
     <button id="guideBtn" onclick="goTo('s-guide')" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;border-radius:12px;padding:10px 18px;font-size:11px;font-weight:bold;cursor:pointer;box-shadow:0 2px 8px rgba(102,126,234,0.4)">📖 מדריך<br>למשתמש</button>
     <div style="text-align:right">
       <h1 style="margin:0">סוכר ואינסולין <button onclick="location.reload(true)" style="background:none;border:none;font-size:18px;cursor:pointer;vertical-align:middle;padding:4px" title="רענון">⟳</button></h1>
@@ -1118,37 +1118,31 @@ function calc(){
     }
     const b=cfg.basal, dose=Number(b.dose);
     lastBasal = dose;
-    const d=el('div','dose long');
-    d.innerHTML = `<div class="who">${esc(b.name)}</div>
-      <div class="units num">${dose}</div><div class="unitlbl">יחידות עכשיו</div>
-      <div class="math">מנה יומית קבועה</div>
-      <div class="src">אינסולין ארוך טווח, פעם ביום בזמן קבוע. לא תלוי בגובה המדידה — המדידה קובעת רק אם מעלים את המנה.</div>`;
-    out.append(d);
 
     const t = titrationState(v);
     if (t.kind!=='off'){
       const n=el('div','card');
       if (t.kind==='below'){
-        n.style.cssText='background:#E8F5E9;border:2px solid #66BB6A;padding:16px';
-        n.innerHTML = `<h2 style="color:#2E7D32;font-size:22px;margin-bottom:8px">✓ אין שינוי במנה</h2>
-          <p style="font-size:18px;margin:0">${v} לא מעל ${t.th}. ממשיכים עם <strong>${dose} יחידות</strong>.</p>`;
+        n.style.cssText='background:#E8F5E9;border:2px solid #66BB6A;padding:14px';
+        n.innerHTML = `<h2 style="color:#2E7D32;font-size:20px;margin-bottom:6px">✓ אין שינוי במנה</h2>
+          <p style="font-size:17px;margin:0">${v} לא מעל ${t.th}. ממשיכים עם <strong>${dose} יחידות</strong>.</p>`;
       } else if (t.kind==='wait'){
-        n.style.cssText='background:#FFF3E0;border:2px solid #FFB74D;padding:16px';
-        n.innerHTML = `<h2 style="color:#E65100;font-size:22px;margin-bottom:8px">⏳ עוד לא מעלים</h2>
-          <p style="font-size:18px;margin:0">${v} מעל ${b.threshold}, אבל עברו רק <strong>${t.since} ימים</strong> מאז ההעלאה האחרונה.</p>
-          <p style="font-size:18px;margin:8px 0 0">אפשר לשקול בעוד <strong>${t.wait} ימים</strong>. היום <strong>${dose} יחידות</strong>.</p>`;
+        n.style.cssText='background:#FFF3E0;border:3px solid #FFB74D;padding:14px';
+        n.innerHTML = `<h2 style="color:#E65100;font-size:20px;margin-bottom:6px">⏳ עוד לא מעלים</h2>
+          <p style="font-size:17px;margin:0">${v} מעל ${b.threshold}, אבל עברו רק <strong>${t.since} ימים</strong> מאז ההעלאה האחרונה.</p>
+          <p style="font-size:17px;margin:6px 0 0">אפשר לשקול בעוד <strong>${t.wait} ימים</strong>. היום <strong>${dose} יחידות</strong>.</p>`;
       } else if (t.kind==='capped'){
-        n.style.cssText='background:#FFEBEE;border:2px solid #EF5350;padding:16px';
-        n.innerHTML = `<h2 style="color:#C62828;font-size:22px;margin-bottom:8px">⛔ הגעת לגבול העליון</h2>
-          <p style="font-size:18px;margin:0">${v} מעל ${b.threshold}, אבל המנה כבר <strong>${dose}</strong> והגבול <strong>${t.max}</strong>.</p>
-          <p style="font-size:18px;margin:8px 0 0;color:#C62828"><strong>אל תעלה עוד — פנה לצוות.</strong></p>`;
+        n.style.cssText='background:#FFEBEE;border:3px solid #EF5350;padding:14px';
+        n.innerHTML = `<h2 style="color:#C62828;font-size:20px;margin-bottom:6px">⛔ הגעת לגבול העליון</h2>
+          <p style="font-size:17px;margin:0">${v} מעל ${b.threshold}, אבל המנה כבר <strong>${dose}</strong> והגבול <strong>${t.max}</strong>.</p>
+          <p style="font-size:17px;margin:6px 0 0;color:#C62828"><strong>אל תעלה עוד — פנה לצוות.</strong></p>`;
       } else if (t.kind==='raise'){
-        n.style.cssText='background:#FFF3E0;border:3px solid #FF9800;padding:20px';
-        n.innerHTML = `<h2 style="color:#E65100;font-size:24px;margin-bottom:12px">⬆️ להעלות את המנה!</h2>
-          <p style="font-size:20px;margin:0">${v} מעל ${b.threshold}, ועברו לפחות ${b.everyDays} ימים מאז השינוי האחרון.</p>
-          <p style="font-size:24px;margin:12px 0;text-align:center"><strong>${dose} ← ${t.to} יחידות</strong></p>`;
-        const ok=el('button','btn','העליתי ל־'+t.to+' יחידות');
-        ok.style.cssText='font-size:20px;padding:14px 24px;width:100%';
+        n.style.cssText='background:#FFF3E0;border:3px solid #FF9800;padding:16px';
+        n.innerHTML = `<h2 style="color:#E65100;font-size:22px;margin-bottom:8px">⬆️ יש להעלות את המנה!</h2>
+          <p style="font-size:18px;margin:0">${v} מעל ${b.threshold}, ועברו לפחות ${b.everyDays} ימים.</p>
+          <p style="font-size:28px;margin:10px 0;text-align:center;font-weight:bold;color:#E65100">${dose} → ${t.to} יחידות</p>`;
+        const ok=el('button','btn','✅ העליתי ל־'+t.to+' יחידות');
+        ok.style.cssText='font-size:18px;padding:12px 24px;width:100%;background:#FF9800;border:none;color:#fff;border-radius:10px;cursor:pointer;font-weight:bold';
         ok.onclick=()=>{
           b.history=(b.history||[]); b.history.push({date:today(), from:dose, to:t.to});
           b.dose=String(t.to); b.lastChange=today(); saveCfg(); renderBasal(); calc(); toast('המנה עודכנה ל־'+t.to);
@@ -1157,6 +1151,13 @@ function calc(){
       }
       out.append(n);
     }
+
+    const d=el('div','dose long');
+    d.style.cssText='padding:12px;font-size:14px';
+    d.innerHTML = `<div class="who" style="font-size:15px">${esc(b.name)}</div>
+      <div class="units num" style="font-size:42px">${dose}</div><div class="unitlbl">יחידות עכשיו</div>
+      <div class="src" style="font-size:12px;margin-top:6px">אינסולין ארוך, פעם ביום בזמן קבוע.</div>`;
+    out.append(d);
 
     const nxt=el('div','card');
     nxt.append(el('h2',null,'הבדיקה הבאה'));
@@ -2208,7 +2209,7 @@ $('#impjson').onclick=()=>{
 <script>
 // Auto-update: check for newer version every page load
 (function(){
-  const MY_VER = 'V1.41';
+  const MY_VER = 'V1.42';
   setTimeout(function(){
     fetch('index.html?_nocache='+Date.now(), {cache:'no-store'})
       .then(r => r.text())
