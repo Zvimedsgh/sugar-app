@@ -195,8 +195,8 @@ table.grid input{border:0; padding:6px 2px; text-align:center; font-family:var(-
 
 <header>
   <div style="display:flex;justify-content:space-between;align-items:center">
-    <div style="font-size:10px;color:#999;line-height:1.2">GorenTech<br>WhatsApp:<br>054-6677396<br>V1.48</div>
-    <!-- GorenTech<br>054-6677396<br>V1.48 -->
+    <div style="font-size:10px;color:#999;line-height:1.2">GorenTech<br>WhatsApp:<br>054-6677396<br>V1.49</div>
+    <!-- GorenTech<br>054-6677396<br>V1.49 -->
     <button id="guideBtn" onclick="goTo('s-guide')" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;border-radius:12px;padding:10px 18px;font-size:11px;font-weight:bold;cursor:pointer;box-shadow:0 2px 8px rgba(102,126,234,0.4)">📖 מדריך<br>למשתמש</button>
     <div style="text-align:right">
       <h1 style="margin:0">סוכר ואינסולין <button onclick="location.reload(true)" style="background:none;border:none;font-size:18px;cursor:pointer;vertical-align:middle;padding:4px" title="רענון">⟳</button></h1>
@@ -2179,8 +2179,24 @@ $('#impjson').onclick=()=>{
     }
   }
 
-  const PW_TRIAL7 = 'R3o3MzAxNDc='; // 7-day key (one-time)
+  const PW_TRIAL7 = 'R3o3MzAxNDc='; // 7-day key A (one-time)
+  const PW_TRIAL7B = 'RWc3MTgwNDc1'; // 7-day key B (one-time)
   const K_TRIAL7_USED = 'sugar:trial7used';
+  const K_TRIAL7B_USED = 'sugar:trial7Bused';
+
+  function tryTrial7(pw){
+    if (pw === atob(PW_TRIAL7)){
+      if (localStorage.getItem(K_TRIAL7_USED)){ return 'used'; }
+      localStorage.setItem(K_TRIAL7_USED, '1');
+      return 'ok';
+    }
+    if (pw === atob(PW_TRIAL7B)){
+      if (localStorage.getItem(K_TRIAL7B_USED)){ return 'used'; }
+      localStorage.setItem(K_TRIAL7B_USED, '1');
+      return 'ok';
+    }
+    return false;
+  }
 
   function activateLicense(){
     const pw = $('#lockpw').value;
@@ -2193,25 +2209,25 @@ $('#impjson').onclick=()=>{
       const banner = document.getElementById('trialbanner');
       if (banner) banner.remove();
       toast('רישיון הופעל לשנה!');
-    } else if (pw === atob(PW_TRIAL7)){
-      if (localStorage.getItem(K_TRIAL7_USED)){
+    } else {
+      const t7 = tryTrial7(pw);
+      if (t7 === 'ok'){
+        const fakeStart = Date.now() - (LIC_DAYS - 7) * 24*60*60*1000;
+        localStorage.setItem(K_LIC, String(fakeStart));
+        $('#lockoverlay').style.display = 'none';
+        document.querySelector('header').style.display = '';
+        document.querySelector('main').style.display = '';
+        document.querySelector('nav').style.display = '';
+        const banner = document.getElementById('trialbanner');
+        if (banner) banner.remove();
+        toast('הופעל ל-7 ימים!');
+      } else if (t7 === 'used'){
         $('#lockerr').textContent = 'מפתח זה כבר נוצל';
         $('#lockpw').value = '';
-        return;
+      } else {
+        $('#lockerr').textContent = 'מפתח שגוי';
+        $('#lockpw').value = '';
       }
-      const fakeStart = Date.now() - (LIC_DAYS - 7) * 24*60*60*1000;
-      localStorage.setItem(K_LIC, String(fakeStart));
-      localStorage.setItem(K_TRIAL7_USED, '1');
-      $('#lockoverlay').style.display = 'none';
-      document.querySelector('header').style.display = '';
-      document.querySelector('main').style.display = '';
-      document.querySelector('nav').style.display = '';
-      const banner = document.getElementById('trialbanner');
-      if (banner) banner.remove();
-      toast('הופעל ל-7 ימים!');
-    } else {
-      $('#lockerr').textContent = 'מפתח שגוי';
-      $('#lockpw').value = '';
     }
   }
 
@@ -2221,7 +2237,7 @@ $('#impjson').onclick=()=>{
   if (hasLicense){
     // Licensed - do nothing
   } else if (licenseExpired){
-    showLicensePrompt('הרישיון שלך פג', 'הכנס/י מפתח רישיון לחידוש לשנה נוספת');
+    showLicensePrompt('הרישיון שלך פג', 'הכנס/י מפתח לחידוש הגישה');
   } else if (expired){
     showLicensePrompt('תקופת הניסיון הסתיימה');
   } else if (inTrial){
@@ -2240,7 +2256,7 @@ $('#impjson').onclick=()=>{
 <script>
 // Auto-update: check for newer version every page load
 (function(){
-  const MY_VER = 'V1.48';
+  const MY_VER = 'V1.49';
   setTimeout(function(){
     fetch('index.html?_nocache='+Date.now(), {cache:'no-store'})
       .then(r => r.text())
